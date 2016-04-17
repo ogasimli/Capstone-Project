@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "manat.ogasimli.org.manat"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        buildTypes.each {
+            it.buildConfigField 'String', 'API_KEY', API_KEY
+        }
+    }
+}
+
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+
+    //TODO: remove unnecessary libs
+    //Android Libraries
+    compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:design:23.3.0'
+    compile 'com.android.support:recyclerview-v7:23.3.0'
+    compile 'com.android.support:cardview-v7:23.3.0'
+    compile 'com.android.support:gridlayout-v7:23.3.0'
+
+    //ButterKnife
+    compile 'com.jakewharton:butterknife:7.0.1'
+
+    //MPAndroidChart
+    compile 'com.github.PhilJay:MPAndroidChart:v2.2.4'
+
+    //Joda Time
+    compile 'joda-time:joda-time:2.9.3'
+
+    //Retrofit
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+
+    //Inquiry
+    compile 'com.github.afollestad:inquiry:2.0.1'
+
+    //Sugar ORM
+    compile 'com.github.satyan:sugar:1.4'
+}

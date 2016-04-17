@@ -1,0 +1,113 @@
+<resources>
+    <string name="app_name">Manat</string>
+    <string name="menu_settings_text">Settings</string>
+    <string name="title_activity_select_currency">Select Currency</string>
+    <string name="line_chart_no_data_text">No data available to illustrate.</string>
+    <string name="currency_not_found_message">Manat was unable to get rates. Please check your
+        internet connection and try again.
+    </string>
+    <string name="progress_dialog_title">Please wait</string>
+    <string name="progress_dialog_content">Loading</string>
+    <string name="error_no_connection">Please check your internet connection.</string>
+    <string name="no_result_image_description">No result image</string>
+    <string name="no_result_message">Oops! Unable to load data. Please try again.
+    </string>
+    <string name="error_view_click_to_reload_text">Reload</string>
+    <string name="menu_refresh_text">Refresh</string>
+    <string name="currency_name_transition_name">currency_name</string>
+    <string name="detail_statistics_label">"%s" Statistics</string>
+
+    <string-array name="currency_codes" translatable="false">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>GBP</item>
+        <item>RUB</item>
+        <item>TRY</item>
+        <item>AED</item>
+        <item>ARS</item>
+        <item>AUD</item>
+        <item>BRL</item>
+        <item>BYR</item>
+        <item>CAD</item>
+        <item>CHF</item>
+        <item>CLP</item>
+        <item>CNY</item>
+        <item>CZK</item>
+        <item>DKK</item>
+        <item>EGP</item>
+        <item>GEL</item>
+        <item>HKD</item>
+        <item>IDR</item>
+        <item>ILS</item>
+        <item>INR</item>
+        <item>IRR</item>
+        <item>JPY</item>
+        <item>KGS</item>
+        <item>KRW</item>
+        <item>KWD</item>
+        <item>KZT</item>
+        <item>LBP</item>
+        <item>MDL</item>
+        <item>MXN</item>
+        <item>MYR</item>
+        <item>NOK</item>
+        <item>NZD</item>
+        <item>PLN</item>
+        <item>SAR</item>
+        <item>SEK</item>
+        <item>SGD</item>
+        <item>TJS</item>
+        <item>TMT</item>
+        <item>TWD</item>
+        <item>UAH</item>
+        <item>UZS</item>
+        <item>ZAR</item>
+    </string-array>
+
+    <string-array name="currency_names">
+        <item>US Dollar</item>
+        <item>Euro</item>
+        <item>British Pound Sterling</item>
+        <item>Russian Ruble</item>
+        <item>Turkish Lira</item>
+        <item>Arab Emirates Dirham</item>
+        <item>Argentine Peso</item>
+        <item>Australian Dollar</item>
+        <item>Brazilian Real</item>
+        <item>Belarussian Ruble</item>
+        <item>Canadian Dollar</item>
+        <item>Swiss Franc</item>
+        <item>Chilean Peso</item>
+        <item>Chinese Yuan</item>
+        <item>Czech Koruna</item>
+        <item>Danish Krone</item>
+        <item>Egyptian Pound</item>
+        <item>Georgian Lari</item>
+        <item>Hong Kong Dollar</item>
+        <item>Indonesian Rupiah</item>
+        <item>Israeli New Shekel</item>
+        <item>Indian Rupee</item>
+        <item>Iranian Rial</item>
+        <item>Japanese Yen</item>
+        <item>Kyrgyz Som</item>
+        <item>Korean Won</item>
+        <item>Kuwaiti Dinar</item>
+        <item>Kazakhstan Tenge</item>
+        <item>Lebanese Pound</item>
+        <item>Moldovan Leu</item>
+        <item>Mexican Peso</item>
+        <item>Malaysian Ringgit</item>
+        <item>Norwegian Krone</item>
+        <item>New Zealand Dollar</item>
+        <item>Polish Zloty</item>
+        <item>Saudi Riyal</item>
+        <item>Swedish Krona</item>
+        <item>Singapore Dollar</item>
+        <item>Tajik Somoni</item>
+        <item>Turkmen Manat</item>
+        <item>Taiwan Dollar</item>
+        <item>Ukraine Hryvnia</item>
+        <item>Uzbekistan Sum</item>
+        <item>South African Rand</item>
+    </string-array>
+</resources>

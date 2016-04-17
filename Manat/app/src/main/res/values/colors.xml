@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F44336</color>
+    <color name="colorPrimaryDark">#D32F2F</color>
+    <color name="colorAccent">#FFFFFF</color>
+    <color name="colorPrimaryLight">#FFCDD2</color>
+    <color name="colorTextPrimary">#212121</color>
+    <color name="colorTextSecondary">#727272</color>
+    <color name="colorDivider">#B6B6B6</color>
+    <color name="colorWhiteSilver">#FAFAFA</color>
+
+    <!-- Icon colors -->
+    <color name="colorTrendingUp">#388E3C</color>
+    <color name="colorTrendingDown">#D32F2F</color>
+    <color name="colorTrendingFlat">#FBC02D</color>
+</resources>

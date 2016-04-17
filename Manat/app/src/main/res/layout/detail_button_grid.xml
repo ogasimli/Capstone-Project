@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="5"
+    android:orientation="horizontal"
+    style="?android:attr/buttonBarStyle">
+
+    <Button
+        android:id="@+id/weekly_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="2dp"
+        android:background="@drawable/text_view_border_color_accent"
+        android:textColor="?colorPrimary"
+        android:textAllCaps="false"
+        style="?android:attr/buttonBarButtonStyle"
+        android:text="Week"/>
+
+    <Button
+        android:id="@+id/monthly_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="2dp"
+        android:background="@drawable/ripple_border_color_primary"
+        android:textColor="?colorAccent"
+        android:textAllCaps="false"
+        style="?android:attr/buttonBarButtonStyle"
+        android:text="Month"/>
+
+    <Button
+        android:id="@+id/quarterly_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="2dp"
+        android:background="@drawable/ripple_border_color_primary"
+        android:textColor="?colorAccent"
+        android:textAllCaps="false"
+        style="?android:attr/buttonBarButtonStyle"
+        android:text="3 M"/>
+
+    <Button
+        android:id="@+id/semi_annually_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="2dp"
+        android:background="@drawable/ripple_border_color_primary"
+        android:textColor="?colorAccent"
+        android:textAllCaps="false"
+        style="?android:attr/buttonBarButtonStyle"
+        android:text="6 M"/>
+
+    <Button
+        android:id="@+id/yearly_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="2dp"
+        android:background="@drawable/ripple_border_color_primary"
+        android:textColor="?colorAccent"
+        android:textAllCaps="false"
+        style="?android:attr/buttonBarButtonStyle"
+        android:text="Year"/>
+
+</LinearLayout>

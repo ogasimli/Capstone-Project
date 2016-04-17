@@ -1,0 +1,272 @@
+package org.ogasimli.manat.helper;
+
+import com.afollestad.inquiry.Inquiry;
+import com.afollestad.inquiry.callbacks.RunCallback;
+
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormatter;
+import org.ogasimli.manat.object.Currency;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+
+import manat.ogasimli.org.manat.R;
+
+/**
+ * Created by Orkhan Gasimli on 03.04.2016.
+ */
+public class Utilities {
+
+    private static final String LOG_TAG = Utilities.class.getSimpleName();
+
+    /*
+    * Helper method to check if device has a network connection
+    */
+    public static boolean isOnline(Context context) {
+        ConnectivityManager cm = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+    }
+
+    /*
+    * Helper method to get currency name by code
+    */
+    public static String getCurrencyName(Context context, String code) {
+        int i = -1;
+        for (String codes : context.getResources().getStringArray(R.array.currency_codes)) {
+            i++;
+            if (codes.equals(code))
+                break;
+        }
+        return context.getResources().getStringArray(R.array.currency_names)[i];
+    }
+
+    /*
+    * Helper method to get currency image resource by code
+    */
+    public static int getCurrencyImage(Context context, String code) {
+        switch (code) {
+            case "TRY":
+                return context.getResources().getIdentifier("trl", "drawable",
+                        context.getPackageName());
+            default:
+                return context.getResources().getIdentifier(code.toLowerCase(), "drawable",
+                        context.getPackageName());
+        }
+    }
+
+    /*
+    * Helper method to get trend image resource by currency trend
+    */
+    public static int getTrendImage(String trendString) {
+        int trend = Integer.parseInt(trendString);
+        switch (trend) {
+            case -1:
+                return R.drawable.ic_trending_down;
+            case 0:
+                return R.drawable.ic_trending_flat;
+            case 1:
+                return R.drawable.ic_trending_up;
+            default:
+                return R.drawable.ic_trending_flat;
+        }
+    }
+
+    /*
+    * Helper method to modify date string to use in query
+    */
+    public static String modifyDateString(String dateString, DateTimeFormatter beforeFormatter,
+                                          DateTimeFormatter afterFormatter, String appendix) {
+        DateTime date = DateTime.parse(dateString, beforeFormatter);
+        return afterFormatter.print(date) + appendix;
+    }
+
+    /*
+    * Helper method to get currency rate by currency code
+    */
+    public static String getRateByCode(ArrayList<Currency> currencyList, String code) {
+        double rate = 0.00;
+        if (currencyList != null && currencyList.size() > 0) {
+            for (Currency currency : currencyList) {
+                if (currency.getCode().equals(code)) {
+                    double value = Double.parseDouble(currency.getValue());
+                    double nominal = Double.parseDouble(currency.getNominal());
+                    rate = value / nominal;
+                }
+            }
+        }
+        return String.format(Locale.getDefault(), "%.4f", rate);
+    }
+
+    /**
+     * Helper method to retrieve selected currency code from SharedPreferences
+     */
+    public static String getSelectedCode(Context context) {
+        SharedPreferences sharedPref = context
+                .getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        String[] codes = context.getResources().getStringArray(R.array.currency_codes);
+        String defaultValue = codes[0];
+        return sharedPref.getString(Constants.SELECTED_CODE_KEY, defaultValue);
+    }
+
+    /**
+     * Helper method to build query string
+     */
+    public static String buildQueryString(String fromDate, String tillDate,
+                                          String code) {
+        String queryString;
+
+        if (tillDate == null || tillDate.isEmpty()) {
+            if (code == null || !code.isEmpty()) {
+                queryString = "{\"$and\":[{\"date\":\"" + fromDate + "\"},{\"type\":\"1\"}]}";
+
+            } else {
+                queryString = "{\"$and\":[{\"date\":\"" + fromDate + "\"},{\"code\":\"" + code
+                        + "\"}]}";
+            }
+        } else {
+            queryString = "{\"$and\":[{\"date\":{\"$gt\":\"" + fromDate + "\"," +
+                    "\"$lte\":\"" + tillDate + "\"}},{\"code\":\"" + code + "\"}]}";
+        }
+
+        return queryString;
+    }
+
+    /**
+     * Helper method to sort currency list
+     */
+    public static ArrayList<Currency> sortList(ArrayList<Currency> currencyList) {
+        //Sort list by code
+        Collections.sort(currencyList, new CurrencyCodeComparator());
+        //USD
+        currencyList.set(0, currencyList.get(41));
+        //EUR
+        currencyList.set(1, currencyList.get(12));
+        //GBP
+        currencyList.set(2, currencyList.get(13));
+        //RUB
+        currencyList.set(3, currencyList.get(32));
+        //TRY
+        currencyList.set(4, currencyList.get(38));
+
+        return currencyList;
+    }
+
+    public static class CurrencyCodeComparator implements Comparator<Currency> {
+
+        public int compare(Currency before, Currency after) {
+            return before.getCode().compareTo(after.getCode());
+        }
+    }
+
+    /**
+     * Helper method to find current, average, max and min rates from set of rates
+     */
+    public static HashMap<String, String> processData(ArrayList<Currency> currencyList, String
+            dateString) {
+
+        String currentRate = "";
+        String averageRate = "";
+        String maxRate = "";
+        String minRate = "";
+        double sum = 0;
+        List<Double> values = new ArrayList<>();
+        HashMap<String, String> result = new HashMap<>();
+
+        for (Currency currency : currencyList) {
+            if (currency.getDate().equals(dateString)) {
+                currentRate = currency.getValue();
+            }
+
+            sum += Double.parseDouble(currency.getValue());
+            values.add(Double.parseDouble(currency.getValue()));
+        }
+
+        currentRate = String.format(Locale.getDefault(), "%.4f", Double.parseDouble(currentRate));
+        averageRate = String.format(Locale.getDefault(), "%.4f", sum / currencyList.size());
+        maxRate = String.format(Locale.getDefault(), "%.4f", Collections.max(values));
+        minRate = String.format(Locale.getDefault(), "%.4f", Collections.min(values));
+
+        result.put(Constants.CURRENT_RATE_KEY, currentRate);
+        result.put(Constants.AVERAGE_RATE_KEY, averageRate);
+        result.put(Constants.MAX_RATE_KEY, maxRate);
+        result.put(Constants.MIN_RATE_KEY, minRate);
+
+        return result;
+    }
+
+    /**
+     * Helper method to query DB
+     */
+    public static ArrayList<Currency> queryDb(String dateString, String[] codes) {
+        ArrayList<Currency> currencyList = new ArrayList<>();
+
+        for (String code : codes) {
+
+            Currency currency = Inquiry.get()
+                    .selectFrom(Constants.DB_NAME, Currency.class)
+                    .where("date = ? AND code = ?", dateString, code)
+                    .one();
+
+            Log.d(LOG_TAG, "Loaded currencies: " + currency);
+
+
+            if (currency == null) {
+                break;
+            } else {
+                currencyList.add(currency);
+            }
+        }
+
+        if (currencyList.size() != codes.length) {
+            currencyList = null;
+        }
+
+        return currencyList;
+    }
+
+    /**
+     * Helper method to insert into DB
+     */
+    public static void insertIntoDb(final ArrayList<Currency> currencyList) {
+        for (Currency currency : currencyList) {
+            Inquiry.get()
+                    .insertInto(Constants.DB_NAME, Currency.class)
+                    .values(currency)
+                    .run(new RunCallback<Long[]>() {
+                        @Override
+                        public void result(Long[] changed) {
+                            Log.d(LOG_TAG, "Inserted currency " + "IDs: " + Arrays.toString(changed));
+                        }
+                    });
+        }
+    }
+
+
+    /**
+     * Helper method to delete from DB
+     */
+    public static void deleteFromDB(String dateString) {
+        Inquiry.get()
+                .deleteFrom(Constants.DB_NAME, Currency.class)
+                .where("date = ?", dateString)
+                .run(new RunCallback<Integer>() {
+                    @Override
+                    public void result(Integer changed) {
+                        Log.d(LOG_TAG, "Deleted currency IDs: " + changed.toString());
+                    }
+                });
+    }
+}

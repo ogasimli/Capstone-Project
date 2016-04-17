@@ -1,0 +1,142 @@
+package org.ogasimli.manat.object;
+
+import com.google.gson.annotations.SerializedName;
+
+import com.afollestad.inquiry.annotations.Column;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+/**
+ * Class for holding Currency object
+ *
+ * Created by Orkhan Gasimli on 03.04.2016.
+ */
+public class Currency implements Parcelable {
+
+    //TODO: remove ObjectID if unnecessary
+    @Column(name = "_id", primaryKey = true, notNull = true, autoIncrement = true)
+    private long id;
+
+    @SerializedName("code")
+    @Column
+    private String code;
+
+    private String name;
+
+    @SerializedName("nominal")
+    @Column
+    private String nominal;
+
+    @SerializedName("value")
+    @Column
+    private String value;
+
+    @SerializedName("date")
+    @Column
+    private String date;
+
+    @SerializedName("trend")
+    @Column
+    private String trend;
+
+    public Currency() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNominal() {
+        return nominal;
+    }
+
+    public void setNominal(String nominal) {
+        this.nominal = nominal;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        if(value.equals("")){
+            value = "0";
+        }
+        this.value = value;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTrend() {
+        return trend;
+    }
+
+    public void setTrend(String trend) {
+        this.trend = trend;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
+        dest.writeString(this.code);
+        dest.writeString(this.name);
+        dest.writeString(this.nominal);
+        dest.writeString(this.value);
+        dest.writeString(this.date);
+        dest.writeString(this.trend);
+    }
+
+    protected Currency(Parcel in) {
+        this.id = in.readLong();
+        this.code = in.readString();
+        this.name = in.readString();
+        this.nominal = in.readString();
+        this.value = in.readString();
+        this.date = in.readString();
+        this.trend = in.readString();
+    }
+
+    public static final Creator<Currency> CREATOR = new Creator<Currency>() {
+        @Override
+        public Currency createFromParcel(Parcel source) {
+            return new Currency(source);
+        }
+
+        @Override
+        public Currency[] newArray(int size) {
+            return new Currency[size];
+        }
+    };
+}
