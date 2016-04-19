@@ -28,8 +28,11 @@ import manat.ogasimli.org.manat.R;
 public class ChartMaker {
 
     private Context mContext;
+
     private Typeface tf;
+
     private LineChart mChart;
+
     ArrayList<Currency> mCurrencyList;
 
     public ChartMaker(Context context, LineChart lineChart, ArrayList<Currency> currencyList) {
@@ -58,7 +61,7 @@ public class ChartMaker {
 
         // create a custom MarkerView (extend MarkerView) and specify the layout
         // to use for it
-        CustomChartMarker mv = new CustomChartMarker(mContext, R.layout.custom_marker_view);
+        CustomChartMarker mv = new CustomChartMarker(mContext, R.layout.custom_marker_view, mChart);
 
         // set the marker to the chart
         mChart.setMarkerView(mv);
@@ -90,7 +93,7 @@ public class ChartMaker {
         y.setTypeface(tf);
         y.setLabelCount(6, false);
         y.setStartAtZero(false);
-        y.setLabelCount(5, false);
+        y.setLabelCount(8, true);
         y.setValueFormatter(new MyYAxisValueFormatter());
 
         mChart.getAxisRight().setEnabled(false);
@@ -121,25 +124,25 @@ public class ChartMaker {
         }
 
         // create a dataset and give it a type
-        LineDataSet set1 = new LineDataSet(yVals, "DataSet 1");
-        set1.setDrawCubic(true);
-        set1.setCubicIntensity(0.1f);
-        set1.setDrawFilled(true);
-        set1.setDrawCircles(false);
-        set1.setLineWidth(1.8f);
+        LineDataSet lineDataSet = new LineDataSet(yVals, "DataSet 1");
+        lineDataSet.setDrawCubic(true);
+        lineDataSet.setCubicIntensity(0.1f);
+        lineDataSet.setDrawFilled(true);
+        lineDataSet.setDrawCircles(false);
+        lineDataSet.setLineWidth(1.8f);
         //set1.setCircleSize(4f);
-        set1.setCircleColor(Color.WHITE);
-        set1.setHighlightEnabled(true);
-        set1.setDrawHorizontalHighlightIndicator(false);
-        set1.setDrawVerticalHighlightIndicator(true);
-        set1.setHighLightColor(Color.WHITE);
-        set1.setColor(Color.WHITE);
-        set1.setFillColor(Color.WHITE);
+        lineDataSet.setCircleColor(Color.WHITE);
+        lineDataSet.setHighlightEnabled(true);
+        lineDataSet.setDrawHorizontalHighlightIndicator(false);
+        lineDataSet.setDrawVerticalHighlightIndicator(true);
+        lineDataSet.setHighLightColor(Color.WHITE);
+        lineDataSet.setColor(Color.WHITE);
+        lineDataSet.setFillColor(Color.WHITE);
         //set1.setFillAlpha(255);
 
         // create a data object with the datasets
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(set1); // add the datasets
+        dataSets.add(lineDataSet); // add the datasets
         LineData data = new LineData(xVals, dataSets);
         data.setValueTypeface(tf);
         data.setValueTextSize(9f);

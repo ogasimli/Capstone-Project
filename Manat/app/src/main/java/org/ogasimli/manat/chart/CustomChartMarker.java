@@ -1,5 +1,6 @@
 package org.ogasimli.manat.chart;
 
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.data.CandleEntry;
 import com.github.mikephil.charting.data.Entry;
@@ -20,11 +21,17 @@ import manat.ogasimli.org.manat.R;
  */
 public class CustomChartMarker extends MarkerView {
 
-    @Bind(R.id.marker_textview)
-    TextView markerTextView;
+    private LineChart mChart;
 
-    public CustomChartMarker(Context context, int layoutResource) {
+    @Bind(R.id.marker_y_text_view)
+    TextView markerYTextView;
+
+    @Bind(R.id.marker_x_text_view)
+    TextView markerXTextView;
+
+    public CustomChartMarker(Context context, int layoutResource, LineChart lineChart) {
         super(context, layoutResource);
+        mChart = lineChart;
         ButterKnife.bind(this);
     }
 
@@ -35,10 +42,12 @@ public class CustomChartMarker extends MarkerView {
 
         if (e instanceof CandleEntry) {
             CandleEntry ce = (CandleEntry) e;
-            markerTextView.setText("" + Utils.formatNumber(ce.getHigh(), 0, true));
+            markerYTextView.setText("" + Utils.formatNumber(ce.getHigh(), 4, true));
         } else {
-            markerTextView.setText("" + Utils.formatNumber(e.getVal(), 0, true));
+            markerYTextView.setText("" + Utils.formatNumber(e.getVal(), 4, true));
         }
+
+        markerXTextView.setText(mChart.getData().getXVals().get(e.getXIndex()));
     }
 
     @Override

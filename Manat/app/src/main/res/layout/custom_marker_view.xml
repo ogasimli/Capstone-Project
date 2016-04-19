@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/text_view_border_color_accent"
+    android:padding="5dp"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/marker_textview"
+        android:id="@+id/marker_y_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:text=""
-        android:textSize="12sp"
+        android:layout_marginBottom="2dp"
+        tools:text="1.528"
+        android:textSize="10sp"
+        android:textColor="@color/colorPrimary"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/marker_x_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        tools:text="1.528"
+        android:textSize="10sp"
         android:textColor="@color/colorPrimary"
         android:ellipsize="end"
         android:singleLine="true"
