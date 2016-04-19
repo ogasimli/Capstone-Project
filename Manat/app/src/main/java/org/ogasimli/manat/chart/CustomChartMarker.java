@@ -29,14 +29,21 @@ public class CustomChartMarker extends MarkerView {
     @Bind(R.id.marker_x_text_view)
     TextView markerXTextView;
 
+    /**
+     * Constructor. Sets up the MarkerView with a custom layout resource.
+     *
+     * @param layoutResource the layout resource to use for the MarkerView
+     */
     public CustomChartMarker(Context context, int layoutResource, LineChart lineChart) {
         super(context, layoutResource);
         mChart = lineChart;
         ButterKnife.bind(this);
     }
 
-    // callbacks everytime the MarkerView is redrawn, can be used to update the
-    // content (user-interface)
+    /**
+    * callbacks every time the MarkerView is redrawn, can be used to update the
+    * content (user-interface)
+    */
     @Override
     public void refreshContent(Entry e, Highlight highlight) {
 
@@ -51,13 +58,13 @@ public class CustomChartMarker extends MarkerView {
     }
 
     @Override
-    public int getXOffset(float xpos) {
+    public int getXOffset(float xPosition) {
         // this will center the marker-view horizontally
         return -(getWidth() / 2);
     }
 
     @Override
-    public int getYOffset(float ypos) {
+    public int getYOffset(float yPosition) {
         // this will cause the marker-view to be above the selected value
         return -(getHeight()+2);
     }
