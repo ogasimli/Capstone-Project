@@ -199,9 +199,6 @@ public class DetailActivityFragment extends Fragment {
             }
         }
 
-        ChartMaker chartMaker = new ChartMaker(getActivity(), mChart);
-        chartMaker.createChart();
-
         return rootView;
     }
 
@@ -282,6 +279,10 @@ public class DetailActivityFragment extends Fragment {
         //View and hide relevant LinearLayouts
         mResultView.setVisibility(View.VISIBLE);
         mErrorView.setVisibility(View.GONE);
+
+        //Instantiate and create LineChart
+        ChartMaker chartMaker = new ChartMaker(getActivity(), mChart, mSecondaryCurrencyList);
+        chartMaker.createChart();
 
         //Analyze and set values to TextViews
         HashMap<String, String> map = Utilities.processData(mSecondaryCurrencyList, mTillDateString);

@@ -30,6 +30,8 @@ public class Constants {
             ("dd MM yyyy");
     public static final DateTimeFormatter DATE_FORMATTER_MONTH_STRING_D = DateTimeFormat.forPattern
             ("d MMMM yyyy");
+    public static final DateTimeFormatter DATE_FORMATTER_MONTH_STRING_DMMMYY = DateTimeFormat
+            .forPattern("d MMM yy");
     public static final DateTimeFormatter DATE_FORMATTER_MONTH_STRING_DD = DateTimeFormat.forPattern
             ("dd MMMM yyyy");
     public static final DateTimeFormatter DATE_FORMATTER_WITH_DASH = DateTimeFormat.forPattern

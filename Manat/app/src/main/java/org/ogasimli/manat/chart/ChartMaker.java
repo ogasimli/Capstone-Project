@@ -8,6 +8,10 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
+import org.ogasimli.manat.helper.Constants;
+import org.ogasimli.manat.helper.Utilities;
+import org.ogasimli.manat.object.Currency;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -26,10 +30,12 @@ public class ChartMaker {
     private Context mContext;
     private Typeface tf;
     private LineChart mChart;
+    ArrayList<Currency> mCurrencyList;
 
-    public ChartMaker(Context context, LineChart lineChart) {
+    public ChartMaker(Context context, LineChart lineChart, ArrayList<Currency> currencyList) {
         mContext = context;
         mChart = lineChart;
+        mCurrencyList = currencyList;
     }
 
     public void createChart(){
@@ -84,32 +90,34 @@ public class ChartMaker {
         y.setTypeface(tf);
         y.setLabelCount(6, false);
         y.setStartAtZero(false);
+        y.setLabelCount(5, false);
+        y.setValueFormatter(new MyYAxisValueFormatter());
 
         mChart.getAxisRight().setEnabled(false);
 
         // add data
-        setData(12, 20);
+        setData(mCurrencyList);
 
         mChart.getLegend().setEnabled(false);
 
         mChart.animateXY(2000, 2000);
     }
 
-    private void setData(int count, float range) {
+    private void setData(ArrayList<Currency> currencyList) {
 
         ArrayList<String> xVals = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            xVals.add((1990 +i) + "");
-        }
-
         ArrayList<Entry> yVals = new ArrayList<>();
 
-        for (int i = 0; i < count; i++) {
-            float mult = (range + 1);
-            float val = (float) (Math.random() * mult) + 20;// + (float)
-            // ((mult *
-            // 0.1) / 10);
-            yVals.add(new Entry(val, i));
+        for (int i = 0; i < currencyList.size(); i++) {
+            Currency currency = currencyList.get(i);
+            String dateString = currency.getDate();
+            String dateSubstring = dateString.substring(0, dateString.indexOf("T"));
+            dateString = Utilities.modifyDateString(dateSubstring,
+                    Constants.DATE_FORMATTER_WITH_DASH,
+                    Constants.DATE_FORMATTER_MONTH_STRING_DMMMYY, "");
+            float value = Float.parseFloat(currency.getValue());
+            xVals.add(dateString);
+            yVals.add(new Entry(value, i));
         }
 
         // create a dataset and give it a type

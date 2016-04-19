@@ -158,13 +158,13 @@ public class Utilities {
         int periodInt = days.getDays();
 
         //Create new Currency list based on old Currency list containing dates
-        for (int i = 0; i < periodInt; i++) {
+        for (int i = periodInt - 1; i >= 0; i--) {
             for (Currency currency : currencyList) {
-                String tillDateString = Constants.DATE_FORMATTER_WITH_DASH
+                String fromDateString = Constants.DATE_FORMATTER_WITH_DASH
                         .print(tillDate.minusDays(i));
                 String date = currency.getDate();
                 String currencyDateString = date.substring(0, date.indexOf("T"));
-                if (currencyDateString.equals(tillDateString)) {
+                if (currencyDateString.equals(fromDateString)) {
                     newCurrencyList.add(currency);
                 }
             }
