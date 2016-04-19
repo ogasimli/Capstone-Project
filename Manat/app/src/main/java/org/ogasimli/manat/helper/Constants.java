@@ -43,7 +43,9 @@ public class Constants {
     //Bundle keys
     public static final String DATE_PICKER_BUNDLE_KEY = "DATE_PICKER_BUNDLE_KEY";
     public static final String LIST_STATE_KEY = "LIST_STATE_KEY";
+    public static final String SECONDARY_LIST_STATE_KEY = "SECONDARY_LIST_STATE_KEY";
     public static final String VIEW_STATE_KEY = "VIEW_STATE_KEY";
+    public static final String BUTTON_STATE_KEY = "VIEW_STATE_KEY";
 
     //Activity state keys
     public final static int VIEW_STATE_ERROR = 0;

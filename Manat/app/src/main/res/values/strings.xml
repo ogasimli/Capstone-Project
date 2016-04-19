@@ -16,6 +16,11 @@
     <string name="menu_refresh_text">Refresh</string>
     <string name="currency_name_transition_name">currency_name</string>
     <string name="detail_statistics_label">"%s" Statistics</string>
+    <string name="statistics_label_weekly">Weekly</string>
+    <string name="statistics_label_quarterly">Quarterly</string>
+    <string name="statistics_label_monthly">Monthly</string>
+    <string name="statistics_label_semi_annually">Semiannually</string>
+    <string name="statistics_label_yearly">Yearly</string>
 
     <string-array name="currency_codes" translatable="false">
         <item>USD</item>

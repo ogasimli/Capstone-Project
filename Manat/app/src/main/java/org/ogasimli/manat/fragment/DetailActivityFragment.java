@@ -52,7 +52,9 @@ public class DetailActivityFragment extends Fragment {
 
     private String mCurrencyName;
 
-    private ArrayList<Currency> mCurrencyList;
+    private ArrayList<Currency> mMainCurrencyList;
+
+    private ArrayList<Currency> mSecondaryCurrencyList;
 
     private ProgressDialog mProgressDialog;
 
@@ -140,7 +142,9 @@ public class DetailActivityFragment extends Fragment {
         }
 
         outState.putInt(Constants.VIEW_STATE_KEY, state);
-        outState.putParcelableArrayList(Constants.LIST_STATE_KEY, mCurrencyList);
+        outState.putInt(Constants.BUTTON_STATE_KEY, mPressedBtnNum);
+        outState.putParcelableArrayList(Constants.LIST_STATE_KEY, mMainCurrencyList);
+        outState.putParcelableArrayList(Constants.SECONDARY_LIST_STATE_KEY, mSecondaryCurrencyList);
     }
 
     @Override
@@ -173,7 +177,9 @@ public class DetailActivityFragment extends Fragment {
         * if savedInstanceSate is not null
         */
         if (savedInstanceState == null || !savedInstanceState.containsKey(Constants.LIST_STATE_KEY)
-                || !savedInstanceState.containsKey(Constants.VIEW_STATE_KEY)) {
+                || !savedInstanceState.containsKey(Constants.SECONDARY_LIST_STATE_KEY)
+                || !savedInstanceState.containsKey(Constants.VIEW_STATE_KEY)
+                || !savedInstanceState.containsKey(Constants.BUTTON_STATE_KEY)) {
             loadData();
         } else {
             int state = savedInstanceState.getInt(Constants.VIEW_STATE_KEY,
@@ -183,8 +189,10 @@ public class DetailActivityFragment extends Fragment {
                     showErrorView();
                     break;
                 case Constants.VIEW_STATE_RESULTS:
-                    mCurrencyList = savedInstanceState.getParcelableArrayList
+                    mMainCurrencyList = savedInstanceState.getParcelableArrayList
                             (Constants.LIST_STATE_KEY);
+                    mSecondaryCurrencyList = savedInstanceState.getParcelableArrayList
+                            (Constants.SECONDARY_LIST_STATE_KEY);
 
                     showResultView();
                     break;
@@ -233,9 +241,11 @@ public class DetailActivityFragment extends Fragment {
                 new Callback<ArrayList<Currency>>() {
                     @Override
                     public void success(ArrayList<Currency> currencyList, Response response) {
-                        mCurrencyList = new ArrayList<>();
-                        mCurrencyList = currencyList;
-                        if (mCurrencyList != null && mCurrencyList.size() > 0) {
+                        mMainCurrencyList = new ArrayList<>();
+                        mMainCurrencyList = currencyList;
+                        mSecondaryCurrencyList = Utilities.getDataForPeriod(mMainCurrencyList,
+                                mPressedBtnNum);
+                        if (mSecondaryCurrencyList != null && mSecondaryCurrencyList.size() > 0) {
                             showResultView();
                         } else {
                             showErrorView();
@@ -274,7 +284,7 @@ public class DetailActivityFragment extends Fragment {
         mErrorView.setVisibility(View.GONE);
 
         //Analyze and set values to TextViews
-        HashMap<String, String> map = Utilities.processData(mCurrencyList, mTillDateString);
+        HashMap<String, String> map = Utilities.processData(mSecondaryCurrencyList, mTillDateString);
         mCurrentRateTextView.setText(map.get(Constants.CURRENT_RATE_KEY));
         mAverageRateTextView.setText(map.get(Constants.AVERAGE_RATE_KEY));
         mMaxRateTextView.setText(map.get(Constants.MAX_RATE_KEY));
@@ -341,7 +351,7 @@ public class DetailActivityFragment extends Fragment {
                         button.setTextColor(mColorAccent);
                     }
                 }
-                statisticsLabel = "Weekly";
+                statisticsLabel = getActivity().getString(R.string.statistics_label_weekly);
                 break;
             case Constants.MONTHLY_BTN_SELECTED:
                 for (Button button : buttonList) {
@@ -355,7 +365,7 @@ public class DetailActivityFragment extends Fragment {
                         button.setTextColor(mColorAccent);
                     }
                 }
-                statisticsLabel = "Monthly";
+                statisticsLabel = getActivity().getString(R.string.statistics_label_monthly);
                 break;
             case Constants.QUARTERLY_BTN_SELECTED:
                 for (Button button : buttonList) {
@@ -369,7 +379,7 @@ public class DetailActivityFragment extends Fragment {
                         button.setTextColor(mColorAccent);
                     }
                 }
-                statisticsLabel = "Quarterly";
+                statisticsLabel = getActivity().getString(R.string.statistics_label_quarterly);
                 break;
             case Constants.SEMI_ANNUALLY_BTN_SELECTED:
                 for (Button button : buttonList) {
@@ -383,7 +393,7 @@ public class DetailActivityFragment extends Fragment {
                         button.setTextColor(mColorAccent);
                     }
                 }
-                statisticsLabel = "Semiannually";
+                statisticsLabel = getActivity().getString(R.string.statistics_label_semi_annually);
                 break;
             case Constants.YEARLY_BTN_SELECTED:
                 for (Button button : buttonList) {
@@ -397,7 +407,7 @@ public class DetailActivityFragment extends Fragment {
                         button.setTextColor(mColorAccent);
                     }
                 }
-                statisticsLabel = "Yearly";
+                statisticsLabel = getActivity().getString(R.string.statistics_label_yearly);
                 break;
         }
 
@@ -422,33 +432,41 @@ public class DetailActivityFragment extends Fragment {
         loadData();
     }
 
-    @OnClick(R.id.weekly_btn)
-    public void weeklyBtnClick(Button button) {
-        mPressedBtnNum = Constants.WEEKLY_BTN_SELECTED;
-        changeBtnState(mPressedBtnNum);
-    }
+    @OnClick({R.id.weekly_btn, R.id.monthly_btn, R.id.quarterly_btn,
+            R.id.semi_annually_btn, R.id.yearly_btn})
+    public void showStatistics(Button button) {
+        //Show ProgressDialog if not visible
+        if (mProgressDialog == null || !mProgressDialog.isShowing()) {
+            showProgressDialog(true);
+        }
 
-    @OnClick(R.id.monthly_btn)
-    public void monthlyBtnClick(Button button) {
-        mPressedBtnNum = Constants.MONTHLY_BTN_SELECTED;
-        changeBtnState(mPressedBtnNum);
-    }
+        switch (button.getText().toString()) {
+            case "Week":
+                mPressedBtnNum = Constants.WEEKLY_BTN_SELECTED;
+                break;
+            case "Month":
+                mPressedBtnNum = Constants.MONTHLY_BTN_SELECTED;
+                break;
+            case "3 M":
+                mPressedBtnNum = Constants.QUARTERLY_BTN_SELECTED;
+                break;
+            case "6 M":
+                mPressedBtnNum = Constants.SEMI_ANNUALLY_BTN_SELECTED;
+                break;
+            case "Year":
+                mPressedBtnNum = Constants.YEARLY_BTN_SELECTED;
+                break;
+            default:
+                mPressedBtnNum = Constants.WEEKLY_BTN_SELECTED;
+                break;
+        }
 
-    @OnClick(R.id.quarterly_btn)
-    public void quarterlyBtnClick(Button button) {
-        mPressedBtnNum = Constants.QUARTERLY_BTN_SELECTED;
         changeBtnState(mPressedBtnNum);
-    }
-
-    @OnClick(R.id.semi_annually_btn)
-    public void semiAnnuallyBtnClick(Button button) {
-        mPressedBtnNum = Constants.SEMI_ANNUALLY_BTN_SELECTED;
-        changeBtnState(mPressedBtnNum);
-    }
-
-    @OnClick(R.id.yearly_btn)
-    public void yearlyBtnClick(Button button) {
-        mPressedBtnNum = Constants.YEARLY_BTN_SELECTED;
-        changeBtnState(mPressedBtnNum);
+        mSecondaryCurrencyList = Utilities.getDataForPeriod(mMainCurrencyList, mPressedBtnNum);
+        if (mSecondaryCurrencyList != null && mSecondaryCurrencyList.size() > 0) {
+            showResultView();
+        } else {
+            showErrorView();
+        }
     }
 }

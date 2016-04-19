@@ -4,6 +4,7 @@ import com.afollestad.inquiry.Inquiry;
 import com.afollestad.inquiry.callbacks.RunCallback;
 
 import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.joda.time.format.DateTimeFormatter;
 import org.ogasimli.manat.object.Currency;
 
@@ -122,6 +123,96 @@ public class Utilities {
     }
 
     /**
+     * Helper method to set Date property of Currency object
+     */
+    public static ArrayList<Currency> getDataForPeriod(ArrayList<Currency> currencyList,
+                                                       int pressedBtnNum) {
+        ArrayList<Currency> newCurrencyList = new ArrayList<>();
+        DateTime tillDate = new DateTime();
+        DateTime fromDate;
+
+        //Identify period
+        switch (pressedBtnNum) {
+            case Constants.WEEKLY_BTN_SELECTED:
+                fromDate = tillDate.minusWeeks(1);
+                break;
+            case Constants.MONTHLY_BTN_SELECTED:
+                fromDate = tillDate.minusMonths(1);
+                break;
+            case Constants.QUARTERLY_BTN_SELECTED:
+                fromDate = tillDate.minusMonths(3);
+                break;
+            case Constants.SEMI_ANNUALLY_BTN_SELECTED:
+                fromDate = tillDate.minusMonths(6);
+                break;
+            case Constants.YEARLY_BTN_SELECTED:
+                fromDate = tillDate.minusYears(1);
+                break;
+            default:
+                fromDate = tillDate.minusWeeks(1);
+                break;
+        }
+
+        //Get days between dates
+        Days days = Days.daysBetween(fromDate, tillDate);
+        int periodInt = days.getDays();
+
+        //Create new Currency list based on old Currency list containing dates
+        for (int i = 0; i < periodInt; i++) {
+            for (Currency currency : currencyList) {
+                String tillDateString = Constants.DATE_FORMATTER_WITH_DASH
+                        .print(tillDate.minusDays(i));
+                String date = currency.getDate();
+                String currencyDateString = date.substring(0, date.indexOf("T"));
+                if (currencyDateString.equals(tillDateString)) {
+                    newCurrencyList.add(currency);
+                }
+            }
+        }
+
+        return newCurrencyList;
+    }
+
+    /**
+     * Helper method to find current, average, max and min rates from set of rates
+     */
+    public static HashMap<String, String> processData(ArrayList<Currency> currencyList, String
+            dateString) {
+
+        String currentRate = "";
+        String averageRate = "";
+        String maxRate = "";
+        String minRate = "";
+        double sum = 0;
+        List<Double> values = new ArrayList<>();
+        HashMap<String, String> result = new HashMap<>();
+
+        for (Currency currency : currencyList) {
+            if (currency.getDate().equals(dateString)) {
+                currentRate = currency.getValue();
+            }
+
+            sum += Double.parseDouble(currency.getValue());
+            values.add(Double.parseDouble(currency.getValue()));
+        }
+
+        if (!currentRate.isEmpty()) {
+            currentRate = String.format(Locale.getDefault(), "%.4f", Double.parseDouble(currentRate));
+        }
+
+        averageRate = String.format(Locale.getDefault(), "%.4f", sum / currencyList.size());
+        maxRate = String.format(Locale.getDefault(), "%.4f", Collections.max(values));
+        minRate = String.format(Locale.getDefault(), "%.4f", Collections.min(values));
+
+        result.put(Constants.CURRENT_RATE_KEY, currentRate);
+        result.put(Constants.AVERAGE_RATE_KEY, averageRate);
+        result.put(Constants.MAX_RATE_KEY, maxRate);
+        result.put(Constants.MIN_RATE_KEY, minRate);
+
+        return result;
+    }
+
+    /**
      * Helper method to build query string
      */
     public static String buildQueryString(String fromDate, String tillDate,
@@ -148,18 +239,29 @@ public class Utilities {
      * Helper method to sort currency list
      */
     public static ArrayList<Currency> sortList(ArrayList<Currency> currencyList) {
+        Currency currency;
         //Sort list by code
         Collections.sort(currencyList, new CurrencyCodeComparator());
         //USD
-        currencyList.set(0, currencyList.get(41));
+        currency = currencyList.get(41);
+        currencyList.remove(41);
+        currencyList.add(0, currency);
         //EUR
-        currencyList.set(1, currencyList.get(12));
+        currency = currencyList.get(13);
+        currencyList.remove(13);
+        currencyList.add(1, currency);
         //GBP
-        currencyList.set(2, currencyList.get(13));
+        currency = currencyList.get(14);
+        currencyList.remove(14);
+        currencyList.add(2, currency);
         //RUB
-        currencyList.set(3, currencyList.get(32));
+        currency = currencyList.get(33);
+        currencyList.remove(33);
+        currencyList.add(3, currency);
         //TRY
-        currencyList.set(4, currencyList.get(38));
+        currency = currencyList.get(39);
+        currencyList.remove(39);
+        currencyList.add(4, currency);
 
         return currencyList;
     }
@@ -172,56 +274,18 @@ public class Utilities {
     }
 
     /**
-     * Helper method to find current, average, max and min rates from set of rates
-     */
-    public static HashMap<String, String> processData(ArrayList<Currency> currencyList, String
-            dateString) {
-
-        String currentRate = "";
-        String averageRate = "";
-        String maxRate = "";
-        String minRate = "";
-        double sum = 0;
-        List<Double> values = new ArrayList<>();
-        HashMap<String, String> result = new HashMap<>();
-
-        for (Currency currency : currencyList) {
-            if (currency.getDate().equals(dateString)) {
-                currentRate = currency.getValue();
-            }
-
-            sum += Double.parseDouble(currency.getValue());
-            values.add(Double.parseDouble(currency.getValue()));
-        }
-
-        currentRate = String.format(Locale.getDefault(), "%.4f", Double.parseDouble(currentRate));
-        averageRate = String.format(Locale.getDefault(), "%.4f", sum / currencyList.size());
-        maxRate = String.format(Locale.getDefault(), "%.4f", Collections.max(values));
-        minRate = String.format(Locale.getDefault(), "%.4f", Collections.min(values));
-
-        result.put(Constants.CURRENT_RATE_KEY, currentRate);
-        result.put(Constants.AVERAGE_RATE_KEY, averageRate);
-        result.put(Constants.MAX_RATE_KEY, maxRate);
-        result.put(Constants.MIN_RATE_KEY, minRate);
-
-        return result;
-    }
-
-    /**
      * Helper method to query DB
      */
     public static ArrayList<Currency> queryDb(String dateString, String[] codes) {
         ArrayList<Currency> currencyList = new ArrayList<>();
 
         for (String code : codes) {
-
             Currency currency = Inquiry.get()
                     .selectFrom(Constants.DB_NAME, Currency.class)
                     .where("date = ? AND code = ?", dateString, code)
                     .one();
 
             Log.d(LOG_TAG, "Loaded currencies: " + currency);
-
 
             if (currency == null) {
                 break;
