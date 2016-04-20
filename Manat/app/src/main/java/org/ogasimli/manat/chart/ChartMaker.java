@@ -117,7 +117,7 @@ public class ChartMaker {
             String dateSubstring = dateString.substring(0, dateString.indexOf("T"));
             dateString = Utilities.modifyDateString(dateSubstring,
                     Constants.DATE_FORMATTER_WITH_DASH,
-                    Constants.DATE_FORMATTER_MONTH_STRING_DMMMYY, "");
+                    Constants.DATE_FORMATTER_DMMMYY, "");
             float value = Float.parseFloat(currency.getValue());
             xVals.add(dateString);
             yVals.add(new Entry(value, i));

@@ -21,6 +21,14 @@
     <string name="statistics_label_monthly">Monthly</string>
     <string name="statistics_label_semi_annually">Semiannually</string>
     <string name="statistics_label_yearly">Yearly</string>
+    <string name="share_rate_statistics_title">Share rate statistics via</string>
+    <string name="share_statistics_text" formatted="false">Check out rate statistics of \""%s"\"
+        for period from "%s" till "%s":\n
+        Current rate - "%s"\n
+        Average rate - "%s"\n
+        Maximum rate - "%s"\n
+        Minimum rate - "%s"
+    </string>
 
     <string-array name="currency_codes" translatable="false">
         <item>USD</item>

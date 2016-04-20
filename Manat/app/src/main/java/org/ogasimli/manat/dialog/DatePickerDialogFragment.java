@@ -40,7 +40,7 @@ public class DatePickerDialogFragment extends DialogFragment
         ButterKnife.bind(this, getActivity());
 
         String dateString = getArguments().getString(Constants.DATE_PICKER_BUNDLE_KEY);
-        DateTime date = DateTime.parse(dateString, Constants.DATE_FORMATTER_MONTH_STRING_DD);
+        DateTime date = DateTime.parse(dateString, Constants.DATE_FORMATTER_DDMMMYYYY);
         int year = date.getYear();
         //Subtract 1 because JodaTime's month begins from 1, while Calendar's month from 0
         int month = date.getMonthOfYear() - 1;
@@ -53,8 +53,8 @@ public class DatePickerDialogFragment extends DialogFragment
     public void onDateSet(DatePicker view, int year, int month, int day) {
         String dateString = String.format("%s %s %s", String.valueOf(day),
                 String.valueOf(month + 1), String.valueOf(year));
-        dateString = Utilities.modifyDateString(dateString, Constants.DATE_FORMATTER_NORMAL,
-                Constants.DATE_FORMATTER_MONTH_STRING_D, "");
+        dateString = Utilities.modifyDateString(dateString, Constants.DATE_FORMATTER_DDMMYYYY,
+                Constants.DATE_FORMATTER_DMMMMYYYY, "");
         mMainDateTextView.setText(dateString);
     }
 

@@ -26,13 +26,13 @@ public class Constants {
     public static final String SELECT_CURRENCY_DIALOG_FRAGMENT = "SelectCurrencyDialogFragment";
 
     //Date constants
-    public static final DateTimeFormatter DATE_FORMATTER_NORMAL = DateTimeFormat.forPattern
+    public static final DateTimeFormatter DATE_FORMATTER_DDMMYYYY = DateTimeFormat.forPattern
             ("dd MM yyyy");
-    public static final DateTimeFormatter DATE_FORMATTER_MONTH_STRING_D = DateTimeFormat.forPattern
+    public static final DateTimeFormatter DATE_FORMATTER_DMMMMYYYY = DateTimeFormat.forPattern
             ("d MMMM yyyy");
-    public static final DateTimeFormatter DATE_FORMATTER_MONTH_STRING_DMMMYY = DateTimeFormat
-            .forPattern("d MMM yy");
-    public static final DateTimeFormatter DATE_FORMATTER_MONTH_STRING_DD = DateTimeFormat.forPattern
+    public static final DateTimeFormatter DATE_FORMATTER_DMMMYY = DateTimeFormat.forPattern
+            ("d MMM yy");
+    public static final DateTimeFormatter DATE_FORMATTER_DDMMMYYYY = DateTimeFormat.forPattern
             ("dd MMMM yyyy");
     public static final DateTimeFormatter DATE_FORMATTER_WITH_DASH = DateTimeFormat.forPattern
             ("yyyy-MM-dd");
@@ -47,7 +47,7 @@ public class Constants {
     public static final String LIST_STATE_KEY = "LIST_STATE_KEY";
     public static final String SECONDARY_LIST_STATE_KEY = "SECONDARY_LIST_STATE_KEY";
     public static final String VIEW_STATE_KEY = "VIEW_STATE_KEY";
-    public static final String BUTTON_STATE_KEY = "VIEW_STATE_KEY";
+    public static final String BUTTON_STATE_KEY = "BUTTON_STATE_KEY";
 
     //Activity state keys
     public final static int VIEW_STATE_ERROR = 0;

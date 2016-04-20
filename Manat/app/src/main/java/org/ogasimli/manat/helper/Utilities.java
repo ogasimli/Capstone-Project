@@ -129,6 +129,29 @@ public class Utilities {
                                                        int pressedBtnNum) {
         ArrayList<Currency> newCurrencyList = new ArrayList<>();
         DateTime tillDate = new DateTime();
+        int period = determinePeriod(pressedBtnNum);
+
+        //Create new Currency list based on old Currency list containing dates
+        for (int i = period; i >= 0; i--) {
+            for (Currency currency : currencyList) {
+                String fromDateString = Constants.DATE_FORMATTER_WITH_DASH
+                        .print(tillDate.minusDays(i));
+                String date = currency.getDate();
+                String currencyDateString = date.substring(0, date.indexOf("T"));
+                if (currencyDateString.equals(fromDateString)) {
+                    newCurrencyList.add(currency);
+                }
+            }
+        }
+
+        return newCurrencyList;
+    }
+
+    /**
+     * Helper method to determine beginning date of period based on the user selection
+     */
+    public static int determinePeriod(int pressedBtnNum){
+        DateTime tillDate = new DateTime();
         DateTime fromDate;
 
         //Identify period
@@ -155,22 +178,9 @@ public class Utilities {
 
         //Get days between dates
         Days days = Days.daysBetween(fromDate, tillDate);
-        int periodInt = days.getDays();
+        int periodInt = days.getDays() -1;
 
-        //Create new Currency list based on old Currency list containing dates
-        for (int i = periodInt - 1; i >= 0; i--) {
-            for (Currency currency : currencyList) {
-                String fromDateString = Constants.DATE_FORMATTER_WITH_DASH
-                        .print(tillDate.minusDays(i));
-                String date = currency.getDate();
-                String currencyDateString = date.substring(0, date.indexOf("T"));
-                if (currencyDateString.equals(fromDateString)) {
-                    newCurrencyList.add(currency);
-                }
-            }
-        }
-
-        return newCurrencyList;
+        return periodInt;
     }
 
     /**

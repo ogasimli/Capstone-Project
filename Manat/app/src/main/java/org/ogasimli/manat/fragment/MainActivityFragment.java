@@ -139,7 +139,7 @@ public class MainActivityFragment extends Fragment {
 
         //Set date
         DateTime date = new DateTime();
-        String dateText = Constants.DATE_FORMATTER_MONTH_STRING_D.print(date);
+        String dateText = Constants.DATE_FORMATTER_DMMMMYYYY.print(date);
         mMainDateTextView.setText(dateText);
 
         //Instantiate RecyclerView adapter
@@ -321,7 +321,7 @@ public class MainActivityFragment extends Fragment {
      */
     private void initializeData() {
         mDateString = Utilities.modifyDateString(mMainDateTextView.getText().toString(),
-                Constants.DATE_FORMATTER_MONTH_STRING_DD,
+                Constants.DATE_FORMATTER_DDMMMYYYY,
                 Constants.DATE_FORMATTER_WITH_DASH,
                 Constants.DATE_APPENDIX);
         mQueryString = Utilities.buildQueryString(mDateString, null, null);

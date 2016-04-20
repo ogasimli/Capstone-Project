@@ -11,6 +11,7 @@ import org.ogasimli.manat.retrofit.ApiService;
 import org.ogasimli.manat.retrofit.RetrofitAdapter;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -70,7 +71,7 @@ public class DetailActivityFragment extends Fragment {
     @Bind(R.id.toolbar_detail)
     Toolbar mToolbar;
 
-    @Bind(R.id.fab_details)
+    @Bind(R.id.fab_share_details)
     FloatingActionButton mFab;
 
     @Bind(R.id.detail_result_view)
@@ -141,8 +142,8 @@ public class DetailActivityFragment extends Fragment {
             state = Constants.VIEW_STATE_ERROR;
         }
 
-        outState.putInt(Constants.VIEW_STATE_KEY, state);
         outState.putInt(Constants.BUTTON_STATE_KEY, mPressedBtnNum);
+        outState.putInt(Constants.VIEW_STATE_KEY, state);
         outState.putParcelableArrayList(Constants.LIST_STATE_KEY, mMainCurrencyList);
         outState.putParcelableArrayList(Constants.SECONDARY_LIST_STATE_KEY, mSecondaryCurrencyList);
     }
@@ -276,13 +277,11 @@ public class DetailActivityFragment extends Fragment {
      */
     private void showResultView() {
 
-        //View and hide relevant LinearLayouts
-        mResultView.setVisibility(View.VISIBLE);
-        mErrorView.setVisibility(View.GONE);
-
         //Instantiate and create LineChart
         ChartMaker chartMaker = new ChartMaker(getActivity(), mChart, mSecondaryCurrencyList);
         chartMaker.createChart();
+
+        changeBtnState(mPressedBtnNum);
 
         //Analyze and set values to TextViews
         HashMap<String, String> map = Utilities.processData(mSecondaryCurrencyList, mTillDateString);
@@ -290,6 +289,10 @@ public class DetailActivityFragment extends Fragment {
         mAverageRateTextView.setText(map.get(Constants.AVERAGE_RATE_KEY));
         mMaxRateTextView.setText(map.get(Constants.MAX_RATE_KEY));
         mMinRateTextView.setText(map.get(Constants.MIN_RATE_KEY));
+
+        //View and hide relevant LinearLayouts
+        mResultView.setVisibility(View.VISIBLE);
+        mErrorView.setVisibility(View.GONE);
 
         //Hide ProgressDialog
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
@@ -318,8 +321,8 @@ public class DetailActivityFragment extends Fragment {
     private void showProgressDialog(boolean show) {
         if (show) {
             mProgressDialog = ProgressDialog.show(getActivity(),
-                    getActivity().getString(R.string.progress_dialog_title),
-                    getActivity().getString(R.string.progress_dialog_content), true, false);
+                    getString(R.string.progress_dialog_title),
+                    getString(R.string.progress_dialog_content), true, false);
         } else {
             mProgressDialog.dismiss();
         }
@@ -352,7 +355,7 @@ public class DetailActivityFragment extends Fragment {
                         button.setTextColor(mColorAccent);
                     }
                 }
-                statisticsLabel = getActivity().getString(R.string.statistics_label_weekly);
+                statisticsLabel = getString(R.string.statistics_label_weekly);
                 break;
             case Constants.MONTHLY_BTN_SELECTED:
                 for (Button button : buttonList) {
@@ -366,7 +369,7 @@ public class DetailActivityFragment extends Fragment {
                         button.setTextColor(mColorAccent);
                     }
                 }
-                statisticsLabel = getActivity().getString(R.string.statistics_label_monthly);
+                statisticsLabel = getString(R.string.statistics_label_monthly);
                 break;
             case Constants.QUARTERLY_BTN_SELECTED:
                 for (Button button : buttonList) {
@@ -380,7 +383,7 @@ public class DetailActivityFragment extends Fragment {
                         button.setTextColor(mColorAccent);
                     }
                 }
-                statisticsLabel = getActivity().getString(R.string.statistics_label_quarterly);
+                statisticsLabel = getString(R.string.statistics_label_quarterly);
                 break;
             case Constants.SEMI_ANNUALLY_BTN_SELECTED:
                 for (Button button : buttonList) {
@@ -394,7 +397,7 @@ public class DetailActivityFragment extends Fragment {
                         button.setTextColor(mColorAccent);
                     }
                 }
-                statisticsLabel = getActivity().getString(R.string.statistics_label_semi_annually);
+                statisticsLabel = getString(R.string.statistics_label_semi_annually);
                 break;
             case Constants.YEARLY_BTN_SELECTED:
                 for (Button button : buttonList) {
@@ -408,7 +411,7 @@ public class DetailActivityFragment extends Fragment {
                         button.setTextColor(mColorAccent);
                     }
                 }
-                statisticsLabel = getActivity().getString(R.string.statistics_label_yearly);
+                statisticsLabel = getString(R.string.statistics_label_yearly);
                 break;
         }
 
@@ -431,6 +434,26 @@ public class DetailActivityFragment extends Fragment {
     @OnClick(R.id.reload_text)
     public void reloadTextViewClick(TextView texView) {
         loadData();
+    }
+
+    @OnClick(R.id.fab_share_details)
+    public void shareStatistics(FloatingActionButton fab) {
+        int period = Utilities.determinePeriod(mPressedBtnNum);
+        DateTime tillDate = new DateTime();
+        DateTime fromDate = tillDate.minusDays(period);
+        String fromDateString = Constants.DATE_FORMATTER_DMMMMYYYY.print(fromDate);
+        String tillDateString = Constants.DATE_FORMATTER_DMMMMYYYY.print(tillDate);
+
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_statistics_text,
+                mCurrencyName, fromDateString, tillDateString,
+                mCurrentRateTextView.getText().toString(),
+                mAverageRateTextView.getText().toString(),
+                mMaxRateTextView.getText().toString(),
+                mMinRateTextView.getText().toString()));
+        intent.setType("text/plain");
+        startActivity(Intent.createChooser(intent, getString(R.string.share_rate_statistics_title)));
     }
 
     @OnClick({R.id.weekly_btn, R.id.monthly_btn, R.id.quarterly_btn,
@@ -462,7 +485,6 @@ public class DetailActivityFragment extends Fragment {
                 break;
         }
 
-        changeBtnState(mPressedBtnNum);
         mSecondaryCurrencyList = Utilities.getDataForPeriod(mMainCurrencyList, mPressedBtnNum);
         if (mSecondaryCurrencyList != null && mSecondaryCurrencyList.size() > 0) {
             showResultView();
