@@ -46,8 +46,19 @@ public class DatePickerDialogFragment extends DialogFragment
         int month = date.getMonthOfYear() - 1;
         int day = date.getDayOfMonth();
 
-        return new DatePickerDialog(getActivity(), R.style.DatePickerDialogStyle, this,
-                year, month, day);
+        DatePickerDialog dialog = new DatePickerDialog(getActivity(),
+                R.style.DatePickerDialogStyle, this, year, month, day);
+
+        //Set min date
+        DateTime minDate =  DateTime.parse("25 11 1993",
+                Constants.DATE_FORMATTER_DDMMYYYY);
+        long minDateMillis = minDate.getMillis();
+        dialog.getDatePicker().setMinDate(minDateMillis);
+
+        //Set max date
+        dialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+        return dialog;
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {

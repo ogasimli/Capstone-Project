@@ -31,6 +31,7 @@
             android:text="@string/detail_statistics_label"
             android:minHeight="48dp"
             android:textSize="18sp"
+            android:layout_marginTop="8dp"
             app:layout_columnWeight="1"
             app:layout_gravity="fill"
             app:layout_rowWeight="1"
