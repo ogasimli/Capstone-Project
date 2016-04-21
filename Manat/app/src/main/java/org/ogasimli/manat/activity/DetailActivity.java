@@ -17,7 +17,7 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_currency_details);
+        setContentView(R.layout.activity_details);
 
         Bundle extras = getIntent().getExtras();
         String code;

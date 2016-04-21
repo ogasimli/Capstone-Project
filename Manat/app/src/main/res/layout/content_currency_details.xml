@@ -7,4 +7,4 @@
     android:name="org.ogasimli.manat.fragment.DetailActivityFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:layout="@layout/fragment_currency_detail"/>
+    tools:layout="@layout/fragment_detail"/>

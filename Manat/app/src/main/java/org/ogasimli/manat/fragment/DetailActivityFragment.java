@@ -16,7 +16,6 @@ import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -75,7 +74,7 @@ public class DetailActivityFragment extends Fragment {
     FloatingActionButton mFab;
 
     @Bind(R.id.detail_result_view)
-    CoordinatorLayout mResultView;
+    LinearLayout mResultView;
 
     @Bind(R.id.detail_error_view)
     LinearLayout mErrorView;
@@ -164,7 +163,7 @@ public class DetailActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_currency_detail, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
         ButterKnife.bind(this, rootView);
 
         //initToolbar();
@@ -292,6 +291,7 @@ public class DetailActivityFragment extends Fragment {
 
         //View and hide relevant LinearLayouts
         mResultView.setVisibility(View.VISIBLE);
+        mFab.setVisibility(View.VISIBLE);
         mErrorView.setVisibility(View.GONE);
 
         //Hide ProgressDialog
@@ -307,6 +307,7 @@ public class DetailActivityFragment extends Fragment {
 
         //View and hide relevant LinearLayouts
         mResultView.setVisibility(View.GONE);
+        mFab.setVisibility(View.GONE);
         mErrorView.setVisibility(View.VISIBLE);
 
         //Hide ProgressDialog
