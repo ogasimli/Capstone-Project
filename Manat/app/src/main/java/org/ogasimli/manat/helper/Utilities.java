@@ -20,11 +20,11 @@ import java.util.Locale;
 import manat.ogasimli.org.manat.R;
 
 /**
+ * Helper class for holding methods
+ *
  * Created by Orkhan Gasimli on 03.04.2016.
  */
 public class Utilities {
-
-    private static final String LOG_TAG = Utilities.class.getSimpleName();
 
     /*
     * Helper method to check if device has a network connection
@@ -184,12 +184,12 @@ public class Utilities {
             dateString) {
 
         String currentRate = "";
-        String averageRate = "";
-        String maxRate = "";
-        String minRate = "";
+        String averageRate;
+        String maxRate;
+        String minRate;
         double sum = 0;
         List<Double> values = new ArrayList<>();
-        HashMap<String, String> result = new HashMap<>();
+        HashMap<String, String> map = new HashMap<>();
 
         for (Currency currency : currencyList) {
             if (currency.getDate().equals(dateString)) {
@@ -208,12 +208,12 @@ public class Utilities {
         maxRate = String.format(Locale.getDefault(), "%.4f", Collections.max(values));
         minRate = String.format(Locale.getDefault(), "%.4f", Collections.min(values));
 
-        result.put(Constants.CURRENT_RATE_KEY, currentRate);
-        result.put(Constants.AVERAGE_RATE_KEY, averageRate);
-        result.put(Constants.MAX_RATE_KEY, maxRate);
-        result.put(Constants.MIN_RATE_KEY, minRate);
+        map.put(Constants.CURRENT_RATE_KEY, currentRate);
+        map.put(Constants.AVERAGE_RATE_KEY, averageRate);
+        map.put(Constants.MAX_RATE_KEY, maxRate);
+        map.put(Constants.MIN_RATE_KEY, minRate);
 
-        return result;
+        return map;
     }
 
     /**
