@@ -3,8 +3,8 @@ package org.ogasimli.manat.fragment;
 import org.joda.time.DateTime;
 import org.ogasimli.manat.activity.DetailActivity;
 import org.ogasimli.manat.adapter.CurrencyListAdapter;
-import org.ogasimli.manat.dbtasks.CurrencyLoader;
-import org.ogasimli.manat.dbtasks.CurrencySaver;
+import org.ogasimli.manat.asynctask.CurrencyLoader;
+import org.ogasimli.manat.asynctask.CurrencySaver;
 import org.ogasimli.manat.dialog.CalculatorDialogFragment;
 import org.ogasimli.manat.dialog.DatePickerDialogFragment;
 import org.ogasimli.manat.dialog.SelectCurrencyDialogFragment;
@@ -273,6 +273,14 @@ public class MainActivityFragment extends Fragment
         getActivity()
                 .getSupportLoaderManager()
                 .restartLoader(Constants.CURRENCY_LOADER_ID, null,this);
+
+        //If there is no corresponding entries in DB then make API call and write to DB
+        if (mCurrencyList != null && mCurrencyList.size() == 44) {
+            Log.d(LOG_TAG, "Loaded from DB");
+            showResultView();
+        } else {
+            refreshData();
+        }
     }
 
     /**
@@ -482,14 +490,6 @@ public class MainActivityFragment extends Fragment
     @Override
     public void onLoadFinished(Loader<ArrayList<Currency>> loader, ArrayList<Currency> data) {
         mCurrencyList = data;
-
-        //If there is no corresponding entries in DB the make API call and write to DB
-        if (mCurrencyList != null && mCurrencyList.size() == 44) {
-            Log.d(LOG_TAG, "Loaded from DB");
-            showResultView();
-        } else {
-            refreshData();
-        }
     }
 
     @Override

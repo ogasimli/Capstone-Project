@@ -1,4 +1,4 @@
-package org.ogasimli.manat.dbtasks;
+package org.ogasimli.manat.asynctask;
 
 import org.ogasimli.manat.object.Currency;
 import org.ogasimli.manat.provigen.ManatContract;
