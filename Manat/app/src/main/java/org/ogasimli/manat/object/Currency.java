@@ -2,8 +2,6 @@ package org.ogasimli.manat.object;
 
 import com.google.gson.annotations.SerializedName;
 
-import com.afollestad.inquiry.annotations.Column;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -14,41 +12,24 @@ import android.os.Parcelable;
  */
 public class Currency implements Parcelable {
 
-    //TODO: remove ObjectID if unnecessary
-    @Column(name = "_id", primaryKey = true, notNull = true, autoIncrement = true)
-    private long id;
-
     @SerializedName("code")
-    @Column
     private String code;
 
     private String name;
 
     @SerializedName("nominal")
-    @Column
     private String nominal;
 
     @SerializedName("value")
-    @Column
     private String value;
 
     @SerializedName("date")
-    @Column
     private String date;
 
     @SerializedName("trend")
-    @Column
     private String trend;
 
     public Currency() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getCode() {
@@ -109,7 +90,6 @@ public class Currency implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(this.id);
         dest.writeString(this.code);
         dest.writeString(this.name);
         dest.writeString(this.nominal);
@@ -119,7 +99,6 @@ public class Currency implements Parcelable {
     }
 
     protected Currency(Parcel in) {
-        this.id = in.readLong();
         this.code = in.readString();
         this.name = in.readString();
         this.nominal = in.readString();

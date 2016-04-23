@@ -58,7 +58,6 @@ public class Constants {
     public final static int SEMI_ANNUALLY_BTN_SELECTED = 3;
     public final static int YEARLY_BTN_SELECTED = 4;
 
-
     //Database constants
     public static String DB_NAME = "fxrates";
     public static int DB_VERSION = 1;
@@ -68,4 +67,7 @@ public class Constants {
     public static String AVERAGE_RATE_KEY = "AVERAGE_RATE";
     public static String MAX_RATE_KEY = "MAX_RATE";
     public static String MIN_RATE_KEY = "MIN_RATE";
+
+    //DB Loader ID
+    public static int CURRENCY_LOADER_ID = 0;
 }

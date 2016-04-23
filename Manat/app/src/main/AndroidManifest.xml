@@ -30,6 +30,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.ogasimli.manat.activity.MainActivity"/>
         </activity>
+
+        <!-- ProviGen provider -->
+        <provider
+            android:name="org.ogasimli.manat.provigen.ManatContentProvider"
+            android:authorities="org.ogasimli.manat" />
     </application>
 
 </manifest>

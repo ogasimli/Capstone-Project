@@ -1,8 +1,5 @@
 package org.ogasimli.manat.helper;
 
-import com.afollestad.inquiry.Inquiry;
-import com.afollestad.inquiry.callbacks.RunCallback;
-
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.format.DateTimeFormatter;
@@ -12,10 +9,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -178,9 +173,8 @@ public class Utilities {
 
         //Get days between dates
         Days days = Days.daysBetween(fromDate, tillDate);
-        int periodInt = days.getDays() -1;
 
-        return periodInt;
+        return days.getDays() - 1;
     }
 
     /**
@@ -281,66 +275,5 @@ public class Utilities {
         public int compare(Currency before, Currency after) {
             return before.getCode().compareTo(after.getCode());
         }
-    }
-
-    /**
-     * Helper method to query DB
-     */
-    public static ArrayList<Currency> queryDb(String dateString, String[] codes) {
-        ArrayList<Currency> currencyList = new ArrayList<>();
-
-        for (String code : codes) {
-            Currency currency = Inquiry.get()
-                    .selectFrom(Constants.DB_NAME, Currency.class)
-                    .where("date = ? AND code = ?", dateString, code)
-                    .one();
-
-            Log.d(LOG_TAG, "Loaded currencies: " + currency);
-
-            if (currency == null) {
-                break;
-            } else {
-                currencyList.add(currency);
-            }
-        }
-
-        if (currencyList.size() != codes.length) {
-            currencyList = null;
-        }
-
-        return currencyList;
-    }
-
-    /**
-     * Helper method to insert into DB
-     */
-    public static void insertIntoDb(final ArrayList<Currency> currencyList) {
-        for (Currency currency : currencyList) {
-            Inquiry.get()
-                    .insertInto(Constants.DB_NAME, Currency.class)
-                    .values(currency)
-                    .run(new RunCallback<Long[]>() {
-                        @Override
-                        public void result(Long[] changed) {
-                            Log.d(LOG_TAG, "Inserted currency " + "IDs: " + Arrays.toString(changed));
-                        }
-                    });
-        }
-    }
-
-
-    /**
-     * Helper method to delete from DB
-     */
-    public static void deleteFromDB(String dateString) {
-        Inquiry.get()
-                .deleteFrom(Constants.DB_NAME, Currency.class)
-                .where("date = ?", dateString)
-                .run(new RunCallback<Integer>() {
-                    @Override
-                    public void result(Integer changed) {
-                        Log.d(LOG_TAG, "Deleted currency IDs: " + changed.toString());
-                    }
-                });
     }
 }

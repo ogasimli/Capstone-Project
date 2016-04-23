@@ -3,6 +3,8 @@ package org.ogasimli.manat.fragment;
 import org.joda.time.DateTime;
 import org.ogasimli.manat.activity.DetailActivity;
 import org.ogasimli.manat.adapter.CurrencyListAdapter;
+import org.ogasimli.manat.dbtasks.CurrencyLoader;
+import org.ogasimli.manat.dbtasks.CurrencySaver;
 import org.ogasimli.manat.dialog.CalculatorDialogFragment;
 import org.ogasimli.manat.dialog.DatePickerDialogFragment;
 import org.ogasimli.manat.dialog.SelectCurrencyDialogFragment;
@@ -21,6 +23,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -51,7 +55,8 @@ import retrofit.client.Response;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class MainActivityFragment extends Fragment
+        implements LoaderManager.LoaderCallbacks<ArrayList<Currency>>{
 
     private final String LOG_TAG = MainActivityFragment.class.getSimpleName();
 
@@ -265,14 +270,9 @@ public class MainActivityFragment extends Fragment {
         initializeData();
         showProgressDialog(true);
         //First try to check if DB has corresponding entries
-        mCurrencyList = Utilities.queryDb(mDateString, mCodes);
-        //If there is no corresponding entries in DB the make API call and write to DB
-        if (mCurrencyList != null && mCurrencyList.size() == 44) {
-            Log.d(LOG_TAG, "Loaded from DB");
-            showResultView();
-        } else {
-            refreshData();
-        }
+        getActivity()
+                .getSupportLoaderManager()
+                .restartLoader(Constants.CURRENCY_LOADER_ID, null,this);
     }
 
     /**
@@ -296,10 +296,8 @@ public class MainActivityFragment extends Fragment {
                     //Sort list in desired order
                     mCurrencyList = Utilities.sortList(mCurrencyList);
                     Log.d(LOG_TAG, "Loaded from API");
-                    //Delete old data
-                    Utilities.deleteFromDB(mDateString);
-                    //Insert new data
-                    Utilities.insertIntoDb(mCurrencyList);
+                    //Delete old data and insert new
+                    new CurrencySaver(getActivity(), mDateString).execute(mCurrencyList);
                     Log.d(LOG_TAG, "Inserted into DB");
                     showResultView();
                 } else {
@@ -458,7 +456,7 @@ public class MainActivityFragment extends Fragment {
         selectCurrencyDialog.show(fm, Constants.SELECT_CURRENCY_DIALOG_FRAGMENT);
     }
 
-    /*ItemClickListener for currency list items*/
+    /* ItemClickListener for currency list items */
     private final CurrencyListAdapter.ClickListener itemClickListener
             = new CurrencyListAdapter.ClickListener() {
         @Override
@@ -474,4 +472,28 @@ public class MainActivityFragment extends Fragment {
             //TODO: Implement long click on list item
         }
     };
+
+    /* Callbacks to query data from movie table */
+    @Override
+    public Loader<ArrayList<Currency>> onCreateLoader(int id, Bundle args) {
+        return new CurrencyLoader(getActivity(), mDateString, mCodes);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<ArrayList<Currency>> loader, ArrayList<Currency> data) {
+        mCurrencyList = data;
+
+        //If there is no corresponding entries in DB the make API call and write to DB
+        if (mCurrencyList != null && mCurrencyList.size() == 44) {
+            Log.d(LOG_TAG, "Loaded from DB");
+            showResultView();
+        } else {
+            refreshData();
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<ArrayList<Currency>> loader) {
+
+    }
 }

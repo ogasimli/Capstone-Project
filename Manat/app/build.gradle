@@ -51,6 +51,6 @@ dependencies {
     //Retrofit
     compile 'com.squareup.retrofit:retrofit:1.9.0'
 
-    //Inquiry
-    compile 'com.github.afollestad:inquiry:2.0.1'
+    //ProviGen
+    compile 'com.github.provigen:ProviGen-lib:2.0.1'
 }
