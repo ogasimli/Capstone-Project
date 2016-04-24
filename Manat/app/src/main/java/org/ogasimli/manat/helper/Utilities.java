@@ -1,5 +1,7 @@
 package org.ogasimli.manat.helper;
 
+import com.udojava.evalex.Expression;
+
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.format.DateTimeFormatter;
@@ -8,6 +10,7 @@ import org.ogasimli.manat.object.Currency;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -38,6 +41,40 @@ public class Utilities {
             decimalSeparator = String.valueOf(symbols.getDecimalSeparator());
         }
         return amount.replace(",", decimalSeparator);
+    }
+
+    /*
+    * Helper method to determine if string contains any math expression
+    */
+    public static boolean isStringContainsMath(String string) {
+        int charCount = 0;
+        String alphabet = "+-/*";
+        if (string.length() == 0) return false;//zero length string ain't alpha
+        for (int i = 0; i < string.length(); i++) {
+            for (int j = 0; j < alphabet.length(); j++) {
+                if (string.substring(i, i + 1).equals(alphabet.substring(j, j + 1)))
+                    charCount++;
+            }
+            if (charCount != (i + 1)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*
+    * Helper method to evaluate strings containing math expression
+    */
+    public static String evalMathString(String string) {
+        BigDecimal result;
+        if (isStringContainsMath(string)) {
+            Expression expression = new Expression(string.replace(",", "."));
+            result = expression.eval();
+        } else {
+            result = new BigDecimal(string.replaceAll(String.valueOf(DecimalFormatSymbols
+                    .getInstance().getGroupingSeparator()),""));
+        }
+        return String.format(Locale.getDefault(), "%.2f", result);
     }
 
     /*

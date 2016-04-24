@@ -1,7 +1,5 @@
 package org.ogasimli.manat.dialog;
 
-import com.udojava.evalex.Expression;
-
 import org.ogasimli.manat.customview.MyTextView;
 import org.ogasimli.manat.helper.Constants;
 import org.ogasimli.manat.helper.Utilities;
@@ -16,8 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.math.BigDecimal;
 import java.util.Locale;
 
 import butterknife.Bind;
@@ -169,12 +167,16 @@ public class CalculatorDialogFragment extends DialogFragment {
 
     @OnClick(R.id.calc_equals_textview)
     public void equalsClick(TextView textView) {
-        BigDecimal result = null;
         String editText = mEditTextView.getText().toString();
-        Expression expression = new Expression(editText.replace(",", "."));
-        result = expression.eval();
-        editText = String.format(Locale.getDefault(), "%.2f", result);
-        mEditTextView.setText(editText);
+        char firstChar = editText.charAt(0);
+        char lastChar = editText.charAt(editText.length() - 1);
+        if (Character.isDigit(firstChar) && Character.isDigit(lastChar)) {
+            editText = Utilities.evalMathString(editText);
+            mEditTextView.setText(editText);
+        } else {
+            Toast.makeText(getActivity(), "Invalid input! Enter correct values.", Toast
+                    .LENGTH_LONG).show();
+        }
     }
 
     @OnClick(R.id.calc_cancel_btn)
@@ -184,11 +186,21 @@ public class CalculatorDialogFragment extends DialogFragment {
 
     @OnClick(R.id.calc_ok_btn)
     public void sendResultClick(Button button) {
-        //Go back to MainActivityFragment
-        Intent intent = new Intent();
-        intent.putExtra(Constants.AMOUNT, mEditTextView.getText().toString());
-        intent.putExtra(Constants.BUTTON_KEY, mButtonKey);
-        getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
-        getDialog().dismiss();
+        //Determine the state of String
+        String editText = mEditTextView.getText().toString();
+        char firstChar = editText.charAt(0);
+        char lastChar = editText.charAt(editText.length() - 1);
+        if (Character.isDigit(firstChar) && Character.isDigit(lastChar)) {
+            editText = Utilities.evalMathString(editText);
+            //Go back to MainActivityFragment
+            Intent intent = new Intent();
+            intent.putExtra(Constants.AMOUNT, editText);
+            intent.putExtra(Constants.BUTTON_KEY, mButtonKey);
+            getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
+            getDialog().dismiss();
+        } else {
+            Toast.makeText(getActivity(), "Invalid input! Enter correct values.", Toast
+                    .LENGTH_LONG).show();
+        }
     }
 }
