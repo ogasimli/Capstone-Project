@@ -10,8 +10,7 @@
     <string name="progress_dialog_content">Loading</string>
     <string name="error_no_connection">Please check your internet connection.</string>
     <string name="no_result_image_description">No result image</string>
-    <string name="no_result_message">Oops! Unable to load data. Please try again.
-    </string>
+    <string name="no_result_message">Oops! Unable to load data. Please try again.</string>
     <string name="error_view_click_to_reload_text">Reload</string>
     <string name="menu_refresh_text">Refresh</string>
     <string name="currency_name_transition_name">currency_name</string>
@@ -29,6 +28,25 @@
         Maximum rate - "%s"\n
         Minimum rate - "%s"
     </string>
+
+    <string name="calc_backspace_text" translatable="false"><![CDATA[<-]]></string>
+    <string name="calc_clear_text" translatable="false">C</string>
+    <string name="calc_divide_text" translatable="false">/</string>
+    <string name="calc_multiply_text" translatable="false">*</string>
+    <string name="calc_minus_text" translatable="false">-</string>
+    <string name="calc_plus_text" translatable="false">+</string>
+    <string name="calc_equals_text" translatable="false">=</string>
+    <string name="calc_delimiter_text" translatable="false">.</string>
+    <string name="calc_1_text">1</string>
+    <string name="calc_2_text">2</string>
+    <string name="calc_3_text">3</string>
+    <string name="calc_4_text">4</string>
+    <string name="calc_5_text">5</string>
+    <string name="calc_6_text">6</string>
+    <string name="calc_7_text">7</string>
+    <string name="calc_8_text">8</string>
+    <string name="calc_9_text">9</string>
+    <string name="calc_0_text">0</string>
 
     <string-array name="currency_codes" translatable="false">
         <item>USD</item>

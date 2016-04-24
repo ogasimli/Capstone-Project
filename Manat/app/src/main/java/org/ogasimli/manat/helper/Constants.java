@@ -20,7 +20,10 @@ public class Constants {
 
     //Intent extra keys
     public static final String CODE = "CODE";
-    public static final int SELECT_CURRENCY_DIALOG_RESULT = 1;
+    public static final String AMOUNT = "AMOUNT";
+    public static final String BUTTON_KEY = "BUTTON_KEY";
+    public static final int SELECT_CURRENCY_DIALOG_RESULT = 0;
+    public static final int CALCULATOR_DIALOG_RESULT = 1;
     public static final String DATA_PICKER_DIALOG_FRAGMENT = "DatePickerDialogFragment";
     public static final String CALCULATOR_DIALOG_FRAGMENT = "CalculatorDialogFragment";
     public static final String SELECT_CURRENCY_DIALOG_FRAGMENT = "SelectCurrencyDialogFragment";
@@ -44,6 +47,7 @@ public class Constants {
 
     //Bundle keys
     public static final String DATE_PICKER_BUNDLE_KEY = "DATE_PICKER_BUNDLE_KEY";
+    public static final String CALCULATOR_BUNDLE_KEY = "CALCULATOR_BUNDLE_KEY";
     public static final String LIST_STATE_KEY = "LIST_STATE_KEY";
     public static final String SECONDARY_LIST_STATE_KEY = "SECONDARY_LIST_STATE_KEY";
     public static final String VIEW_STATE_KEY = "VIEW_STATE_KEY";

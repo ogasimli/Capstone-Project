@@ -49,6 +49,7 @@ public class DatePickerDialogFragment extends DialogFragment
         DatePickerDialog dialog = new DatePickerDialog(getActivity(),
                 R.style.DatePickerDialogStyle, this, year, month, day);
 
+        //TODO: fix issue with selection of current date
         //Set min date
         DateTime minDate =  DateTime.parse("25 11 1993",
                 Constants.DATE_FORMATTER_DDMMYYYY);

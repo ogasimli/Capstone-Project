@@ -109,10 +109,10 @@ public class DetailActivityFragment extends Fragment {
     @Bind(R.id.yearly_btn)
     Button mYearlyBtn;
 
-    @BindDrawable(R.drawable.text_view_border_color_accent)
+    @BindDrawable(R.drawable.background_color_accent)
     Drawable mSelectedBackground;
 
-    @BindDrawable(R.drawable.ripple_border_color_primary)
+    @BindDrawable(R.drawable.ripple_color_primary_stroke)
     Drawable mUnselectedBackground;
 
     @BindColor(R.color.colorPrimary)
@@ -290,6 +290,7 @@ public class DetailActivityFragment extends Fragment {
         mMinRateTextView.setText(map.get(Constants.MIN_RATE_KEY));
 
         //View and hide relevant LinearLayouts
+        mToolbar.setVisibility(View.VISIBLE);
         mResultView.setVisibility(View.VISIBLE);
         mFab.setVisibility(View.VISIBLE);
         mErrorView.setVisibility(View.GONE);
@@ -306,6 +307,7 @@ public class DetailActivityFragment extends Fragment {
     private void showErrorView() {
 
         //View and hide relevant LinearLayouts
+        mToolbar.setVisibility(View.GONE );
         mResultView.setVisibility(View.GONE);
         mFab.setVisibility(View.GONE);
         mErrorView.setVisibility(View.VISIBLE);
@@ -348,12 +350,10 @@ public class DetailActivityFragment extends Fragment {
                 for (Button button : buttonList) {
                     if (button.getText().equals("Week")) {
                         //Make weekly_btn selected
-                        setDrawable(button, mSelectedBackground);
-                        button.setTextColor(mColorPrimary);
+                        setButtonStyle(button, true);
                     } else {
                         //Make other buttons unselected
-                        setDrawable(button, mUnselectedBackground);
-                        button.setTextColor(mColorAccent);
+                        setButtonStyle(button, false);
                     }
                 }
                 statisticsLabel = getString(R.string.statistics_label_weekly);
@@ -362,12 +362,10 @@ public class DetailActivityFragment extends Fragment {
                 for (Button button : buttonList) {
                     if (button.getText().equals("Month")) {
                         //Make monthly_btn selected
-                        setDrawable(button, mSelectedBackground);
-                        button.setTextColor(mColorPrimary);
+                        setButtonStyle(button, true);
                     } else {
                         //Make other buttons unselected
-                        setDrawable(button, mUnselectedBackground);
-                        button.setTextColor(mColorAccent);
+                        setButtonStyle(button, false);
                     }
                 }
                 statisticsLabel = getString(R.string.statistics_label_monthly);
@@ -376,12 +374,10 @@ public class DetailActivityFragment extends Fragment {
                 for (Button button : buttonList) {
                     if (button.getText().equals("3 M")) {
                         //Make quarterly_btn selected
-                        setDrawable(button, mSelectedBackground);
-                        button.setTextColor(mColorPrimary);
+                        setButtonStyle(button, true);
                     } else {
                         //Make other buttons unselected
-                        setDrawable(button, mUnselectedBackground);
-                        button.setTextColor(mColorAccent);
+                        setButtonStyle(button, false);
                     }
                 }
                 statisticsLabel = getString(R.string.statistics_label_quarterly);
@@ -390,12 +386,10 @@ public class DetailActivityFragment extends Fragment {
                 for (Button button : buttonList) {
                     if (button.getText().equals("6 M")) {
                         //Make semi_annually_btn selected
-                        setDrawable(button, mSelectedBackground);
-                        button.setTextColor(mColorPrimary);
+                        setButtonStyle(button, true);
                     } else {
                         //Make other buttons unselected
-                        setDrawable(button, mUnselectedBackground);
-                        button.setTextColor(mColorAccent);
+                        setButtonStyle(button, false);
                     }
                 }
                 statisticsLabel = getString(R.string.statistics_label_semi_annually);
@@ -404,12 +398,10 @@ public class DetailActivityFragment extends Fragment {
                 for (Button button : buttonList) {
                     if (button.getText().equals("Year")) {
                         //Make yearly_btn selected
-                        setDrawable(button, mSelectedBackground);
-                        button.setTextColor(mColorPrimary);
+                        setButtonStyle(button, true);
                     } else {
                         //Make other buttons unselected
-                        setDrawable(button, mUnselectedBackground);
-                        button.setTextColor(mColorAccent);
+                        setButtonStyle(button, false);
                     }
                 }
                 statisticsLabel = getString(R.string.statistics_label_yearly);
@@ -429,6 +421,23 @@ public class DetailActivityFragment extends Fragment {
             view.setBackgroundDrawable(drawable);
         } else {
             view.setBackground(drawable);
+        }
+    }
+
+    /*
+    * Helper method to change state of buttons
+    */
+    private void setButtonStyle(Button button, boolean selected) {
+        if (selected) {
+            //Make button selected
+            setDrawable(button, mSelectedBackground);
+            button.setTextColor(mColorPrimary);
+            button.setClickable(false);
+        } else {
+            //Make button unselected
+            setDrawable(button, mUnselectedBackground);
+            button.setTextColor(mColorAccent);
+            button.setClickable(true);
         }
     }
 

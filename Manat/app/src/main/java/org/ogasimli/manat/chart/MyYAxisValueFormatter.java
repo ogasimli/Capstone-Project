@@ -15,7 +15,7 @@ public class MyYAxisValueFormatter implements YAxisValueFormatter {
     private DecimalFormat mFormat;
 
     public MyYAxisValueFormatter() {
-        mFormat = new DecimalFormat("###,###,##0.00"); // use two decimal
+        mFormat = new DecimalFormat("###,###,##0.0000"); // use two decimal
     }
 
     @Override

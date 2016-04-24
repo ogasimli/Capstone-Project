@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:weightSum="5"
-    android:orientation="horizontal"
-    style="?android:attr/buttonBarStyle">
+    android:orientation="horizontal">
 
     <Button
         android:id="@+id/weekly_btn"
@@ -13,10 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_margin="2dp"
-        android:background="@drawable/text_view_border_color_accent"
+        android:background="@drawable/background_color_accent"
         android:textColor="?colorPrimary"
         android:textAllCaps="false"
-        style="?android:attr/buttonBarButtonStyle"
+        style="?attr/borderlessButtonStyle"
         android:text="Week"/>
 
     <Button
@@ -25,10 +24,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_margin="2dp"
-        android:background="@drawable/ripple_border_color_primary"
+        android:background="@drawable/background_color_primary_stroke"
         android:textColor="?colorAccent"
         android:textAllCaps="false"
-        style="?android:attr/buttonBarButtonStyle"
+        style="?attr/borderlessButtonStyle"
         android:text="Month"/>
 
     <Button
@@ -37,10 +36,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_margin="2dp"
-        android:background="@drawable/ripple_border_color_primary"
+        android:background="@drawable/background_color_primary_stroke"
         android:textColor="?colorAccent"
         android:textAllCaps="false"
-        style="?android:attr/buttonBarButtonStyle"
+        style="?attr/borderlessButtonStyle"
         android:text="3 M"/>
 
     <Button
@@ -49,10 +48,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_margin="2dp"
-        android:background="@drawable/ripple_border_color_primary"
+        android:background="@drawable/background_color_primary_stroke"
         android:textColor="?colorAccent"
         android:textAllCaps="false"
-        style="?android:attr/buttonBarButtonStyle"
+        style="?attr/borderlessButtonStyle"
         android:text="6 M"/>
 
     <Button
@@ -61,10 +60,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_margin="2dp"
-        android:background="@drawable/ripple_border_color_primary"
+        android:background="@drawable/background_color_primary_stroke"
         android:textColor="?colorAccent"
         android:textAllCaps="false"
-        style="?android:attr/buttonBarButtonStyle"
+        style="?attr/borderlessButtonStyle"
         android:text="Year"/>
 
 </LinearLayout>

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -52,19 +53,14 @@ public class CurrencyListAdapter extends RecyclerView.Adapter<CurrencyListAdapte
         } else {
             holder.mCountryName.setText(currency.getName());
         }
-        holder.mRate.setText(currency.getValue());
+        double value = Double.parseDouble(currency.getValue());
+        holder.mRate.setText(String.format(Locale.getDefault(), "%.4f", value));
         holder.mRateTrend.setImageResource(Utilities.getTrendImage(currency.getTrend()));
     }
 
     public void setCurrencyList(ArrayList<Currency> currencyList) {
         mCurrencyList = currencyList;
         notifyDataSetChanged();
-    }
-
-    public void selectCurrency(int position, View view) {
-        Currency currency = mCurrencyList.get(position);
-        String currencyCode = currency.getCode();
-
     }
 
     @Override

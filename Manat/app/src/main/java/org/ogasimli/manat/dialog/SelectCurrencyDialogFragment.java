@@ -72,7 +72,7 @@ public class SelectCurrencyDialogFragment extends DialogFragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick(R.id.cancel_btn)
+    @OnClick(R.id.select_currency_cancel_btn)
     public void dismissDialog(TextView textView) {
         getDialog().dismiss();
     }

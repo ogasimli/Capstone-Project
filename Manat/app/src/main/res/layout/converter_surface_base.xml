@@ -15,7 +15,7 @@
         android:padding="5dp"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:background="@drawable/ripple_border_color_primary"
+        android:background="@drawable/ripple_color_primary_stroke"
         android:textColor="@color/colorAccent"
         tools:text="4 February 2016"/>
 
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="end"
-            android:text="0.00"
+            tools:text="0,00"
             android:textSize="24sp"
             android:textColor="@color/colorAccent"
             android:background="?attr/selectableItemBackground"/>
@@ -86,7 +86,7 @@
             tools:text="1.5626"
             android:textSize="16sp"
             android:textColor="@color/colorAccent"
-            android:background="@drawable/text_view_border_color_primary"/>
+            android:background="@drawable/background_color_primary_stroke"/>
     </FrameLayout>
 
     <LinearLayout
@@ -105,7 +105,7 @@
             android:gravity="center"
             android:text="AZN"
             android:textSize="16sp"
-            android:background="@drawable/text_view_oval"
+            android:background="@drawable/background_oval"
             android:textColor="@color/colorAccent"/>
 
         <org.ogasimli.manat.customview.MyTextView
@@ -114,7 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:gravity="end"
-            android:text="0.00"
+            tools:text="0,00"
             android:textSize="24sp"
             android:textColor="@color/colorAccent"
             android:background="?attr/selectableItemBackground"/>

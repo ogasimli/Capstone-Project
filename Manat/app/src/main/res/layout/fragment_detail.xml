@@ -20,7 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.AppBarOverlay"/>
+            app:popupTheme="@style/AppTheme.AppBarOverlay"
+            android:visibility="gone"
+            tools:visibility="visible"/>
 
     </android.support.design.widget.AppBarLayout>
 

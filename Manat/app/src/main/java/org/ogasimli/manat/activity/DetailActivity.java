@@ -31,7 +31,7 @@ public class DetailActivity extends AppCompatActivity {
             DetailActivityFragment fragment = DetailActivityFragment.getInstance(code);
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.detail_container, fragment)
+                    .add(R.id.detail_container, fragment)
                     .commit();
         }
     }

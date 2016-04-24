@@ -12,10 +12,10 @@
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/currency_list"
-        android:layout_above="@+id/cancel_btn"/>
+        android:layout_above="@+id/select_currency_cancel_btn"/>
 
     <TextView
-        android:id="@+id/cancel_btn"
+        android:id="@+id/select_currency_cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -24,7 +24,7 @@
         android:text="@android:string/cancel"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:textColor="@color/colorPrimary"
-        android:background="@drawable/ripple_border_color_accent"
+        android:background="@drawable/ripple_color_accent"
         android:layout_gravity="end"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"

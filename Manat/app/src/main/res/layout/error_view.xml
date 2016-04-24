@@ -36,6 +36,6 @@
         android:layout_gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:textColor="@color/colorPrimary"
-        android:background="@drawable/ripple_border_color_accent"/>
+        android:background="@drawable/ripple_color_accent"/>
 
 </LinearLayout>

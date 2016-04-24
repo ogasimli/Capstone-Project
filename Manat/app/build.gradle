@@ -53,4 +53,7 @@ dependencies {
 
     //ProviGen
     compile 'com.github.provigen:ProviGen-lib:2.0.1'
+
+    //EvalEx
+    compile 'com.udojava:EvalEx:1.2'
 }

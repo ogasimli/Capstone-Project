@@ -42,6 +42,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -56,7 +57,7 @@ import retrofit.client.Response;
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment
-        implements LoaderManager.LoaderCallbacks<ArrayList<Currency>>{
+        implements LoaderManager.LoaderCallbacks<ArrayList<Currency>> {
 
     private final String LOG_TAG = MainActivityFragment.class.getSimpleName();
 
@@ -147,6 +148,16 @@ public class MainActivityFragment extends Fragment
         String dateText = Constants.DATE_FORMATTER_DMMMMYYYY.print(date);
         mMainDateTextView.setText(dateText);
 
+        //Set amounts equal to zero
+        double zero = 0;
+        String zeroStr = String.format(Locale.getDefault(), "%.2f", zero);
+        mMainForeignAmountTextView.setText(zeroStr);
+        mMainAznAmountTextView.setText(zeroStr);
+
+        //Set selected currency
+        mSelectedCode = Utilities.getSelectedCode(getActivity());
+        mMainForeignCurrencyText.setText(mSelectedCode);
+
         //Instantiate RecyclerView adapter
         mCurrencyListAdapter = new CurrencyListAdapter(getActivity());
 
@@ -165,19 +176,7 @@ public class MainActivityFragment extends Fragment
                 || !savedInstanceState.containsKey(Constants.VIEW_STATE_KEY)) {
             loadData();
         } else {
-            int state = savedInstanceState.getInt(Constants.VIEW_STATE_KEY,
-                    Constants.VIEW_STATE_ERROR);
-            switch (state) {
-                case Constants.VIEW_STATE_ERROR:
-                    showErrorView();
-                    break;
-                case Constants.VIEW_STATE_RESULTS:
-                    mCurrencyList = savedInstanceState.getParcelableArrayList
-                            (Constants.LIST_STATE_KEY);
-
-                    showResultView();
-                    break;
-            }
+            restoreInstanceState(savedInstanceState);
         }
 
 /*        ViewTreeObserver viewTreeObserver = mMainAznAmountTextView.getViewTreeObserver();
@@ -240,6 +239,26 @@ public class MainActivityFragment extends Fragment
                     Log.d(LOG_TAG, "Unable to get selected code");
                 }
                 break;
+            case Constants.CALCULATOR_DIALOG_RESULT:
+                if (resultCode == Activity.RESULT_OK) {
+                    Bundle bundle = data.getExtras();
+                    String amount = bundle.getString(Constants.AMOUNT);
+                    int key = bundle.getInt(Constants.BUTTON_KEY);
+                    switch (key) {
+                        case 0:
+                            mMainForeignAmountTextView.setText(amount);
+                            break;
+                        case 1:
+                            mMainAznAmountTextView.setText(amount);
+                            break;
+                        default:
+                            mMainForeignAmountTextView.setText(amount);
+                    }
+                    Log.d(LOG_TAG, "Amount is: " + amount);
+                } else if (resultCode == Activity.RESULT_CANCELED) {
+                    Log.d(LOG_TAG, "Unable to get selected code");
+                }
+                break;
         }
     }
 
@@ -272,15 +291,8 @@ public class MainActivityFragment extends Fragment
         //First try to check if DB has corresponding entries
         getActivity()
                 .getSupportLoaderManager()
-                .restartLoader(Constants.CURRENCY_LOADER_ID, null,this);
+                .restartLoader(Constants.CURRENCY_LOADER_ID, null, this);
 
-        //If there is no corresponding entries in DB then make API call and write to DB
-        if (mCurrencyList != null && mCurrencyList.size() == 44) {
-            Log.d(LOG_TAG, "Loaded from DB");
-            showResultView();
-        } else {
-            refreshData();
-        }
     }
 
     /**
@@ -347,10 +359,6 @@ public class MainActivityFragment extends Fragment
         mCurrencyListAdapter.setCurrencyList(mCurrencyList);
         mRecyclerView.setAdapter(mCurrencyListAdapter);
 
-        //Get selected currency
-        mSelectedCode = Utilities.getSelectedCode(getActivity());
-        mMainForeignCurrencyText.setText(mSelectedCode);
-
         //Set main rate text
         mMainRateTextView.setText(Utilities.getRateByCode(mCurrencyList, mSelectedCode));
 
@@ -385,6 +393,22 @@ public class MainActivityFragment extends Fragment
                     getActivity().getString(R.string.progress_dialog_content), true, false);
         } else {
             mProgressDialog.dismiss();
+        }
+    }
+
+    private void restoreInstanceState(Bundle savedInstanceState) {
+        int state = savedInstanceState.getInt(Constants.VIEW_STATE_KEY,
+                Constants.VIEW_STATE_ERROR);
+        switch (state) {
+            case Constants.VIEW_STATE_ERROR:
+                showErrorView();
+                break;
+            case Constants.VIEW_STATE_RESULTS:
+                mCurrencyList = savedInstanceState.getParcelableArrayList
+                        (Constants.LIST_STATE_KEY);
+
+                showResultView();
+                break;
         }
     }
 
@@ -432,9 +456,14 @@ public class MainActivityFragment extends Fragment
         showDatePickerDialog();
     }
 
-    @OnClick({R.id.main_foreign_amount_textview, R.id.main_azn_amount_textview})
-    public void amountTextViewClick(TextView textView) {
-        showCalculatorDialog();
+    @OnClick(R.id.main_foreign_amount_textview)
+    public void foreignAmountTextViewClick(TextView textView) {
+        showCalculatorDialog(0);
+    }
+
+    @OnClick(R.id.main_azn_amount_textview)
+    public void aznAmountTextViewClick(TextView textView) {
+        showCalculatorDialog(1);
     }
 
     @OnClick(R.id.main_foreign_currency_text)
@@ -446,14 +475,18 @@ public class MainActivityFragment extends Fragment
         Bundle bundle = new Bundle();
         bundle.putString(Constants.DATE_PICKER_BUNDLE_KEY, mMainDateTextView.getText().toString());
         FragmentManager fm = getActivity().getSupportFragmentManager();
-        DialogFragment datePickerDialog = new DatePickerDialogFragment();
+        DialogFragment datePickerDialog = DatePickerDialogFragment.newInstance();
         datePickerDialog.setArguments(bundle);
         datePickerDialog.show(fm, Constants.DATA_PICKER_DIALOG_FRAGMENT);
     }
 
-    private void showCalculatorDialog() {
+    private void showCalculatorDialog(int key) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.CALCULATOR_BUNDLE_KEY, key);
         FragmentManager fm = getActivity().getSupportFragmentManager();
         CalculatorDialogFragment calculatorDialog = CalculatorDialogFragment.newInstance();
+        calculatorDialog.setArguments(bundle);
+        calculatorDialog.setTargetFragment(this, Constants.CALCULATOR_DIALOG_RESULT);
         calculatorDialog.show(fm, Constants.CALCULATOR_DIALOG_FRAGMENT);
     }
 
@@ -490,6 +523,13 @@ public class MainActivityFragment extends Fragment
     @Override
     public void onLoadFinished(Loader<ArrayList<Currency>> loader, ArrayList<Currency> data) {
         mCurrencyList = data;
+        //If there is no corresponding entries in DB then make API call and write to DB
+        if (mCurrencyList != null && mCurrencyList.size() == 44) {
+            Log.d(LOG_TAG, "Loaded from DB");
+            showResultView();
+        } else {
+            refreshData();
+        }
     }
 
     @Override

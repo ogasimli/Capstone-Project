@@ -37,6 +37,17 @@ public class Utilities {
     }
 
     /*
+    * Helper method to delete last char of a string
+    */
+    public static String deleteLastChar(String str) {
+        String subStr = null;
+        if (str != null && str.length() > 0) {
+            subStr = str.substring(0, str.length()-1);
+        }
+        return subStr;
+    }
+
+    /*
     * Helper method to get currency name by code
     */
     public static String getCurrencyName(Context context, String code) {
@@ -145,7 +156,7 @@ public class Utilities {
     /**
      * Helper method to determine beginning date of period based on the user selection
      */
-    public static int determinePeriod(int pressedBtnNum){
+    public static int determinePeriod(int pressedBtnNum) {
         DateTime tillDate = new DateTime();
         DateTime fromDate;
 
