@@ -73,11 +73,11 @@ public class MainActivityFragment extends Fragment
 
     private String mDateBeforeChange;
 
-    private boolean mIsConnected;
-
     private String mQueryString;
 
     private String[] mCodes;
+
+    private boolean mIgnoreChange = false;
 
     float viewHeight;
     boolean noSwap = true;
@@ -148,11 +148,13 @@ public class MainActivityFragment extends Fragment
         String dateText = Constants.DATE_FORMATTER_DMMMMYYYY.print(date);
         mMainDateTextView.setText(dateText);
 
-        //Set amounts equal to zero
-        double zero = 0;
-        String zeroStr = String.format(Locale.getDefault(), "%.2f", zero);
-        mMainForeignAmountTextView.setText(zeroStr);
-        mMainAznAmountTextView.setText(zeroStr);
+        //Format amount to have default locale decimal separator
+        String foreignAmount = mMainForeignAmountTextView.getText().toString();
+        String aznAmount = mMainAznAmountTextView.getText().toString();
+        mIgnoreChange = true;
+        mMainForeignAmountTextView.setText(Utilities.formatAmount(foreignAmount));
+        mIgnoreChange = true;
+        mMainAznAmountTextView.setText(Utilities.formatAmount(aznAmount));
 
         //Set selected currency
         mSelectedCode = Utilities.getSelectedCode(getActivity());
@@ -217,6 +219,86 @@ public class MainActivityFragment extends Fragment
 
             }
         });
+
+        mMainForeignAmountTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (mIgnoreChange) {
+                    mIgnoreChange = true;
+                    String amountString = mMainForeignAmountTextView.getText().toString();
+                    String rateString = mMainRateTextView.getText().toString();
+                    double amount = Double.parseDouble(amountString.replace(",", "."));
+                    double rate = Double.parseDouble(rateString.replace(",", "."));
+                    double result = amount * rate;
+                    String resultString = String.format(Locale.getDefault(), "%.2f", result);
+                    mMainAznAmountTextView.setText(resultString);
+                } else {
+                    mIgnoreChange = false;
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        mMainAznAmountTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (mIgnoreChange) {
+                    mIgnoreChange = true;
+                    String amountString = mMainAznAmountTextView.getText().toString();
+                    String rateString = mMainRateTextView.getText().toString();
+                    double amount = Double.parseDouble(amountString.replace(",", "."));
+                    double rate = Double.parseDouble(rateString.replace(",", "."));
+                    double result = amount / rate;
+                    String resultString = String.format(Locale.getDefault(), "%.2f", result);
+                    mMainForeignAmountTextView.setText(resultString);
+                } else {
+                    mIgnoreChange = false;
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        mMainRateTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    mIgnoreChange = true;
+                    String amountString = mMainForeignAmountTextView.getText().toString();
+                    String rateString = mMainRateTextView.getText().toString();
+                    double amount = Double.parseDouble(amountString.replace(",", "."));
+                    double rate = Double.parseDouble(rateString.replace(",", "."));
+                    double result = amount * rate;
+                    String resultString = String.format(Locale.getDefault(), "%.2f", result);
+                    mMainAznAmountTextView.setText(resultString);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
@@ -243,18 +325,24 @@ public class MainActivityFragment extends Fragment
                 if (resultCode == Activity.RESULT_OK) {
                     Bundle bundle = data.getExtras();
                     String amount = bundle.getString(Constants.AMOUNT);
+                    String resultString = null;
+                    if (amount != null) {
+                        resultString = amount.replace(",", ".");
+                    }
+                    Double result = Double.parseDouble(resultString);
+                    resultString = String.format(Locale.getDefault(), "%.2f", result);
                     int key = bundle.getInt(Constants.BUTTON_KEY);
                     switch (key) {
                         case 0:
-                            mMainForeignAmountTextView.setText(amount);
+                            mMainForeignAmountTextView.setText(resultString);
                             break;
                         case 1:
-                            mMainAznAmountTextView.setText(amount);
+                            mMainAznAmountTextView.setText(resultString);
                             break;
                         default:
-                            mMainForeignAmountTextView.setText(amount);
+                            mMainForeignAmountTextView.setText(resultString);
                     }
-                    Log.d(LOG_TAG, "Amount is: " + amount);
+                    Log.d(LOG_TAG, "Amount is: " + resultString);
                 } else if (resultCode == Activity.RESULT_CANCELED) {
                     Log.d(LOG_TAG, "Unable to get selected code");
                 }

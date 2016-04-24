@@ -47,6 +47,7 @@
     <string name="calc_8_text">8</string>
     <string name="calc_9_text">9</string>
     <string name="calc_0_text">0</string>
+    <string name="converter_amount_zero_text">0,00</string>
 
     <string-array name="currency_codes" translatable="false">
         <item>USD</item>

@@ -7,9 +7,10 @@ import org.ogasimli.manat.object.Currency;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,13 +28,16 @@ import manat.ogasimli.org.manat.R;
 public class Utilities {
 
     /*
-    * Helper method to check if device has a network connection
+    * Helper method to format decimal separators of amounts
     */
-    public static boolean isOnline(Context context) {
-        ConnectivityManager cm = (ConnectivityManager)
-                context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+    public static String formatAmount(String amount) {
+        NumberFormat numberFormat = NumberFormat.getNumberInstance();
+        String decimalSeparator = ",";
+        if (numberFormat instanceof DecimalFormat) {
+            DecimalFormatSymbols symbols = ((DecimalFormat) numberFormat).getDecimalFormatSymbols();
+            decimalSeparator = String.valueOf(symbols.getDecimalSeparator());
+        }
+        return amount.replace(",", decimalSeparator);
     }
 
     /*
@@ -42,7 +46,7 @@ public class Utilities {
     public static String deleteLastChar(String str) {
         String subStr = null;
         if (str != null && str.length() > 0) {
-            subStr = str.substring(0, str.length()-1);
+            subStr = str.substring(0, str.length() - 1);
         }
         return subStr;
     }
