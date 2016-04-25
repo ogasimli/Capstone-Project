@@ -51,6 +51,7 @@ public class Constants {
     public static final String LIST_STATE_KEY = "LIST_STATE_KEY";
     public static final String SECONDARY_LIST_STATE_KEY = "SECONDARY_LIST_STATE_KEY";
     public static final String VIEW_STATE_KEY = "VIEW_STATE_KEY";
+    public static String PRESSED_AMOUNT_FIELD_KEY = "PRESSED_AMOUNT_FIELD_KEY";
     public static final String BUTTON_STATE_KEY = "BUTTON_STATE_KEY";
 
     //Activity state keys
@@ -65,6 +66,7 @@ public class Constants {
     //Database constants
     public static String DB_NAME = "fxrates";
     public static int DB_VERSION = 1;
+    public static int CURRENCY_LOADER_ID = 0;
 
     //HashMap keys
     public static String CURRENT_RATE_KEY = "CURRENT_RATE";
@@ -72,6 +74,6 @@ public class Constants {
     public static String MAX_RATE_KEY = "MAX_RATE";
     public static String MIN_RATE_KEY = "MIN_RATE";
 
-    //DB Loader ID
-    public static int CURRENCY_LOADER_ID = 0;
+    //First available date
+    public static String MIN_DATE = "25 11 1993";
 }

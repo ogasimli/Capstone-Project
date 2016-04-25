@@ -49,15 +49,18 @@ public class DatePickerDialogFragment extends DialogFragment
         DatePickerDialog dialog = new DatePickerDialog(getActivity(),
                 R.style.DatePickerDialogStyle, this, year, month, day);
 
-        //TODO: fix issue with selection of current date
         //Set min date
-        DateTime minDate =  DateTime.parse("25 11 1993",
+        DateTime minDate =  DateTime.parse(Constants.MIN_DATE,
                 Constants.DATE_FORMATTER_DDMMYYYY);
         long minDateMillis = minDate.getMillis();
         dialog.getDatePicker().setMinDate(minDateMillis);
 
         //Set max date
-        dialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+        DateTime maxDate = new DateTime()
+                .withHourOfDay(23)
+                .withMinuteOfHour(59)
+                .withSecondOfMinute(59);
+        dialog.getDatePicker().setMaxDate(maxDate.getMillis());
 
         return dialog;
     }
