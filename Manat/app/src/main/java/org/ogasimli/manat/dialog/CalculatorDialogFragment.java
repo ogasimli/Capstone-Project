@@ -205,11 +205,11 @@ public class CalculatorDialogFragment extends DialogFragment {
             getDialog().dismiss();
         } catch (Expression.ExpressionException expressException) {
             Log.d(LOG_TAG, expressException.toString());
-            Toast.makeText(getActivity(), "Invalid input! Enter correct values!", Toast
+            Toast.makeText(getActivity(), R.string.express_exception_message, Toast
                     .LENGTH_LONG).show();
         } catch (ArithmeticException arithmeticException) {
             Log.d(LOG_TAG, arithmeticException.toString());
-            Toast.makeText(getActivity(), "Invalid input! There is an arithmetic problem!", Toast
+            Toast.makeText(getActivity(), R.string.arithmetical_exception_message, Toast
                     .LENGTH_LONG).show();
         }
     }
