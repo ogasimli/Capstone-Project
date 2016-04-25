@@ -44,36 +44,12 @@ public class Utilities {
     }
 
     /*
-    * Helper method to determine if string contains any math expression
-    */
-    public static boolean isStringContainsMath(String string) {
-        int charCount = 0;
-        String alphabet = "+-/*";
-        if (string.length() == 0) return false;//zero length string ain't alpha
-        for (int i = 0; i < string.length(); i++) {
-            for (int j = 0; j < alphabet.length(); j++) {
-                if (string.substring(i, i + 1).equals(alphabet.substring(j, j + 1)))
-                    charCount++;
-            }
-            if (charCount != (i + 1)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /*
-    * Helper method to evaluate strings containing math expression
+    * Helper method to evaluate math string
     */
     public static String evalMathString(String string) {
         BigDecimal result;
-        if (isStringContainsMath(string)) {
-            Expression expression = new Expression(string.replace(",", "."));
-            result = expression.eval();
-        } else {
-            result = new BigDecimal(string.replaceAll(String.valueOf(DecimalFormatSymbols
-                    .getInstance().getGroupingSeparator()),""));
-        }
+        Expression expression = new Expression(string.replace(",", "."));
+        result = expression.eval();
         return String.format(Locale.getDefault(), "%.2f", result);
     }
 

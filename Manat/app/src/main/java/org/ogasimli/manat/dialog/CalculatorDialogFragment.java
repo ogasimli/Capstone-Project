@@ -1,5 +1,7 @@
 package org.ogasimli.manat.dialog;
 
+import com.udojava.evalex.Expression;
+
 import org.ogasimli.manat.customview.MyTextView;
 import org.ogasimli.manat.helper.Constants;
 import org.ogasimli.manat.helper.Utilities;
@@ -9,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +30,8 @@ import manat.ogasimli.org.manat.R;
  * Created by ogasimli on 08.01.2016.
  */
 public class CalculatorDialogFragment extends DialogFragment {
+
+    private static final String LOG_TAG = CalculatorDialogFragment.class.getSimpleName();
 
     private int mButtonKey = 0;
 
@@ -168,13 +173,16 @@ public class CalculatorDialogFragment extends DialogFragment {
     @OnClick(R.id.calc_equals_textview)
     public void equalsClick(TextView textView) {
         String editText = mEditTextView.getText().toString();
-        char firstChar = editText.charAt(0);
-        char lastChar = editText.charAt(editText.length() - 1);
-        if (Character.isDigit(firstChar) && Character.isDigit(lastChar)) {
+        try {
             editText = Utilities.evalMathString(editText);
             mEditTextView.setText(editText);
-        } else {
-            Toast.makeText(getActivity(), "Invalid input! Enter correct values.", Toast
+        } catch (Expression.ExpressionException expressException) {
+            Log.d(LOG_TAG, expressException.toString());
+            Toast.makeText(getActivity(), "Invalid input! Enter correct values!", Toast
+                    .LENGTH_LONG).show();
+        } catch (ArithmeticException arithmeticException) {
+            Log.d(LOG_TAG, arithmeticException.toString());
+            Toast.makeText(getActivity(), "Invalid input! There is an arithmetic problem!", Toast
                     .LENGTH_LONG).show();
         }
     }
@@ -186,11 +194,8 @@ public class CalculatorDialogFragment extends DialogFragment {
 
     @OnClick(R.id.calc_ok_btn)
     public void sendResultClick(Button button) {
-        //Determine the state of String
         String editText = mEditTextView.getText().toString();
-        char firstChar = editText.charAt(0);
-        char lastChar = editText.charAt(editText.length() - 1);
-        if (Character.isDigit(firstChar) && Character.isDigit(lastChar)) {
+        try {
             editText = Utilities.evalMathString(editText);
             //Go back to MainActivityFragment
             Intent intent = new Intent();
@@ -198,8 +203,13 @@ public class CalculatorDialogFragment extends DialogFragment {
             intent.putExtra(Constants.BUTTON_KEY, mButtonKey);
             getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
             getDialog().dismiss();
-        } else {
-            Toast.makeText(getActivity(), "Invalid input! Enter correct values.", Toast
+        } catch (Expression.ExpressionException expressException) {
+            Log.d(LOG_TAG, expressException.toString());
+            Toast.makeText(getActivity(), "Invalid input! Enter correct values!", Toast
+                    .LENGTH_LONG).show();
+        } catch (ArithmeticException arithmeticException) {
+            Log.d(LOG_TAG, arithmeticException.toString());
+            Toast.makeText(getActivity(), "Invalid input! There is an arithmetic problem!", Toast
                     .LENGTH_LONG).show();
         }
     }
