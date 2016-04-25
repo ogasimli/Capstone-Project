@@ -80,9 +80,11 @@ public class MainActivityFragment extends Fragment
     private boolean mIgnoreChange = false;
 
     private int mChangedTextViewId = 0;
-    
+
+    private int mAmountField = 0;
     float viewHeight;
     boolean noSwap = true;
+
     private static int ANIMATION_DURATION = 300;
 
     @Bind(R.id.main_result_view)
@@ -111,7 +113,6 @@ public class MainActivityFragment extends Fragment
 
     @Bind(R.id.main_date_text)
     TextView mMainDateTextView;
-
     @Bind(R.id.main_rate_text)
     TextView mMainRateTextView;
 
@@ -170,7 +171,8 @@ public class MainActivityFragment extends Fragment
         * if savedInstanceSate is not null
         */
         if (savedInstanceState == null || !savedInstanceState.containsKey(Constants.LIST_STATE_KEY)
-                || !savedInstanceState.containsKey(Constants.VIEW_STATE_KEY)) {
+                || !savedInstanceState.containsKey(Constants.VIEW_STATE_KEY)
+                || !savedInstanceState.containsKey(Constants.PRESSED_AMOUNT_FIELD_KEY)) {
             loadData();
         } else {
             restoreInstanceState(savedInstanceState);
@@ -206,6 +208,7 @@ public class MainActivityFragment extends Fragment
         }
 
         outState.putInt(Constants.VIEW_STATE_KEY, state);
+        outState.putInt(Constants.PRESSED_AMOUNT_FIELD_KEY, mAmountField);
         outState.putParcelableArrayList(Constants.LIST_STATE_KEY, mCurrencyList);
     }
 
@@ -239,8 +242,8 @@ public class MainActivityFragment extends Fragment
                     }
                     Double result = Double.parseDouble(resultString);
                     resultString = String.format(Locale.getDefault(), "%.2f", result);
-                    int key = bundle.getInt(Constants.BUTTON_KEY);
-                    switch (key) {
+                    mAmountField = bundle.getInt(Constants.BUTTON_KEY);
+                    switch (mAmountField) {
                         case 0:
                             mMainForeignAmountTextView.setText(resultString);
                             break;
@@ -311,16 +314,27 @@ public class MainActivityFragment extends Fragment
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (mChangedTextViewId != mMainRateTextView.getId()) {
-                mIgnoreChange = true;
-                mChangedTextViewId = mMainRateTextView.getId();
-                String amountString = mMainForeignAmountTextView.getText().toString();
-                String rateString = mMainRateTextView.getText().toString();
-                double amount = Double.parseDouble(amountString.replace(",", "."));
-                double rate = Double.parseDouble(rateString.replace(",", "."));
-                double result = amount * rate;
-                String resultString = String.format(Locale.getDefault(), "%.2f", result);
-                mMainAznAmountTextView.setText(resultString);
+            mIgnoreChange = true;
+            mChangedTextViewId = mMainRateTextView.getId();
+            String fAmountString = mMainForeignAmountTextView.getText().toString();
+            String aAmountString = mMainAznAmountTextView.getText().toString();
+            String rateString = mMainRateTextView.getText().toString();
+            double fAmount = Double.parseDouble(fAmountString.replace(",", "."));
+            double aAmount = Double.parseDouble(aAmountString.replace(",", "."));
+            double rate = Double.parseDouble(rateString.replace(",", "."));
+            double result;
+            String resultString;
+            switch (mAmountField) {
+                case 0:
+                    result = fAmount * rate;
+                    resultString = String.format(Locale.getDefault(), "%.2f", result);
+                    mMainAznAmountTextView.setText(resultString);
+                    break;
+                case 1:
+                    result = aAmount / rate;
+                    resultString = String.format(Locale.getDefault(), "%.2f", result);
+                    mMainForeignAmountTextView.setText(resultString);
+                    break;
             }
         }
 
@@ -341,9 +355,8 @@ public class MainActivityFragment extends Fragment
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (!mIgnoreChange && mChangedTextViewId != mMainAznAmountTextView.getId()) {
+            if (!mIgnoreChange) {
                 mIgnoreChange = true;
-                mChangedTextViewId = mMainAznAmountTextView.getId();
                 String amountString = mMainAznAmountTextView.getText().toString();
                 String rateString = mMainRateTextView.getText().toString();
                 double amount = Double.parseDouble(amountString.replace(",", "."));
@@ -373,9 +386,8 @@ public class MainActivityFragment extends Fragment
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (!mIgnoreChange && mChangedTextViewId != mMainForeignAmountTextView.getId()) {
+            if (!mIgnoreChange) {
                 mIgnoreChange = true;
-                mChangedTextViewId = mMainForeignAmountTextView.getId();
                 String amountString = mMainForeignAmountTextView.getText().toString();
                 String rateString = mMainRateTextView.getText().toString();
                 double amount = Double.parseDouble(amountString.replace(",", "."));
@@ -509,6 +521,7 @@ public class MainActivityFragment extends Fragment
     }
 
     private void restoreInstanceState(Bundle savedInstanceState) {
+        mAmountField = savedInstanceState.getInt(Constants.PRESSED_AMOUNT_FIELD_KEY);
         int state = savedInstanceState.getInt(Constants.VIEW_STATE_KEY,
                 Constants.VIEW_STATE_ERROR);
         switch (state) {
@@ -516,9 +529,7 @@ public class MainActivityFragment extends Fragment
                 showErrorView();
                 break;
             case Constants.VIEW_STATE_RESULTS:
-                mCurrencyList = savedInstanceState.getParcelableArrayList
-                        (Constants.LIST_STATE_KEY);
-
+                mCurrencyList = savedInstanceState.getParcelableArrayList(Constants.LIST_STATE_KEY);
                 showResultView();
                 break;
         }
@@ -570,12 +581,14 @@ public class MainActivityFragment extends Fragment
 
     @OnClick(R.id.main_foreign_amount_textview)
     public void foreignAmountTextViewClick(TextView textView) {
-        showCalculatorDialog(0);
+        mAmountField = 0;
+        showCalculatorDialog(mAmountField);
     }
 
     @OnClick(R.id.main_azn_amount_textview)
     public void aznAmountTextViewClick(TextView textView) {
-        showCalculatorDialog(1);
+        mAmountField = 1;
+        showCalculatorDialog(mAmountField);
     }
 
     @OnClick(R.id.main_foreign_currency_text)
