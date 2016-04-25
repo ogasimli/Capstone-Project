@@ -79,6 +79,8 @@ public class MainActivityFragment extends Fragment
 
     private boolean mIgnoreChange = false;
 
+    private int mChangedTextViewId = 0;
+    
     float viewHeight;
     boolean noSwap = true;
     private static int ANIMATION_DURATION = 300;
@@ -118,19 +120,6 @@ public class MainActivityFragment extends Fragment
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        int state = Constants.VIEW_STATE_RESULTS;
-        if (mErrorView.getVisibility() == View.VISIBLE) {
-            state = Constants.VIEW_STATE_ERROR;
-        }
-
-        outState.putInt(Constants.VIEW_STATE_KEY, state);
-        outState.putParcelableArrayList(Constants.LIST_STATE_KEY, mCurrencyList);
-    }
-
-    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
@@ -155,6 +144,12 @@ public class MainActivityFragment extends Fragment
         mMainForeignAmountTextView.setText(Utilities.formatAmount(foreignAmount));
         mIgnoreChange = true;
         mMainAznAmountTextView.setText(Utilities.formatAmount(aznAmount));
+
+        //Set TextWatchers
+        mMainDateTextView.addTextChangedListener(mDateWatcher);
+        mMainRateTextView.addTextChangedListener(mRateWatcher);
+        mMainForeignAmountTextView.addTextChangedListener(mForeignAmountWatcher);
+        mMainAznAmountTextView.addTextChangedListener(mAznAmountWatcher);
 
         //Set selected currency
         mSelectedCode = Utilities.getSelectedCode(getActivity());
@@ -199,106 +194,19 @@ public class MainActivityFragment extends Fragment
     @Override
     public void onResume() {
         super.onResume();
+    }
 
-        //Reload data if date was changed
-        mMainDateTextView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                mDateBeforeChange = mMainDateTextView.getText().toString();
-            }
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!mDateBeforeChange.equals(mMainDateTextView.getText().toString())) {
-                    loadData();
-                }
-            }
+        int state = Constants.VIEW_STATE_RESULTS;
+        if (mErrorView.getVisibility() == View.VISIBLE) {
+            state = Constants.VIEW_STATE_ERROR;
+        }
 
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        mMainForeignAmountTextView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mIgnoreChange) {
-                    mIgnoreChange = true;
-                    String amountString = mMainForeignAmountTextView.getText().toString();
-                    String rateString = mMainRateTextView.getText().toString();
-                    double amount = Double.parseDouble(amountString.replace(",", "."));
-                    double rate = Double.parseDouble(rateString.replace(",", "."));
-                    double result = amount * rate;
-                    String resultString = String.format(Locale.getDefault(), "%.2f", result);
-                    mMainAznAmountTextView.setText(resultString);
-                } else {
-                    mIgnoreChange = false;
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        mMainAznAmountTextView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mIgnoreChange) {
-                    mIgnoreChange = true;
-                    String amountString = mMainAznAmountTextView.getText().toString();
-                    String rateString = mMainRateTextView.getText().toString();
-                    double amount = Double.parseDouble(amountString.replace(",", "."));
-                    double rate = Double.parseDouble(rateString.replace(",", "."));
-                    double result = amount / rate;
-                    String resultString = String.format(Locale.getDefault(), "%.2f", result);
-                    mMainForeignAmountTextView.setText(resultString);
-                } else {
-                    mIgnoreChange = false;
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        mMainRateTextView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    mIgnoreChange = true;
-                    String amountString = mMainForeignAmountTextView.getText().toString();
-                    String rateString = mMainRateTextView.getText().toString();
-                    double amount = Double.parseDouble(amountString.replace(",", "."));
-                    double rate = Double.parseDouble(rateString.replace(",", "."));
-                    double result = amount * rate;
-                    String resultString = String.format(Locale.getDefault(), "%.2f", result);
-                    mMainAznAmountTextView.setText(resultString);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        outState.putInt(Constants.VIEW_STATE_KEY, state);
+        outState.putParcelableArrayList(Constants.LIST_STATE_KEY, mCurrencyList);
     }
 
     @Override
@@ -369,6 +277,122 @@ public class MainActivityFragment extends Fragment
 
         return super.onOptionsItemSelected(item);
     }
+
+    /**
+     * TextWatcher for mMainDateTextView
+     */
+    private final TextWatcher mDateWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            mDateBeforeChange = mMainDateTextView.getText().toString();
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (!mDateBeforeChange.equals(mMainDateTextView.getText().toString())) {
+                loadData();
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    /**
+     * TextWatcher for mMainRateTextView
+     */
+    private final TextWatcher mRateWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (mChangedTextViewId != mMainRateTextView.getId()) {
+                mIgnoreChange = true;
+                mChangedTextViewId = mMainRateTextView.getId();
+                String amountString = mMainForeignAmountTextView.getText().toString();
+                String rateString = mMainRateTextView.getText().toString();
+                double amount = Double.parseDouble(amountString.replace(",", "."));
+                double rate = Double.parseDouble(rateString.replace(",", "."));
+                double result = amount * rate;
+                String resultString = String.format(Locale.getDefault(), "%.2f", result);
+                mMainAznAmountTextView.setText(resultString);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    /**
+     * TextWatcher for mMainAznAmountTextView
+     */
+    private final TextWatcher mAznAmountWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (!mIgnoreChange && mChangedTextViewId != mMainAznAmountTextView.getId()) {
+                mIgnoreChange = true;
+                mChangedTextViewId = mMainAznAmountTextView.getId();
+                String amountString = mMainAznAmountTextView.getText().toString();
+                String rateString = mMainRateTextView.getText().toString();
+                double amount = Double.parseDouble(amountString.replace(",", "."));
+                double rate = Double.parseDouble(rateString.replace(",", "."));
+                double result = amount / rate;
+                String resultString = String.format(Locale.getDefault(), "%.2f", result);
+                mMainForeignAmountTextView.setText(resultString);
+            } else {
+                mIgnoreChange = false;
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    /**
+     * TextWatcher for mMainForeignAmountTextView
+     */
+    private final TextWatcher mForeignAmountWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (!mIgnoreChange && mChangedTextViewId != mMainForeignAmountTextView.getId()) {
+                mIgnoreChange = true;
+                mChangedTextViewId = mMainForeignAmountTextView.getId();
+                String amountString = mMainForeignAmountTextView.getText().toString();
+                String rateString = mMainRateTextView.getText().toString();
+                double amount = Double.parseDouble(amountString.replace(",", "."));
+                double rate = Double.parseDouble(rateString.replace(",", "."));
+                double result = amount * rate;
+                String resultString = String.format(Locale.getDefault(), "%.2f", result);
+                mMainAznAmountTextView.setText(resultString);
+            } else {
+                mIgnoreChange = false;
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 
     /**
      * Helper method to load rates
