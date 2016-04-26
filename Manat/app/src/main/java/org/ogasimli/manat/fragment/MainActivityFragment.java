@@ -113,9 +113,9 @@ public class MainActivityFragment extends Fragment
 
     @Bind(R.id.main_date_text)
     TextView mMainDateTextView;
+
     @Bind(R.id.main_rate_text)
     TextView mMainRateTextView;
-
 
     public MainActivityFragment() {
     }

@@ -24,6 +24,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -169,8 +171,9 @@ public class DetailActivityFragment extends Fragment {
         //initToolbar();
         initToolbar();
 
+        //Set statistics label
         mStatisticsLabelTextView.setText(getString(R.string.detail_statistics_label,
-                "Weekly"));
+                getString(R.string.statistics_label_weekly)));
 
         /*
         * loadData if savedInstanceState is null, load from already fetched data
@@ -293,6 +296,9 @@ public class DetailActivityFragment extends Fragment {
         mToolbar.setVisibility(View.VISIBLE);
         mResultView.setVisibility(View.VISIBLE);
         mFab.setVisibility(View.VISIBLE);
+        //set animation for share fab
+        Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.grow_fab);
+        mFab.startAnimation(animation);
         mErrorView.setVisibility(View.GONE);
 
         //Hide ProgressDialog
