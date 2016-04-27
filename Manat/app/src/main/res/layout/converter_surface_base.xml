@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/colorPrimary">
 
     <org.ogasimli.manat.customview.MyTextView
@@ -36,7 +36,7 @@
             android:freezesText="true"
             tools:text="USD"
             android:textSize="16sp"
-            android:background="@drawable/ripple_oval_with_stroke"
+            android:background="@drawable/ripple_oval_primary_with_stroke"
             android:textColor="@color/colorAccent"/>
 
         <org.ogasimli.manat.customview.MyTextView
@@ -74,7 +74,8 @@
             android:layout_margin="10dp"
             app:fabSize="mini"
             android:elevation="6dp"
-            android:translationZ="12dp"/>
+            android:translationZ="12dp"
+            tools:targetApi="lollipop"/>
 
         <TextView
             android:id="@+id/main_rate_text"
@@ -108,7 +109,7 @@
             android:gravity="center"
             android:text="AZN"
             android:textSize="16sp"
-            android:background="@drawable/background_oval"
+            android:background="@drawable/background_oval_primary"
             android:textColor="@color/colorAccent"/>
 
         <org.ogasimli.manat.customview.MyTextView

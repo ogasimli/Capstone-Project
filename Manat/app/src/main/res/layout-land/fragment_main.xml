@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context="org.ogasimli.manat.activity.MainActivity">
 
     <android.support.design.widget.CoordinatorLayout
@@ -38,26 +37,40 @@
 
         </android.support.design.widget.AppBarLayout>
 
-            <LinearLayout
-                android:id="@+id/main_result_view"
-                android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="400dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="visible"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                android:layout_centerHorizontal="true">
 
-                <include
+                <LinearLayout
+                    android:id="@+id/main_result_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    layout="@layout/converter_surface"
-                    android:layout_gravity="center_horizontal"/>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerview_main"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    <include
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        layout="@layout/converter_surface"/>
 
-            </LinearLayout>
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerview_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:elevation="@dimen/converter_elevation"
+                        tools:targetApi="lollipop"/>
+
+                </LinearLayout>
+
+            </android.support.v4.widget.NestedScrollView>
+
+        </RelativeLayout>
 
     </android.support.design.widget.CoordinatorLayout>
 

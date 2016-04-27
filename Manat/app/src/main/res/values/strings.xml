@@ -51,6 +51,7 @@
     <string name="express_exception_message">Invalid input! Enter correct values!</string>
     <string name="arithmetical_exception_message">Invalid input! There is an arithmetic problem!
     </string>
+    <string name="menu_share_text">Share</string>
 
     <string-array name="currency_codes" translatable="false">
         <item>USD</item>

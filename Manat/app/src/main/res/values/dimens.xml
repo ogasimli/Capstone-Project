@@ -5,4 +5,6 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="semi_standard_margin">4dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="app_bar_elevation">0dp</dimen>
+    <dimen name="converter_elevation">4dp</dimen>
 </resources>

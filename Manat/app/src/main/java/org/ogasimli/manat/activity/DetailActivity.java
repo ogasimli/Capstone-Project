@@ -31,7 +31,7 @@ public class DetailActivity extends AppCompatActivity {
             DetailActivityFragment fragment = DetailActivityFragment.getInstance(code);
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.detail_container, fragment)
+                    .replace(R.id.detail_container, fragment)
                     .commit();
         }
     }
@@ -45,10 +45,10 @@ public class DetailActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         switch (id) {
-            case R.id.home:
+            case android.R.id.home:
+                supportFinishAfterTransition();
                 return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
+        return super.onOptionsItemSelected(item);
     }
 }

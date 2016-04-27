@@ -25,9 +25,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -54,7 +56,9 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * A placeholder fragment containing a simple view.
+ * MainActivityFragment class
+ *
+ * Created by ogasimli on 10.01.2016.
  */
 public class MainActivityFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<ArrayList<Currency>> {
@@ -79,9 +83,8 @@ public class MainActivityFragment extends Fragment
 
     private boolean mIgnoreChange = false;
 
-    private int mChangedTextViewId = 0;
-
     private int mAmountField = 0;
+
     float viewHeight;
     boolean noSwap = true;
 
@@ -117,6 +120,9 @@ public class MainActivityFragment extends Fragment
     @Bind(R.id.main_rate_text)
     TextView mMainRateTextView;
 
+    @Bind(R.id.toolbar_main)
+    Toolbar mToolbar;
+
     public MainActivityFragment() {
     }
 
@@ -132,6 +138,9 @@ public class MainActivityFragment extends Fragment
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, rootView);
+
+        //Initialize Toolbar
+        initToolbar();
 
         //Set date
         DateTime date = new DateTime();
@@ -281,6 +290,16 @@ public class MainActivityFragment extends Fragment
         return super.onOptionsItemSelected(item);
     }
 
+    /*Initialize Toolbar*/
+    @SuppressWarnings("ConstantConditions")
+    private void initToolbar() {
+        if (mToolbar != null) {
+            ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
+            ((AppCompatActivity) getActivity()).getSupportActionBar()
+                    .setDisplayShowTitleEnabled(false);
+        }
+    }
+
     /**
      * TextWatcher for mMainDateTextView
      */
@@ -315,7 +334,6 @@ public class MainActivityFragment extends Fragment
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             mIgnoreChange = true;
-            mChangedTextViewId = mMainRateTextView.getId();
             String fAmountString = mMainForeignAmountTextView.getText().toString();
             String aAmountString = mMainAznAmountTextView.getText().toString();
             String rateString = mMainRateTextView.getText().toString();

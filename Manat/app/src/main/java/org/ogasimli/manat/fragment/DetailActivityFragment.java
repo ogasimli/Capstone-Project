@@ -13,6 +13,7 @@ import org.ogasimli.manat.retrofit.RetrofitAdapter;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,6 +23,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -46,6 +50,8 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
+ * DetailActivityFragment class
+ *
  * Created by ogasimli on 10.01.2016.
  */
 public class DetailActivityFragment extends Fragment {
@@ -72,6 +78,7 @@ public class DetailActivityFragment extends Fragment {
     @Bind(R.id.toolbar_detail)
     Toolbar mToolbar;
 
+    @Nullable
     @Bind(R.id.fab_share_details)
     FloatingActionButton mFab;
 
@@ -152,6 +159,7 @@ public class DetailActivityFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         setRetainInstance(true);
 
         mCurrencyCode = getArguments().getString(Constants.SELECTED_CODE_KEY);
@@ -209,6 +217,35 @@ public class DetailActivityFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            menu.findItem(R.id.menu_share).setVisible(true);
+        } else {
+            menu.findItem(R.id.menu_share).setVisible(false);
+        }
+
+        super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_detail, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.menu_share:
+                shareRate();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     /*Initialize Toolbar*/
@@ -295,10 +332,14 @@ public class DetailActivityFragment extends Fragment {
         //View and hide relevant LinearLayouts
         mToolbar.setVisibility(View.VISIBLE);
         mResultView.setVisibility(View.VISIBLE);
-        mFab.setVisibility(View.VISIBLE);
-        //set animation for share fab
-        Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.grow_fab);
-        mFab.startAnimation(animation);
+
+        if (mFab != null) {
+            mFab.setVisibility(View.VISIBLE);
+            //set animation for share fab
+            Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.grow_fab);
+            mFab.startAnimation(animation);
+        }
+
         mErrorView.setVisibility(View.GONE);
 
         //Hide ProgressDialog
@@ -315,7 +356,9 @@ public class DetailActivityFragment extends Fragment {
         //View and hide relevant LinearLayouts
         mToolbar.setVisibility(View.GONE );
         mResultView.setVisibility(View.GONE);
-        mFab.setVisibility(View.GONE);
+        if (mFab != null) {
+            mFab.setVisibility(View.GONE);
+        }
         mErrorView.setVisibility(View.VISIBLE);
 
         //Hide ProgressDialog
@@ -452,8 +495,13 @@ public class DetailActivityFragment extends Fragment {
         loadData();
     }
 
+    @Nullable
     @OnClick(R.id.fab_share_details)
     public void shareStatistics(FloatingActionButton fab) {
+        shareRate();
+    }
+
+    private void shareRate() {
         int period = Utilities.determinePeriod(mPressedBtnNum);
         DateTime tillDate = new DateTime();
         DateTime fromDate = tillDate.minusDays(period);
