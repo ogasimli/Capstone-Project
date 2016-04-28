@@ -5,7 +5,7 @@ import com.udojava.evalex.Expression;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.format.DateTimeFormatter;
-import org.ogasimli.manat.object.Currency;
+import org.ogasimli.manat.model.Currency;
 
 import android.content.Context;
 import android.content.SharedPreferences;

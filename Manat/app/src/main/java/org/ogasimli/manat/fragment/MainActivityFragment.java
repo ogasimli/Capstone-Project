@@ -10,7 +10,7 @@ import org.ogasimli.manat.dialog.DatePickerDialogFragment;
 import org.ogasimli.manat.dialog.SelectCurrencyDialogFragment;
 import org.ogasimli.manat.helper.Constants;
 import org.ogasimli.manat.helper.Utilities;
-import org.ogasimli.manat.object.Currency;
+import org.ogasimli.manat.model.Currency;
 import org.ogasimli.manat.retrofit.ApiService;
 import org.ogasimli.manat.retrofit.RetrofitAdapter;
 
@@ -39,6 +39,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -588,7 +589,7 @@ public class MainActivityFragment extends Fragment
     }
 
     @OnClick(R.id.reload_text)
-    public void reloadTextViewClick(TextView texView) {
+    public void reloadTextViewClick(Button button) {
         refreshData();
     }
 
@@ -620,7 +621,7 @@ public class MainActivityFragment extends Fragment
         FragmentManager fm = getActivity().getSupportFragmentManager();
         DialogFragment datePickerDialog = DatePickerDialogFragment.newInstance();
         datePickerDialog.setArguments(bundle);
-        datePickerDialog.show(fm, Constants.DATA_PICKER_DIALOG_FRAGMENT);
+        datePickerDialog.show(fm, Constants.DATA_PICKER_DIALOG_FRAGMENT_TAG);
     }
 
     private void showCalculatorDialog(int key) {
@@ -630,14 +631,14 @@ public class MainActivityFragment extends Fragment
         CalculatorDialogFragment calculatorDialog = CalculatorDialogFragment.newInstance();
         calculatorDialog.setArguments(bundle);
         calculatorDialog.setTargetFragment(this, Constants.CALCULATOR_DIALOG_RESULT);
-        calculatorDialog.show(fm, Constants.CALCULATOR_DIALOG_FRAGMENT);
+        calculatorDialog.show(fm, Constants.CALCULATOR_DIALOG_FRAGMENT_TAG);
     }
 
     private void showSelectCurrencyDialog() {
         FragmentManager fm = getActivity().getSupportFragmentManager();
         SelectCurrencyDialogFragment selectCurrencyDialog = SelectCurrencyDialogFragment.newInstance();
         selectCurrencyDialog.setTargetFragment(this, Constants.SELECT_CURRENCY_DIALOG_RESULT);
-        selectCurrencyDialog.show(fm, Constants.SELECT_CURRENCY_DIALOG_FRAGMENT);
+        selectCurrencyDialog.show(fm, Constants.SELECT_CURRENCY_DIALOG_FRAGMENT_TAG);
     }
 
     /* ItemClickListener for currency list items */

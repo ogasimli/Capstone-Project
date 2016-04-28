@@ -1,7 +1,7 @@
 package org.ogasimli.manat.adapter;
 
 import org.ogasimli.manat.helper.Utilities;
-import org.ogasimli.manat.object.Currency;
+import org.ogasimli.manat.model.Currency;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -53,7 +53,10 @@ public class CurrencyListAdapter extends RecyclerView.Adapter<CurrencyListAdapte
         } else {
             holder.mCountryName.setText(currency.getName());
         }
-        double value = Double.parseDouble(currency.getValue());
+        double value =0;
+        if (!currency.getValue().equals("")) {
+            value = Double.parseDouble(currency.getValue());
+        }
         holder.mRate.setText(String.format(Locale.getDefault(), "%.4f", value));
         holder.mRateTrend.setImageResource(Utilities.getTrendImage(currency.getTrend()));
     }

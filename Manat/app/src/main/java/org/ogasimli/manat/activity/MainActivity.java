@@ -1,6 +1,7 @@
 package org.ogasimli.manat.activity;
 
 import org.ogasimli.manat.fragment.MainActivityFragment;
+import org.ogasimli.manat.helper.Constants;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             MainActivityFragment fragment = new MainActivityFragment();
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.main_container, fragment)
+                    .replace(R.id.main_container, fragment, Constants.MAIN_ACTIVITY_FRAGMENT_TAG)
                     .commit();
         }
     }

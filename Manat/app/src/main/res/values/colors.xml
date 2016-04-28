@@ -9,7 +9,7 @@
     <color name="colorDivider">#B6B6B6</color>
     <color name="colorWhiteSilver">#FAFAFA</color>
 
-    <!-- Icon colors -->
+    <!-- Trending colors -->
     <color name="colorTrendingUp">#388E3C</color>
     <color name="colorTrendingDown">#D32F2F</color>
     <color name="colorTrendingFlat">#FBC02D</color>

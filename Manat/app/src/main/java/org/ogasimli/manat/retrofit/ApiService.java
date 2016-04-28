@@ -1,7 +1,7 @@
 package org.ogasimli.manat.retrofit;
 
 import org.ogasimli.manat.helper.Constants;
-import org.ogasimli.manat.object.Currency;
+import org.ogasimli.manat.model.Currency;
 
 import java.util.ArrayList;
 

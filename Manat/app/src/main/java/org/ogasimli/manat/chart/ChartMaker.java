@@ -10,7 +10,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import org.ogasimli.manat.helper.Constants;
 import org.ogasimli.manat.helper.Utilities;
-import org.ogasimli.manat.object.Currency;
+import org.ogasimli.manat.model.Currency;
 
 import android.content.Context;
 import android.graphics.Color;

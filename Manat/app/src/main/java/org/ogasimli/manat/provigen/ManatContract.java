@@ -4,6 +4,8 @@ import com.tjeannin.provigen.ProviGenBaseContract;
 import com.tjeannin.provigen.annotation.Column;
 import com.tjeannin.provigen.annotation.ContentUri;
 
+import org.ogasimli.manat.helper.Constants;
+
 import android.net.Uri;
 
 /**
@@ -29,5 +31,5 @@ public interface ManatContract extends ProviGenBaseContract {
     String TREND = "trend";
 
     @ContentUri
-    Uri CONTENT_URI = Uri.parse(ManatContentProvider.AUTHORITY + "rates");
+    Uri CONTENT_URI = Uri.parse(Constants.DB_AUTHORITY + "rates");
 }

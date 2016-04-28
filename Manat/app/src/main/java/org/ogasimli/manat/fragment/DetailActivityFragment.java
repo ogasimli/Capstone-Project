@@ -6,7 +6,7 @@ import org.joda.time.DateTime;
 import org.ogasimli.manat.chart.ChartMaker;
 import org.ogasimli.manat.helper.Constants;
 import org.ogasimli.manat.helper.Utilities;
-import org.ogasimli.manat.object.Currency;
+import org.ogasimli.manat.model.Currency;
 import org.ogasimli.manat.retrofit.ApiService;
 import org.ogasimli.manat.retrofit.RetrofitAdapter;
 
@@ -491,7 +491,7 @@ public class DetailActivityFragment extends Fragment {
     }
 
     @OnClick(R.id.reload_text)
-    public void reloadTextViewClick(TextView texView) {
+    public void reloadTextViewClick(Button button) {
         loadData();
     }
 

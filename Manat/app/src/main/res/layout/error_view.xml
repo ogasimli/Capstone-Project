@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -25,7 +26,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="@color/colorTextSecondary"/>
 
-    <TextView
+    <Button
         android:id="@+id/reload_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,7 +36,8 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        style="?attr/borderlessButtonStyle"
         android:textColor="@color/colorPrimary"
-        android:background="@drawable/ripple_color_accent"/>
+        android:background="?selectableItemBackground"/>
 
 </LinearLayout>

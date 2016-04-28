@@ -1,4 +1,4 @@
-package org.ogasimli.manat.object;
+package org.ogasimli.manat.model;
 
 import com.google.gson.annotations.SerializedName;
 

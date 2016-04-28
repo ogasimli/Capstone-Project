@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:elevation="@dimen/converter_elevation"
-    android:background="@color/colorWhiteSilver"
     tools:targetApi="lollipop">
 
     <include layout="@layout/converter_surface_base"
