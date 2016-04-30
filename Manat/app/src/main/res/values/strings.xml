@@ -4,8 +4,8 @@
     <string name="title_activity_select_currency">Select Currency</string>
 
     <!-- Ungrouped -->
-    <string name="converter_amount_zero_text">0,00</string>
-    <string name="azn_text">AZN</string>
+    <string name="converter_amount_zero_text" translatable="false">0,00</string>
+    <string name="azn_text" translatable="false">AZN</string>
     <string name="error_view_click_to_reload_text">Reload</string>
 
     <!-- Progress dialog strings -->
@@ -171,4 +171,8 @@
         <item>Uzbekistan Sum</item>
         <item>South African Rand</item>
     </string-array>
+
+    <!-- Ad Unit ID -->
+    <!-- TODO: Replace with real Ad Unit ID -->
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

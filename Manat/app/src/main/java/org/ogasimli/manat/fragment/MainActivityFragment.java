@@ -1,5 +1,8 @@
 package org.ogasimli.manat.fragment;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import org.joda.time.DateTime;
 import org.ogasimli.manat.activity.DetailActivity;
 import org.ogasimli.manat.adapter.CurrencyListAdapter;
@@ -124,6 +127,10 @@ public class MainActivityFragment extends Fragment
     @Bind(R.id.toolbar_main)
     Toolbar mToolbar;
 
+    @Nullable
+    @Bind(R.id.adView)
+    AdView mAdView;
+
     public MainActivityFragment() {
     }
 
@@ -142,6 +149,9 @@ public class MainActivityFragment extends Fragment
 
         //Initialize Toolbar
         initToolbar();
+
+        //Load add banner
+        loadAd(mAdView);
 
         //Set date
         DateTime date = new DateTime();
@@ -537,6 +547,26 @@ public class MainActivityFragment extends Fragment
         }
     }
 
+    //TODO: replace with AdRequest adRequest = new AdRequest.Builder().build(); before publishing
+    /*
+    * Helper method to load ad banner
+    */
+    private void loadAd(AdView adView){
+        // Create an ad request. Check logcat output for the hashed device ID to
+        // get test ads on a physical device. e.g.
+        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("0F814767A73C088395A8C490C5E288D4")
+                .build();
+        if (adView != null) {
+            adView.loadAd(adRequest);
+        }
+    }
+
+    /*
+    * Helper method to restore instance state
+    */
     private void restoreInstanceState(Bundle savedInstanceState) {
         mAmountField = savedInstanceState.getInt(Constants.PRESSED_AMOUNT_FIELD_KEY);
         int state = savedInstanceState.getInt(Constants.VIEW_STATE_KEY,

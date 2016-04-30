@@ -3,8 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
     android:fitsSystemWindows="true"
     tools:context="org.ogasimli.manat.activity.MainActivity">
 
@@ -39,28 +40,28 @@
 
         </android.support.design.widget.AppBarLayout>
 
-            <LinearLayout
-                android:id="@+id/main_result_view"
+        <LinearLayout
+            android:id="@+id/main_result_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/converter_surface"
+                android:layout_gravity="center_horizontal"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_main"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="visible"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                app:layoutManager="LinearLayoutManager"
+                tools:listitem="@layout/currency_cards"/>
 
-                <include
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    layout="@layout/converter_surface"
-                    android:layout_gravity="center_horizontal"/>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerview_main"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layoutManager="LinearLayoutManager"
-                    tools:listitem="@layout/currency_cards"/>
-
-            </LinearLayout>
+        </LinearLayout>
 
     </android.support.design.widget.CoordinatorLayout>
 
@@ -80,5 +81,14 @@
             android:layout_gravity="center"/>
 
     </LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>
