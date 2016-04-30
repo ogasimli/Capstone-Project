@@ -2,8 +2,11 @@ package org.ogasimli.manat.fragment;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import org.joda.time.DateTime;
+import org.ogasimli.manat.ManatApplication;
 import org.ogasimli.manat.activity.DetailActivity;
 import org.ogasimli.manat.adapter.CurrencyListAdapter;
 import org.ogasimli.manat.asynctask.CurrencyLoader;
@@ -89,9 +92,10 @@ public class MainActivityFragment extends Fragment
 
     private int mAmountField = 0;
 
+    private Tracker mTracker;
+
     float viewHeight;
     boolean noSwap = true;
-
     private static int ANIMATION_DURATION = 300;
 
     @Bind(R.id.main_result_view)
@@ -139,6 +143,10 @@ public class MainActivityFragment extends Fragment
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         setRetainInstance(true);
+
+        // Obtain the shared Tracker instance.
+        ManatApplication application = (ManatApplication) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
     }
 
     @Override
@@ -216,6 +224,9 @@ public class MainActivityFragment extends Fragment
     @Override
     public void onResume() {
         super.onResume();
+        Log.i(LOG_TAG, "Setting screen name: " + Constants.MAIN_ACTIVITY_SCREEN_NAME);
+        mTracker.setScreenName("Screen:" + Constants.MAIN_ACTIVITY_SCREEN_NAME);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override
@@ -294,12 +305,28 @@ public class MainActivityFragment extends Fragment
         switch (id) {
             case R.id.menu_refresh:
                 refreshData();
+                break;
+            case R.id.menu_invite:
+                trackInvite();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    /*Initialize Toolbar*/
+    /**
+     * Track invite clicks
+     */
+    private void trackInvite() {
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory(Constants.ACTION_TYPE)
+                .setAction(Constants.INVITE_ACTION)
+                .build());
+    }
+
+    /**
+     * Initialize Toolbar
+     */
     @SuppressWarnings("ConstantConditions")
     private void initToolbar() {
         if (mToolbar != null) {

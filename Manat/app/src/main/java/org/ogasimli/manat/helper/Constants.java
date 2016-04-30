@@ -81,4 +81,11 @@ public class Constants {
 
     //First available date
     public static final String MIN_DATE = "25 11 1993";
+
+    //Google Analytics constants
+    public static final String MAIN_ACTIVITY_SCREEN_NAME = "Main Activity";
+    public static final String DETAIL_ACTIVITY_SCREEN_NAME = "Detail Activity";
+    public static final String ACTION_TYPE = "Action";
+    public static final String INVITE_ACTION = "Invite";
+    public static final String SHARE_ACTION = "Share";
 }

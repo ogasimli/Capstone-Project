@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "manat.ogasimli.org.manat"
+        applicationId "org.ogasimli.manat"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
@@ -42,6 +42,9 @@ dependencies {
     //Google AdMob
     compile 'com.google.android.gms:play-services-ads:8.4.0'
 
+    //Google Analytics
+    compile 'com.google.android.gms:play-services-analytics:8.4.0'
+
     //ButterKnife
     compile 'com.jakewharton:butterknife:7.0.1'
 
@@ -60,3 +63,5 @@ dependencies {
     //EvalEx
     compile 'com.udojava:EvalEx:1.2'
 }
+
+apply plugin: 'com.google.gms.google-services'

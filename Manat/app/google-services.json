@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "461186020502",
+    "project_id": "manat-1986"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:461186020502:android:41ab52cc0f822e54",
+        "android_client_info": {
+          "package_name": "org.ogasimli.manat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZjITQZa1ENFMjiunLvQGct_oVGJWXMR4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-70074109-2"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

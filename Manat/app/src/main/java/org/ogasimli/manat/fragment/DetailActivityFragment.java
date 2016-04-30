@@ -1,8 +1,12 @@
 package org.ogasimli.manat.fragment;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import com.github.mikephil.charting.charts.LineChart;
 
 import org.joda.time.DateTime;
+import org.ogasimli.manat.ManatApplication;
 import org.ogasimli.manat.chart.ChartMaker;
 import org.ogasimli.manat.helper.Constants;
 import org.ogasimli.manat.helper.Utilities;
@@ -58,6 +62,8 @@ import retrofit.client.Response;
  */
 public class DetailActivityFragment extends Fragment {
 
+    private static final String LOG_TAG = DetailActivityFragment.class.getSimpleName();
+
     private String mCurrencyCode;
 
     private String mCurrencyName;
@@ -73,6 +79,8 @@ public class DetailActivityFragment extends Fragment {
     private String mTillDateString;
 
     private int mPressedBtnNum = 0;
+
+    private Tracker mTracker;
 
     @Bind(R.id.linechart)
     LineChart mChart;
@@ -171,6 +179,10 @@ public class DetailActivityFragment extends Fragment {
             throw new NullPointerException("Currency code should be put into fragment arguments.");
         }
         mCurrencyName = Utilities.getCurrencyName(getActivity(), mCurrencyCode);
+
+        // Obtain the shared Tracker instance.
+        ManatApplication application = (ManatApplication) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
     }
 
     @Override
@@ -224,6 +236,14 @@ public class DetailActivityFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        Log.i(LOG_TAG, "Setting screen name: " + Constants.DETAIL_ACTIVITY_SCREEN_NAME);
+        mTracker.setScreenName("Screen:" + Constants.DETAIL_ACTIVITY_SCREEN_NAME);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
@@ -252,13 +272,26 @@ public class DetailActivityFragment extends Fragment {
 
         switch (id) {
             case R.id.menu_share:
+                trackShare();
                 shareRate();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    /*Initialize Toolbar*/
+    /**
+     * Track invite clicks
+     */
+    private void trackShare() {
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory(Constants.ACTION_TYPE)
+                .setAction(Constants.SHARE_ACTION)
+                .build());
+    }
+
+    /**
+     * Initialize Toolbar
+     */
     @SuppressWarnings("ConstantConditions")
     private void initToolbar() {
         if (mToolbar != null) {
@@ -515,6 +548,7 @@ public class DetailActivityFragment extends Fragment {
     @Nullable
     @OnClick(R.id.fab_share_details)
     public void shareStatistics(FloatingActionButton fab) {
+        trackShare();
         shareRate();
     }
 
