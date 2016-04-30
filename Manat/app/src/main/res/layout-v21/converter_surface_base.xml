@@ -20,7 +20,7 @@
         android:padding="@dimen/date_text_padding"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:background="@drawable/background_color_primary_stroke"
+        android:background="@drawable/ripple_color_primary_stroke"
         android:textColor="@color/colorAccent"
         tools:text="4 February 2016"/>
 
@@ -45,7 +45,7 @@
             android:freezesText="true"
             tools:text="USD"
             android:textSize="@dimen/currency_text_size"
-            android:background="@drawable/background_oval_primary_with_stroke"
+            android:background="@drawable/ripple_oval_primary_with_stroke"
             android:textColor="@color/colorAccent"/>
 
         <org.ogasimli.manat.customview.MyTextViewLight
@@ -67,9 +67,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/activity_horizontal_padding"
+        android:paddingEnd="@dimen/activity_horizontal_padding"
         android:paddingStart="@dimen/activity_horizontal_padding"
         android:paddingRight="@dimen/activity_horizontal_padding"
-        android:paddingEnd="@dimen/activity_horizontal_padding"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_below="@id/main_foreign_linear_layout">
 
@@ -79,7 +79,6 @@
             android:background="@color/colorAccent"
             android:layout_gravity="center"/>
 
-        <!-- Fix padding for pre-lollipop devices -->
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/main_swap_fab"
             android:layout_width="wrap_content"

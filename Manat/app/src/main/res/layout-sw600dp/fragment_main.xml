@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--  TODO: fix issue with  hiding of converter on rotation -->
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -25,7 +24,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 android:background="?attr/colorPrimary"
-                app:layout_scrollFlags="scroll|enterAlways"
                 app:popupTheme="@style/AppTheme.AppBarOverlay">
 
                 <ImageView
@@ -45,17 +43,14 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <android.support.v4.widget.NestedScrollView
-                android:layout_width="@dimen/main_fragment_width"
-                android:layout_height="match_parent"
-                android:layout_centerHorizontal="true">
-
                 <LinearLayout
                     android:id="@+id/main_result_view"
-                    android:layout_width="match_parent"
+                    android:layout_width="@dimen/main_fragment_width"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="visible"
+                    android:layout_centerHorizontal="true"
+                    tools:ignore="UselessParent">
 
                     <include
                         android:layout_width="match_parent"
@@ -72,8 +67,6 @@
                         tools:targetApi="lollipop"/>
 
                 </LinearLayout>
-
-            </android.support.v4.widget.NestedScrollView>
 
         </RelativeLayout>
 

@@ -6,22 +6,23 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 /**
- * Created by ogasimli on 10.01.2016.
+ * Custom TextView with Roboto_light font
+ *
+ * Created by Orkhan Gasimli on 10.01.2016.
  */
-public class MyTextView extends TextView {
+public class MyTextViewLight extends TextView {
 
-
-    public MyTextView(Context context) {
+    public MyTextViewLight(Context context) {
         super(context);
         setFont(context);
     }
 
-    public MyTextView(Context context, AttributeSet attrs) {
+    public MyTextViewLight(Context context, AttributeSet attrs) {
         super(context, attrs);
         setFont(context);
     }
 
-    public MyTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MyTextViewLight(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setFont(context);
     }

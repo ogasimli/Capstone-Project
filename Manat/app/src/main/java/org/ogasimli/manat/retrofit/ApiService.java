@@ -9,7 +9,7 @@ import retrofit.http.GET;
 import retrofit.http.Query;
 
 /**
- * API service
+ * Retrofit API service interface
  *
  * Created by Orkhan Gasimli on 11.04.2016.
  */

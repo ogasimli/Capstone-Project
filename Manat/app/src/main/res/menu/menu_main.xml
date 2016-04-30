@@ -5,11 +5,6 @@
     tools:context="org.ogasimli.manat.activity.MainActivity">
 
     <item
-        android:id="@+id/menu_settings"
-        android:title="@string/menu_settings_text"
-        android:orderInCategory="200"
-        app:showAsAction="never"/>
-    <item
         android:id="@+id/menu_refresh"
         android:title="@string/menu_refresh_text"
         android:icon="@drawable/ic_reload"

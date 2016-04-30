@@ -1,25 +1,44 @@
 <resources>
+    <!-- Activity labels -->
     <string name="app_name">Manat</string>
-    <string name="menu_settings_text">Settings</string>
     <string name="title_activity_select_currency">Select Currency</string>
-    <string name="line_chart_no_data_text">No data available to illustrate.</string>
-    <string name="currency_not_found_message">Manat was unable to get rates. Please check your
-        internet connection and try again.
-    </string>
+
+    <!-- Ungrouped -->
+    <string name="converter_amount_zero_text">0,00</string>
+    <string name="azn_text">AZN</string>
+    <string name="error_view_click_to_reload_text">Reload</string>
+
+    <!-- Progress dialog strings -->
     <string name="progress_dialog_title">Please wait</string>
     <string name="progress_dialog_content">Loading</string>
-    <string name="error_no_connection">Please check your internet connection.</string>
+
+    <!-- Image descriptions -->
     <string name="no_result_image_description">No result image</string>
-    <string name="no_result_message">Oops! Unable to load data. Please try again.</string>
-    <string name="error_view_click_to_reload_text">Reload</string>
+    <string name="country_flag_image_description">Country flag</string>
+    <string name="trending_image_description">Trending status image</string>
+
+    <!-- Menu items -->
     <string name="menu_refresh_text">Refresh</string>
-    <string name="currency_name_transition_name">currency_name</string>
+    <string name="menu_share_text">Share</string>
+
+    <!-- Statistical info labels -->
     <string name="detail_statistics_label">"%s" Statistics</string>
     <string name="statistics_label_weekly">Weekly</string>
     <string name="statistics_label_quarterly">Quarterly</string>
     <string name="statistics_label_monthly">Monthly</string>
     <string name="statistics_label_semi_annually">Semiannually</string>
     <string name="statistics_label_yearly">Yearly</string>
+    <string name="week_button_text">Week</string>
+    <string name="month_button_text">Month</string>
+    <string name="quarter_button_text">3 M</string>
+    <string name="semi_annual_button_text">6 M</string>
+    <string name="year_button_text">Year</string>
+    <string name="current_rate_text">Current rate</string>
+    <string name="average_rate_text">Average rate</string>
+    <string name="maximum_rate_text">Maximum rate</string>
+    <string name="minimum_rate_text">Minimum rate</string>
+
+    <!-- Share rate strings -->
     <string name="share_rate_statistics_title">Share rate statistics via</string>
     <string name="share_statistics_text" formatted="false">Check out rate statistics of \""%s"\"
         for period from "%s" till "%s":\n
@@ -29,6 +48,7 @@
         Minimum rate - "%s"
     </string>
 
+    <!-- Calculator strings -->
     <string name="calc_backspace_text" translatable="false"><![CDATA[<-]]></string>
     <string name="calc_clear_text" translatable="false">C</string>
     <string name="calc_divide_text" translatable="false">/</string>
@@ -47,12 +67,16 @@
     <string name="calc_8_text">8</string>
     <string name="calc_9_text">9</string>
     <string name="calc_0_text">0</string>
-    <string name="converter_amount_zero_text">0,00</string>
+
+    <!-- Error messages -->
     <string name="express_exception_message">Invalid input! Enter correct values!</string>
     <string name="arithmetical_exception_message">Invalid input! There is an arithmetic problem!
     </string>
-    <string name="menu_share_text">Share</string>
+    <string name="error_no_connection">Please check your internet connection.</string>
+    <string name="no_result_message">Oops! Unable to load data. Please try again.</string>
+    <string name="line_chart_no_data_text">No data available to illustrate.</string>
 
+    <!-- Currency abbreviations -->
     <string-array name="currency_codes" translatable="false">
         <item>USD</item>
         <item>EUR</item>
@@ -100,6 +124,7 @@
         <item>ZAR</item>
     </string-array>
 
+    <!-- Currency names -->
     <string-array name="currency_names">
         <item>US Dollar</item>
         <item>Euro</item>

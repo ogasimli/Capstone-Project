@@ -9,7 +9,7 @@ import org.ogasimli.manat.helper.Constants;
 import android.net.Uri;
 
 /**
- * Rates table contract
+ * Rates table contract interface
  *
  * Created by Orkhan Gasimli on 22.04.2016.
  */

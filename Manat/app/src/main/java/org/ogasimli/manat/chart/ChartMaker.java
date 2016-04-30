@@ -103,7 +103,7 @@ public class ChartMaker {
 
         mChart.getLegend().setEnabled(false);
 
-        mChart.animateXY(2000, 2000);
+        mChart.animateXY(1000, 1000);
     }
 
     private void setData(ArrayList<Currency> currencyList) {

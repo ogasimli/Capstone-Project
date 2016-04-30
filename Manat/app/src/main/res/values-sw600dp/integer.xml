@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="detail_fragment_chart_and_button_weight" type="integer" format="float">5</item>
+    <item name="detail_fragment_statistics_weight" type="integer" format="float">2</item>
+    <item name="detail_fragment_chart_weight" type="integer" format="float">6</item>
+    <item name="detail_fragment_button_grid_weight" type="integer" format="float">1</item>
+</resources>

@@ -17,7 +17,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import manat.ogasimli.org.manat.R;
 
-
+/**
+ * RecyclerViewAdapter for select currency list
+ *
+ * Created by Orkhan Gasimli on 06.01.2016.
+ */
 public class SelectCurrencyAdapter extends RecyclerView.Adapter<SelectCurrencyAdapter.ViewHolder> {
 
     final private Context mContext;

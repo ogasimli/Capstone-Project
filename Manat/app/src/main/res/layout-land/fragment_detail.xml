@@ -43,8 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginTop="?actionBarSize"
-                android:weightSum="7">
+                android:layout_marginTop="?actionBarSize">
 
                 <include layout="@layout/detail_chart_grid"
                     android:layout_width="match_parent"

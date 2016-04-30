@@ -1,5 +1,6 @@
 package org.ogasimli.manat.adapter;
 
+import org.ogasimli.manat.customview.MyTextViewLight;
 import org.ogasimli.manat.helper.Utilities;
 import org.ogasimli.manat.model.Currency;
 
@@ -19,7 +20,9 @@ import butterknife.ButterKnife;
 import manat.ogasimli.org.manat.R;
 
 /**
- * Created by ogasimli on 06.01.2016.
+ * RecyclerViewAdapter for main currency list
+ *
+ * Created by Orkhan Gasimli on 06.01.2016.
  */
 public class CurrencyListAdapter extends RecyclerView.Adapter<CurrencyListAdapter.ViewHolder> {
 
@@ -95,7 +98,7 @@ public class CurrencyListAdapter extends RecyclerView.Adapter<CurrencyListAdapte
         TextView mCurrency;
 
         @Bind(R.id.list_item_rate_textview)
-        TextView mRate;
+        MyTextViewLight mRate;
 
         @Bind(R.id.list_item_trend_imageview)
         ImageView mRateTrend;

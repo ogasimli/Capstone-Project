@@ -8,9 +8,9 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="150dp"
-        android:layout_margin="10dp"
+        android:layout_width="@dimen/error_image_width"
+        android:layout_height="@dimen/error_image_height"
+        android:layout_margin="@dimen/activity_vertical_margin"
         android:alpha="0.2"
         android:contentDescription="@string/no_result_image_description"
         android:scaleType="fitCenter"
@@ -19,7 +19,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:padding="@dimen/activity_horizontal_padding"
         android:text="@string/no_result_message"
         android:layout_gravity="center"
         android:gravity="center"
@@ -31,8 +31,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/error_view_click_to_reload_text"
-        android:padding="10dp"
-        android:layout_margin="10dp"
+        android:padding="@dimen/activity_horizontal_padding"
+        android:layout_margin="@dimen/activity_vertical_padding"
         android:gravity="center"
         android:layout_gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"

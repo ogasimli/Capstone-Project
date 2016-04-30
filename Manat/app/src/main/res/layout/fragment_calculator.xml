@@ -21,7 +21,7 @@
             app:rowCount="7">
 
             <!-- TODO: fix maxLines -->
-            <org.ogasimli.manat.customview.MyTextView
+            <org.ogasimli.manat.customview.MyTextViewLight
                 android:id="@+id/calc_edit_textview"
                 android:layout_width="0dp"
                 android:gravity="center_vertical|end"
@@ -33,38 +33,38 @@
                 app:layout_row="0"
                 app:layout_column="0"
                 app:layout_gravity="fill"
-                android:padding="20dp"
+                android:padding="@dimen/calculator_edittext_padding"
                 android:background="@drawable/calculator_edittext_right_border"
                 tools:text="7"/>
 
-            <org.ogasimli.manat.customview.MyTextView
+            <org.ogasimli.manat.customview.MyButtonLight
                 android:id="@+id/calc_backspace_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="26sp"
+                android:textSize="@dimen/calculator_button_text_size"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 app:layout_row="0"
                 app:layout_column="3"
                 app:layout_gravity="fill"
-                android:padding="10dp"
-                android:background="@drawable/ripple_color_primary"
+                android:padding="@dimen/calculator_button_padding"
+                style="?attr/borderlessButtonStyle"
                 android:text="@string/calc_backspace_text"/>
 
-            <org.ogasimli.manat.customview.MyTextView
+            <org.ogasimli.manat.customview.MyButtonLight
                 android:id="@+id/calc_clear_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="26sp"
+                android:textSize="@dimen/calculator_button_text_size"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 app:layout_row="1"
                 app:layout_column="3"
                 app:layout_gravity="fill"
-                android:padding="10dp"
-                android:background="@drawable/ripple_color_primary"
+                android:padding="@dimen/calculator_button_padding"
+                style="?attr/borderlessButtonStyle"
                 android:text="@string/calc_clear_text"/>
 
             <View
@@ -72,212 +72,212 @@
                 app:layout_columnSpan="4"
                 android:background="@color/colorAccent"/>
 
-            <org.ogasimli.manat.customview.MyTextView
+            <org.ogasimli.manat.customview.MyButtonLight
                 android:id="@+id/calc_seven_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="26sp"
+                android:textSize="@dimen/calculator_button_text_size"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 app:layout_gravity="fill"
-                android:padding="10dp"
-                android:background="@drawable/ripple_color_primary"
+                android:padding="@dimen/calculator_button_padding"
+                style="?attr/borderlessButtonStyle"
                 android:text="@string/calc_7_text"/>
 
-            <org.ogasimli.manat.customview.MyTextView
+            <org.ogasimli.manat.customview.MyButtonLight
                 android:id="@+id/calc_eight_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="26sp"
+                android:textSize="@dimen/calculator_button_text_size"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 app:layout_gravity="fill"
-                android:padding="10dp"
-                android:background="@drawable/ripple_color_primary"
+                android:padding="@dimen/calculator_button_padding"
+                style="?attr/borderlessButtonStyle"
                 android:text="@string/calc_8_text"/>
 
-            <org.ogasimli.manat.customview.MyTextView
+            <org.ogasimli.manat.customview.MyButtonLight
                 android:id="@+id/calc_nine_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="26sp"
+                android:textSize="@dimen/calculator_button_text_size"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 app:layout_gravity="fill"
-                android:padding="10dp"
-                android:background="@drawable/ripple_color_primary"
+                android:padding="@dimen/calculator_button_padding"
+                style="?attr/borderlessButtonStyle"
                 android:text="@string/calc_9_text"/>
 
-            <org.ogasimli.manat.customview.MyTextView
+            <org.ogasimli.manat.customview.MyButtonLight
                 android:id="@+id/calc_divide_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="26sp"
+                android:textSize="@dimen/calculator_button_text_size"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 app:layout_gravity="fill"
-                android:padding="10dp"
-                android:background="@drawable/ripple_color_primary"
+                android:padding="@dimen/calculator_button_padding"
+                style="?attr/borderlessButtonStyle"
                 android:text="@string/calc_divide_text"/>
 
-            <org.ogasimli.manat.customview.MyTextView
+            <org.ogasimli.manat.customview.MyButtonLight
                 android:id="@+id/calc_four_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="26sp"
+                android:textSize="@dimen/calculator_button_text_size"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 app:layout_gravity="fill"
-                android:padding="10dp"
-                android:background="@drawable/ripple_color_primary"
+                android:padding="@dimen/calculator_button_padding"
+                style="?attr/borderlessButtonStyle"
                 android:text="@string/calc_4_text"/>
 
-            <org.ogasimli.manat.customview.MyTextView
+            <org.ogasimli.manat.customview.MyButtonLight
                 android:id="@+id/calc_five_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="26sp"
+                android:textSize="@dimen/calculator_button_text_size"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 app:layout_gravity="fill"
-                android:padding="10dp"
-                android:background="@drawable/ripple_color_primary"
+                android:padding="@dimen/calculator_button_padding"
+                style="?attr/borderlessButtonStyle"
                 android:text="@string/calc_5_text"/>
 
-            <org.ogasimli.manat.customview.MyTextView
+            <org.ogasimli.manat.customview.MyButtonLight
                 android:id="@+id/calc_six_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="26sp"
+                android:textSize="@dimen/calculator_button_text_size"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 app:layout_gravity="fill"
-                android:padding="10dp"
-                android:background="@drawable/ripple_color_primary"
+                android:padding="@dimen/calculator_button_padding"
+                style="?attr/borderlessButtonStyle"
                 android:text="@string/calc_6_text"/>
 
-            <org.ogasimli.manat.customview.MyTextView
+            <org.ogasimli.manat.customview.MyButtonLight
                 android:id="@+id/calc_multiply_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="26sp"
+                android:textSize="@dimen/calculator_button_text_size"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 app:layout_gravity="fill"
-                android:padding="10dp"
-                android:background="@drawable/ripple_color_primary"
+                android:padding="@dimen/calculator_button_padding"
+                style="?attr/borderlessButtonStyle"
                 android:text="@string/calc_multiply_text"/>
 
-            <org.ogasimli.manat.customview.MyTextView
+            <org.ogasimli.manat.customview.MyButtonLight
                 android:id="@+id/calc_one_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="26sp"
+                android:textSize="@dimen/calculator_button_text_size"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 app:layout_gravity="fill"
-                android:padding="10dp"
-                android:background="@drawable/ripple_color_primary"
+                android:padding="@dimen/calculator_button_padding"
+                style="?attr/borderlessButtonStyle"
                 android:text="@string/calc_1_text"/>
 
-            <org.ogasimli.manat.customview.MyTextView
+            <org.ogasimli.manat.customview.MyButtonLight
                 android:id="@+id/calc_two_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="26sp"
+                android:textSize="@dimen/calculator_button_text_size"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 app:layout_gravity="fill"
-                android:padding="10dp"
-                android:background="@drawable/ripple_color_primary"
+                android:padding="@dimen/calculator_button_padding"
+                style="?attr/borderlessButtonStyle"
                 android:text="@string/calc_2_text"/>
 
-            <org.ogasimli.manat.customview.MyTextView
+            <org.ogasimli.manat.customview.MyButtonLight
                 android:id="@+id/calc_three_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="26sp"
+                android:textSize="@dimen/calculator_button_text_size"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 app:layout_gravity="fill"
-                android:padding="10dp"
-                android:background="@drawable/ripple_color_primary"
+                android:padding="@dimen/calculator_button_padding"
+                style="?attr/borderlessButtonStyle"
                 android:text="@string/calc_3_text"/>
 
-            <org.ogasimli.manat.customview.MyTextView
+            <org.ogasimli.manat.customview.MyButtonLight
                 android:id="@+id/calc_minus_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="26sp"
+                android:textSize="@dimen/calculator_button_text_size"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 app:layout_gravity="fill"
-                android:padding="10dp"
-                android:background="@drawable/ripple_color_primary"
+                android:padding="@dimen/calculator_button_padding"
+                style="?attr/borderlessButtonStyle"
                 android:text="@string/calc_minus_text"/>
 
-            <org.ogasimli.manat.customview.MyTextView
+            <org.ogasimli.manat.customview.MyButtonLight
                 android:id="@+id/calc_delimiter_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="26sp"
+                android:textSize="@dimen/calculator_button_text_size"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 app:layout_gravity="fill"
-                android:padding="10dp"
-                android:background="@drawable/ripple_color_primary"
+                android:padding="@dimen/calculator_button_padding"
+                style="?attr/borderlessButtonStyle"
                 android:text="@string/calc_delimiter_text"/>
 
-            <org.ogasimli.manat.customview.MyTextView
+            <org.ogasimli.manat.customview.MyButtonLight
                 android:id="@+id/calc_zero_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="26sp"
+                android:textSize="@dimen/calculator_button_text_size"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 app:layout_gravity="fill"
-                android:padding="10dp"
-                android:background="@drawable/ripple_color_primary"
+                android:padding="@dimen/calculator_button_padding"
+                style="?attr/borderlessButtonStyle"
                 android:text="@string/calc_0_text"/>
 
-            <org.ogasimli.manat.customview.MyTextView
+            <org.ogasimli.manat.customview.MyButtonLight
                 android:id="@+id/calc_equals_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="26sp"
+                android:textSize="@dimen/calculator_button_text_size"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 app:layout_gravity="fill"
-                android:padding="10dp"
-                android:background="@drawable/ripple_color_primary"
+                android:padding="@dimen/calculator_button_padding"
+                style="?attr/borderlessButtonStyle"
                 android:text="@string/calc_equals_text"/>
 
-            <org.ogasimli.manat.customview.MyTextView
+            <org.ogasimli.manat.customview.MyButtonLight
                 android:id="@+id/calc_plus_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="26sp"
+                android:textSize="@dimen/calculator_button_text_size"
                 app:layout_columnWeight="1"
                 app:layout_rowWeight="1"
                 app:layout_gravity="fill"
-                android:padding="10dp"
-                android:background="@drawable/ripple_color_primary"
+                android:padding="@dimen/calculator_button_padding"
+                style="?attr/borderlessButtonStyle"
                 android:text="@string/calc_plus_text"/>
 
         </android.support.v7.widget.GridLayout>
@@ -287,7 +287,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="15dp"
+            android:padding="@dimen/activity_horizontal_padding"
             android:text="@android:string/ok"
             style="?attr/borderlessButtonStyle"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
@@ -301,7 +301,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="15dp"
+            android:padding="@dimen/activity_horizontal_padding"
             android:text="@android:string/cancel"
             style="?attr/borderlessButtonStyle"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"

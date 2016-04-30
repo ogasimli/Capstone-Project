@@ -15,10 +15,12 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -52,7 +54,7 @@ import retrofit.client.Response;
 /**
  * DetailActivityFragment class
  *
- * Created by ogasimli on 10.01.2016.
+ * Created by Orkhan Gasimli on 10.01.2016.
  */
 public class DetailActivityFragment extends Fragment {
 
@@ -121,8 +123,10 @@ public class DetailActivityFragment extends Fragment {
     @BindDrawable(R.drawable.background_color_accent)
     Drawable mSelectedBackground;
 
-    @BindDrawable(R.drawable.ripple_color_primary_stroke)
+    @BindDrawable(R.drawable.background_color_primary_stroke)
     Drawable mUnselectedBackground;
+
+    Drawable mUnselectedRippleBackground;
 
     @BindColor(R.color.colorPrimary)
     ColorStateList mColorPrimary;
@@ -175,6 +179,12 @@ public class DetailActivityFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
         ButterKnife.bind(this, rootView);
+
+        //Getting ripple drawable manually
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mUnselectedRippleBackground = ContextCompat.getDrawable(getContext(),
+                    R.drawable.ripple_color_primary_stroke);
+        }
 
         //initToolbar();
         initToolbar();
@@ -334,10 +344,12 @@ public class DetailActivityFragment extends Fragment {
         mResultView.setVisibility(View.VISIBLE);
 
         if (mFab != null) {
-            mFab.setVisibility(View.VISIBLE);
-            //set animation for share fab
-            Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.grow_fab);
-            mFab.startAnimation(animation);
+            if (mFab.getVisibility() == View.GONE) {
+                mFab.setVisibility(View.VISIBLE);
+                //set animation for share fab
+                Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.grow_fab);
+                mFab.startAnimation(animation);
+            }
         }
 
         mErrorView.setVisibility(View.GONE);
@@ -397,7 +409,7 @@ public class DetailActivityFragment extends Fragment {
         switch (state) {
             case Constants.WEEKLY_BTN_SELECTED:
                 for (Button button : buttonList) {
-                    if (button.getText().equals("Week")) {
+                    if (button.getId() == R.id.weekly_btn) {
                         //Make weekly_btn selected
                         setButtonStyle(button, true);
                     } else {
@@ -409,7 +421,7 @@ public class DetailActivityFragment extends Fragment {
                 break;
             case Constants.MONTHLY_BTN_SELECTED:
                 for (Button button : buttonList) {
-                    if (button.getText().equals("Month")) {
+                    if (button.getId() == R.id.monthly_btn) {
                         //Make monthly_btn selected
                         setButtonStyle(button, true);
                     } else {
@@ -421,7 +433,7 @@ public class DetailActivityFragment extends Fragment {
                 break;
             case Constants.QUARTERLY_BTN_SELECTED:
                 for (Button button : buttonList) {
-                    if (button.getText().equals("3 M")) {
+                    if (button.getId() == R.id.quarterly_btn) {
                         //Make quarterly_btn selected
                         setButtonStyle(button, true);
                     } else {
@@ -433,7 +445,7 @@ public class DetailActivityFragment extends Fragment {
                 break;
             case Constants.SEMI_ANNUALLY_BTN_SELECTED:
                 for (Button button : buttonList) {
-                    if (button.getText().equals("6 M")) {
+                    if (button.getId() == R.id.semi_annually_btn) {
                         //Make semi_annually_btn selected
                         setButtonStyle(button, true);
                     } else {
@@ -445,7 +457,7 @@ public class DetailActivityFragment extends Fragment {
                 break;
             case Constants.YEARLY_BTN_SELECTED:
                 for (Button button : buttonList) {
-                    if (button.getText().equals("Year")) {
+                    if (button.getId() == R.id.yearly_btn) {
                         //Make yearly_btn selected
                         setButtonStyle(button, true);
                     } else {
@@ -484,7 +496,11 @@ public class DetailActivityFragment extends Fragment {
             button.setClickable(false);
         } else {
             //Make button unselected
-            setDrawable(button, mUnselectedBackground);
+            if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                setDrawable(button, mUnselectedBackground);
+            } else {
+                setDrawable(button, mUnselectedRippleBackground);
+            }
             button.setTextColor(mColorAccent);
             button.setClickable(true);
         }
@@ -495,6 +511,7 @@ public class DetailActivityFragment extends Fragment {
         loadData();
     }
 
+    @SuppressWarnings("NullableProblems")
     @Nullable
     @OnClick(R.id.fab_share_details)
     public void shareStatistics(FloatingActionButton fab) {
@@ -520,6 +537,7 @@ public class DetailActivityFragment extends Fragment {
         startActivity(Intent.createChooser(intent, getString(R.string.share_rate_statistics_title)));
     }
 
+    //TODO: Move heavy loading data processing into background thread
     @OnClick({R.id.weekly_btn, R.id.monthly_btn, R.id.quarterly_btn,
             R.id.semi_annually_btn, R.id.yearly_btn})
     public void showStatistics(Button button) {
@@ -528,20 +546,20 @@ public class DetailActivityFragment extends Fragment {
             showProgressDialog(true);
         }
 
-        switch (button.getText().toString()) {
-            case "Week":
+        switch (button.getId()) {
+            case R.id.weekly_btn:
                 mPressedBtnNum = Constants.WEEKLY_BTN_SELECTED;
                 break;
-            case "Month":
+            case R.id.monthly_btn:
                 mPressedBtnNum = Constants.MONTHLY_BTN_SELECTED;
                 break;
-            case "3 M":
+            case R.id.quarterly_btn:
                 mPressedBtnNum = Constants.QUARTERLY_BTN_SELECTED;
                 break;
-            case "6 M":
+            case R.id.semi_annually_btn:
                 mPressedBtnNum = Constants.SEMI_ANNUALLY_BTN_SELECTED;
                 break;
-            case "Year":
+            case R.id.yearly_btn:
                 mPressedBtnNum = Constants.YEARLY_BTN_SELECTED;
                 break;
             default:

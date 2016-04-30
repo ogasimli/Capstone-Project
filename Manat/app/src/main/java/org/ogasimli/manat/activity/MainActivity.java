@@ -8,19 +8,17 @@ import android.support.v7.app.AppCompatActivity;
 
 import manat.ogasimli.org.manat.R;
 
+/**
+ * MainActivity class
+ *
+ * Created by Orkhan Gasimli on 10.01.2016.
+ */
 public class MainActivity extends AppCompatActivity {
-
-/*    @Bind(R.id.toolbar_main)
-    Toolbar mToolbar;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-/*        ButterKnife.bind(this);
-        setSupportActionBar(mToolbar);
-        //noinspection ConstantConditions
-        getSupportActionBar().setDisplayShowTitleEnabled(false);*/
 
         if (savedInstanceState == null) {
             MainActivityFragment fragment = new MainActivityFragment();
@@ -30,10 +28,4 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
     }
-/*
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ButterKnife.unbind(this);
-    }*/
 }

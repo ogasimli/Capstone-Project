@@ -6,9 +6,12 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:paddingLeft="@dimen/abc_list_item_padding_horizontal_material"
-    android:paddingRight="@dimen/abc_list_item_padding_horizontal_material"
-    android:orientation="vertical">
+    android:paddingLeft="@dimen/activity_horizontal_padding"
+    android:paddingStart="@dimen/activity_horizontal_padding"
+    android:paddingRight="@dimen/activity_horizontal_padding"
+    android:paddingEnd="@dimen/activity_horizontal_padding"
+    android:orientation="vertical"
+    tools:ignore="PrivateResource">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,11 +22,12 @@
         <ImageView
             android:id="@+id/list_item_country_flag"
             android:layout_gravity="center"
-            android:layout_width="40dp"
-            android:layout_height="20dp"
-            android:layout_marginRight="@dimen/abc_list_item_padding_horizontal_material"
-            android:layout_marginEnd="@dimen/abc_list_item_padding_horizontal_material"
+            android:layout_width="@dimen/flag_width"
+            android:layout_height="@dimen/flag_height"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:scaleType="fitXY"
+            android:contentDescription="@string/country_flag_image_description"
             tools:src="@drawable/usd"/>
 
         <LinearLayout
@@ -53,8 +57,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="@dimen/currency_list_border_line_height"
+        android:layout_marginTop="@dimen/currency_list_border_line_margin"
         android:background="@color/colorDivider"
         android:layout_gravity="center"/>
 

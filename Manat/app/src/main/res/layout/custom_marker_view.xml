@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/background_color_accent"
-    android:padding="5dp"
+    android:padding="@dimen/char_marker_padding"
     android:orientation="vertical">
 
     <TextView
@@ -13,13 +13,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="2dp"
+        android:layout_marginBottom="@dimen/char_marker_text_bottom_margin"
         tools:text="1.528"
-        android:textSize="10sp"
+        android:textSize="@dimen/chart_marker_text_size"
         android:textColor="@color/colorPrimary"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textAppearance="?android:attr/textAppearanceSmall"/>
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:ignore="SmallSp"/>
 
     <TextView
         android:id="@+id/marker_x_text_view"
@@ -27,10 +28,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         tools:text="1.528"
-        android:textSize="10sp"
+        android:textSize="@dimen/chart_marker_text_size"
         android:textColor="@color/colorPrimary"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textAppearance="?android:attr/textAppearanceSmall"/>
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:ignore="SmallSp"/>
 
 </LinearLayout>

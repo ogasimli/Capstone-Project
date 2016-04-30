@@ -18,7 +18,9 @@ import butterknife.ButterKnife;
 import manat.ogasimli.org.manat.R;
 
 /**
- * Created by ogasimli on 10.01.2016.
+ * DataPickerDialogFragment class
+ *
+ * Created by Orkhan Gasimli on 10.01.2016.
  */
 public class DatePickerDialogFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {

@@ -10,7 +10,9 @@ import android.view.MenuItem;
 import manat.ogasimli.org.manat.R;
 
 /**
- * Created by ogasimli on 10.01.2016.
+ * DetailActivity class
+ *
+ * Created by Orkhan Gasimli on 10.01.2016.
  */
 public class DetailActivity extends AppCompatActivity {
 

@@ -59,7 +59,7 @@ import retrofit.client.Response;
 /**
  * MainActivityFragment class
  *
- * Created by ogasimli on 10.01.2016.
+ * Created by Orkhan Gasimli on 10.01.2016.
  */
 public class MainActivityFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<ArrayList<Currency>> {
@@ -282,8 +282,6 @@ public class MainActivityFragment extends Fragment
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.menu_settings:
-                return true;
             case R.id.menu_refresh:
                 refreshData();
         }

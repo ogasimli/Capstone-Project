@@ -16,7 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,6 +24,8 @@ import butterknife.OnClick;
 import manat.ogasimli.org.manat.R;
 
 /**
+ * DialogFragment class for selection of currency
+ *
  * Created by Orkhan Gasimli on 12.04.2016.
  */
 public class SelectCurrencyDialogFragment extends DialogFragment {
@@ -73,7 +75,7 @@ public class SelectCurrencyDialogFragment extends DialogFragment {
     }
 
     @OnClick(R.id.select_currency_cancel_btn)
-    public void dismissDialog(TextView textView) {
+    public void dismissDialog(Button button) {
         getDialog().dismiss();
     }
 
