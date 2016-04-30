@@ -15,6 +15,7 @@
     <dimen name="amount_text_size">24sp</dimen>
     <dimen name="fab_elevation">6dp</dimen>
     <dimen name="fab_translationZ">12dp</dimen>
+    <dimen name="fab_margin">0.1dp</dimen>
     <dimen name="main_rate_padding">5dp</dimen>
     <dimen name="flag_width">40dp</dimen>
     <dimen name="flag_height">20dp</dimen>
