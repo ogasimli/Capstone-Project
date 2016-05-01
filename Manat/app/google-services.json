@@ -11,7 +11,16 @@
           "package_name": "org.ogasimli.manat"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "461186020502-ghiglj6tgbkl49rad97q3fkjjpgq8hch.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.ogasimli.manat",
+            "certificate_hash": "8D5D96CF9D4D549CE8E73A1F49E0237CA85281E8"
+          }
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCZjITQZa1ENFMjiunLvQGct_oVGJWXMR4"
@@ -25,7 +34,7 @@
           }
         },
         "appinvite_service": {
-          "status": 1,
+          "status": 2,
           "other_platform_oauth_client": []
         },
         "ads_service": {

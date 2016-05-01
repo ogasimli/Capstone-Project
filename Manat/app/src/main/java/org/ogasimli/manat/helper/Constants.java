@@ -24,7 +24,8 @@ public class Constants {
     public static final String BUTTON_KEY = "BUTTON_KEY";
     public static final int SELECT_CURRENCY_DIALOG_RESULT = 0;
     public static final int CALCULATOR_DIALOG_RESULT = 1;
-    
+    public static final int INVITATION_REQUEST_RESULT = 2;
+
     //Fragment tags
     public static final String MAIN_ACTIVITY_FRAGMENT_TAG = "MAIN_ACTIVITY_FRAGMENT";
     public static final String DETAIL_ACTIVITY_FRAGMENT_TAG = "DETAIL_ACTIVITY_FRAGMENT";

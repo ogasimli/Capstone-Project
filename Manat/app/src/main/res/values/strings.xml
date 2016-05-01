@@ -176,4 +176,15 @@
     <!-- Ad Unit ID -->
     <!-- TODO: Replace with real Ad Unit ID -->
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+
+    <!-- Google AppInvite string resources -->
+    <string name="invitation_title">Send App Invite Quickstart Invitation</string>
+    <string name="invitation_message">This app is terrific, give it a try!</string>
+    <string name="invitation_image">
+        https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    </string>
+    <string name="invitation_cta">Install!</string>
+    <string name="send_failed">Sending invitations failed</string>
+    <string name="sent_invitations_fmt" formatted="false">Sent %d invitations</string>
+    <string name="google_play_services_error">Google Play Services Error</string>
 </resources>

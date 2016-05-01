@@ -106,4 +106,12 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"/>
 
+    <FrameLayout
+        android:id="@+id/snackBar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/activity_horizontal_margin"/>
+
 </RelativeLayout>

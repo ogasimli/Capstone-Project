@@ -35,6 +35,10 @@
         <provider
             android:name="org.ogasimli.manat.provigen.ManatContentProvider"
             android:authorities="org.ogasimli.manat" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>
