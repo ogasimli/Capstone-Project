@@ -12,6 +12,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:fullBackupContent="@xml/backup_scheme"
         android:theme="@style/AppTheme">
         <activity
             android:name="org.ogasimli.manat.activity.MainActivity"
