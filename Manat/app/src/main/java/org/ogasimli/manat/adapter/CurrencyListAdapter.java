@@ -38,7 +38,7 @@ public class CurrencyListAdapter extends RecyclerView.Adapter<CurrencyListAdapte
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.currency_cards, parent,
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_currency_item, parent,
                 false);
 
         return new ViewHolder(view);
@@ -51,10 +51,10 @@ public class CurrencyListAdapter extends RecyclerView.Adapter<CurrencyListAdapte
         holder.mCountryFlag.setImageResource(Utilities.getCurrencyImage(mContext, currency.getCode()));
         holder.mCurrency.setText(currency.getCode());
         if (Integer.valueOf(currency.getNominal()) != 1) {
-            holder.mCountryName.setText(String.format("%s %s",
+            holder.mCurrencyName.setText(String.format("%s %s",
                     currency.getNominal(), currency.getName()));
         } else {
-            holder.mCountryName.setText(currency.getName());
+            holder.mCurrencyName.setText(currency.getName());
         }
         double value =0;
         if (!currency.getValue().equals("")) {
@@ -92,7 +92,7 @@ public class CurrencyListAdapter extends RecyclerView.Adapter<CurrencyListAdapte
         ImageView mCountryFlag;
 
         @Bind(R.id.list_item_currency_name_textview)
-        TextView mCountryName;
+        TextView mCurrencyName;
 
         @Bind(R.id.list_item_currency_textview)
         TextView mCurrency;

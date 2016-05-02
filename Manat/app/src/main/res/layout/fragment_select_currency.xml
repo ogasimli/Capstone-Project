@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/currency_list"
+        tools:listitem="@layout/select_currency_item"
         android:layout_alignParentTop="true"
         android:layout_above="@+id/select_currency_cancel_btn"/>
 

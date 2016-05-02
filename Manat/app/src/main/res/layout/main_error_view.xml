@@ -14,13 +14,13 @@
         android:alpha="0.2"
         android:contentDescription="@string/no_result_image_description"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_connection_error"/>
+        android:src="@drawable/ic_cloud_outline_off"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/activity_horizontal_padding"
-        android:text="@string/no_result_message"
+        android:text="@string/main_no_result_message"
         android:layout_gravity="center"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"

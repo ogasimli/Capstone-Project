@@ -72,7 +72,7 @@
         <include
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/error_view"/>
+            layout="@layout/main_error_view"/>
 
     </LinearLayout>
 

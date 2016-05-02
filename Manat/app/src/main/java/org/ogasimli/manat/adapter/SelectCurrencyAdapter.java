@@ -39,7 +39,7 @@ public class SelectCurrencyAdapter extends RecyclerView.Adapter<SelectCurrencyAd
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.currency_list, parent, false);
+                .inflate(R.layout.select_currency_item, parent, false);
 
         return new ViewHolder(view);
     }
