@@ -74,7 +74,8 @@
     <string name="arithmetical_exception_message">Invalid input! There is an arithmetic problem!
     </string>
     <string name="error_no_connection">Please check your internet connection.</string>
-    <string name="no_result_message">Oops! Unable to load data. Please try again.</string>
+    <string name="main_no_result_message">Oops! Unable to load data. Please try again.</string>
+    <string name="widget_no_result_message">Data is currently unavailable</string>
     <string name="line_chart_no_data_text">No data available to illustrate.</string>
 
     <!-- Currency abbreviations -->

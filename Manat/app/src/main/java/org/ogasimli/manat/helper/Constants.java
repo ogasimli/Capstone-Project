@@ -89,4 +89,8 @@ public class Constants {
     public static final String ACTION_TYPE = "Action";
     public static final String INVITE_ACTION = "Invite";
     public static final String SHARE_ACTION = "Share";
+
+    //BroadcastReceiver key to update widgets
+    // Setting the package ensures that only components in our app will receive the broadcast
+    public static final String ACTION_DATA_UPDATED = "org.ogasimli.manat.ACTION_DATA_UPDATED";
 }

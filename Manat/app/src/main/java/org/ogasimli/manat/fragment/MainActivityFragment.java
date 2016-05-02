@@ -26,6 +26,7 @@ import org.ogasimli.manat.retrofit.RetrofitAdapter;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -550,6 +551,7 @@ public class MainActivityFragment extends Fragment
         RestAdapter adapter = RetrofitAdapter.getRestAdapter();
         ApiService service = adapter.create(ApiService.class);
         service.getCurrencyByDate(mQueryString, new Callback<ArrayList<Currency>>() {
+            @SuppressWarnings("unchecked")
             @Override
             public void success(ArrayList<Currency> currencyList, Response response) {
                 mCurrencyList = new ArrayList<>();
@@ -562,6 +564,7 @@ public class MainActivityFragment extends Fragment
                     new CurrencySaver(getActivity(), mDateString).execute(mCurrencyList);
                     Log.d(LOG_TAG, "Inserted into DB");
                     showResultView();
+                    updateWidgets();
                 } else {
                     showErrorView();
                 }
@@ -671,6 +674,14 @@ public class MainActivityFragment extends Fragment
                 showResultView();
                 break;
         }
+    }
+
+
+    private void updateWidgets() {
+        Context context = getContext();
+        Intent dataUpdatedIntent = new Intent(Constants.ACTION_DATA_UPDATED)
+                .setPackage(context.getPackageName());
+        context.sendBroadcast(dataUpdatedIntent);
     }
 
     //TODO: Enhance swap animation
