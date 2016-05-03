@@ -213,6 +213,7 @@ public class MainActivityFragment extends Fragment
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.setAdapter(mCurrencyListAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mCurrencyListAdapter.setOnItemClickListener(itemClickListener);
 
@@ -602,7 +603,6 @@ public class MainActivityFragment extends Fragment
 
         //Set adapter to RecyclerView
         mCurrencyListAdapter.setCurrencyList(mCurrencyList);
-        mRecyclerView.setAdapter(mCurrencyListAdapter);
 
         //Set main rate text
         mMainRateTextView.setText(Utilities.getRateByCode(mCurrencyList, mSelectedCode));
