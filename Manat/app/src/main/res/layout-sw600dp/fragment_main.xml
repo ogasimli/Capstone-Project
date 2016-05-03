@@ -44,30 +44,31 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <LinearLayout
-                    android:id="@+id/main_result_view"
-                    android:layout_width="@dimen/main_fragment_width"
+            <LinearLayout
+                android:id="@+id/main_result_view"
+                android:layout_width="@dimen/main_fragment_width"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:layout_centerHorizontal="true"
+                tools:ignore="UselessParent">
+
+                <include
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/converter_surface"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview_main"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:visibility="visible"
-                    android:layout_centerHorizontal="true"
-                    tools:ignore="UselessParent">
+                    app:layoutManager="LinearLayoutManager"
+                    tools:listitem="@layout/main_currency_item"
+                    android:elevation="@dimen/converter_elevation"
+                    tools:targetApi="lollipop"/>
 
-                    <include
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        layout="@layout/converter_surface"/>
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerview_main"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:layoutManager="LinearLayoutManager"
-                        tools:listitem="@layout/main_currency_item"
-                        android:elevation="@dimen/converter_elevation"
-                        tools:targetApi="lollipop"/>
-
-                </LinearLayout>
+            </LinearLayout>
 
         </RelativeLayout>
 
