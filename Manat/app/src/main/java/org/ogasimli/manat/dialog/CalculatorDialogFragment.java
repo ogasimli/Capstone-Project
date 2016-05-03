@@ -21,9 +21,10 @@ import android.widget.Toast;
 
 import java.util.Locale;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import manat.ogasimli.org.manat.R;
 
 /**
@@ -37,8 +38,10 @@ public class CalculatorDialogFragment extends DialogFragment {
 
     private int mButtonKey = 0;
 
-    @Bind(R.id.calc_edit_textview)
+    @BindView(R.id.calc_edit_textview)
     MyTextViewLight mEditTextView;
+
+    private Unbinder mUnbinder;
 
     public CalculatorDialogFragment() {
     }
@@ -53,7 +56,7 @@ public class CalculatorDialogFragment extends DialogFragment {
                              @Nullable Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_calculator, container, false);
-        ButterKnife.bind(this, rootView);
+        mUnbinder = ButterKnife.bind(this, rootView);
 
         mButtonKey = getArguments().getInt(Constants.CALCULATOR_BUNDLE_KEY);
 
@@ -82,6 +85,12 @@ public class CalculatorDialogFragment extends DialogFragment {
     @Override
     public void onStart() {
         super.onStart();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mUnbinder.unbind();
     }
 
     @OnClick({R.id.calc_one_textview, R.id.calc_two_textview, R.id.calc_three_textview,

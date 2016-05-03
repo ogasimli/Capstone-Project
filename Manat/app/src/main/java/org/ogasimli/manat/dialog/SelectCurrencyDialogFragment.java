@@ -18,9 +18,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import manat.ogasimli.org.manat.R;
 
 /**
@@ -30,8 +31,10 @@ import manat.ogasimli.org.manat.R;
  */
 public class SelectCurrencyDialogFragment extends DialogFragment {
 
-    @Bind(R.id.select_currency_recyclerview)
+    @BindView(R.id.select_currency_recyclerview)
     RecyclerView mRecyclerView;
+
+    private Unbinder mUnbinder;
 
     private SelectCurrencyAdapter mSelectCurrencyAdapter;
 
@@ -55,7 +58,7 @@ public class SelectCurrencyDialogFragment extends DialogFragment {
 
         View rootView = inflater.inflate(R.layout.fragment_select_currency, container, false);
 
-        ButterKnife.bind(this, rootView);
+        mUnbinder = ButterKnife.bind(this, rootView);
 
         mSelectCurrencyAdapter = new SelectCurrencyAdapter(getActivity());
         mSelectCurrencyAdapter.setOnItemClickListener(itemClickListener);
@@ -71,7 +74,7 @@ public class SelectCurrencyDialogFragment extends DialogFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        mUnbinder.unbind();
     }
 
     @OnClick(R.id.select_currency_cancel_btn)

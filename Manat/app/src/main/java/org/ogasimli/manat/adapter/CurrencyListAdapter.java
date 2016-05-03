@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import manat.ogasimli.org.manat.R;
 
@@ -88,19 +88,19 @@ public class CurrencyListAdapter extends RecyclerView.Adapter<CurrencyListAdapte
     class ViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener, View.OnLongClickListener {
 
-        @Bind(R.id.list_item_country_flag)
+        @BindView(R.id.list_item_country_flag)
         ImageView mCountryFlag;
 
-        @Bind(R.id.list_item_currency_name_textview)
+        @BindView(R.id.list_item_currency_name_textview)
         TextView mCurrencyName;
 
-        @Bind(R.id.list_item_currency_textview)
+        @BindView(R.id.list_item_currency_textview)
         TextView mCurrency;
 
-        @Bind(R.id.list_item_rate_textview)
+        @BindView(R.id.list_item_rate_textview)
         MyTextViewLight mRate;
 
-        @Bind(R.id.list_item_trend_imageview)
+        @BindView(R.id.list_item_trend_imageview)
         ImageView mRateTrend;
 
         public ViewHolder(View itemView) {

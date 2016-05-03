@@ -44,11 +44,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import butterknife.Bind;
 import butterknife.BindColor;
 import butterknife.BindDrawable;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import manat.ogasimli.org.manat.R;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -82,50 +83,50 @@ public class DetailActivityFragment extends Fragment {
 
     private Tracker mTracker;
 
-    @Bind(R.id.linechart)
+    @BindView(R.id.linechart)
     LineChart mChart;
 
-    @Bind(R.id.toolbar_detail)
+    @BindView(R.id.toolbar_detail)
     Toolbar mToolbar;
 
     @Nullable
-    @Bind(R.id.fab_share_details)
+    @BindView(R.id.fab_share_details)
     FloatingActionButton mFab;
 
-    @Bind(R.id.detail_result_view)
+    @BindView(R.id.detail_result_view)
     LinearLayout mResultView;
 
-    @Bind(R.id.detail_error_view)
+    @BindView(R.id.detail_error_view)
     LinearLayout mErrorView;
 
-    @Bind(R.id.detail_current_rate_textview)
+    @BindView(R.id.detail_current_rate_textview)
     TextView mCurrentRateTextView;
 
-    @Bind(R.id.detail_average_rate_textview)
+    @BindView(R.id.detail_average_rate_textview)
     TextView mAverageRateTextView;
 
-    @Bind(R.id.detail_max_rate_textview)
+    @BindView(R.id.detail_max_rate_textview)
     TextView mMaxRateTextView;
 
-    @Bind(R.id.detail_min_rate_textview)
+    @BindView(R.id.detail_min_rate_textview)
     TextView mMinRateTextView;
 
-    @Bind(R.id.detail_statistic_label_text_view)
+    @BindView(R.id.detail_statistic_label_text_view)
     TextView mStatisticsLabelTextView;
 
-    @Bind(R.id.weekly_btn)
+    @BindView(R.id.weekly_btn)
     Button mWeeklyBtn;
 
-    @Bind(R.id.monthly_btn)
+    @BindView(R.id.monthly_btn)
     Button mMonthlyBtn;
 
-    @Bind(R.id.quarterly_btn)
+    @BindView(R.id.quarterly_btn)
     Button mQuarterlyBtn;
 
-    @Bind(R.id.semi_annually_btn)
+    @BindView(R.id.semi_annually_btn)
     Button mSemiAnnuallyBtn;
 
-    @Bind(R.id.yearly_btn)
+    @BindView(R.id.yearly_btn)
     Button mYearlyBtn;
 
     @BindDrawable(R.drawable.background_color_accent)
@@ -141,6 +142,8 @@ public class DetailActivityFragment extends Fragment {
 
     @BindColor(R.color.colorAccent)
     ColorStateList mColorAccent;
+
+    private Unbinder mUnbinder;
 
     public DetailActivityFragment() {
     }
@@ -190,7 +193,7 @@ public class DetailActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-        ButterKnife.bind(this, rootView);
+        mUnbinder = ButterKnife.bind(this, rootView);
 
         //Getting ripple drawable manually
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -246,7 +249,7 @@ public class DetailActivityFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        mUnbinder.unbind();
     }
 
     @Override

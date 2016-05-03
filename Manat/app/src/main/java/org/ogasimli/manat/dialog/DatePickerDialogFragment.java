@@ -13,8 +13,9 @@ import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import manat.ogasimli.org.manat.R;
 
 /**
@@ -25,8 +26,10 @@ import manat.ogasimli.org.manat.R;
 public class DatePickerDialogFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
-    @Bind(R.id.main_date_text)
+    @BindView(R.id.main_date_text)
     TextView mMainDateTextView;
+
+    private Unbinder mUnbinder;
 
     public DatePickerDialogFragment() {
     }
@@ -39,7 +42,7 @@ public class DatePickerDialogFragment extends DialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        ButterKnife.bind(this, getActivity());
+        mUnbinder = ButterKnife.bind(this, getActivity());
 
         String dateString = getArguments().getString(Constants.DATE_PICKER_BUNDLE_KEY);
         DateTime date = DateTime.parse(dateString, Constants.DATE_FORMATTER_DDMMMYYYY);
@@ -78,6 +81,6 @@ public class DatePickerDialogFragment extends DialogFragment
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        mUnbinder.unbind();
     }
 }

@@ -63,9 +63,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import manat.ogasimli.org.manat.R;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -105,51 +106,51 @@ public class MainActivityFragment extends Fragment
 
     private Tracker mTracker;
 
-    private GoogleApiClient mGoogleApiClient;
-
     float viewHeight;
     boolean noSwap = true;
     private static int ANIMATION_DURATION = 300;
 
-    @Bind(R.id.main_result_view)
+    @BindView(R.id.main_result_view)
     LinearLayout mResultView;
 
-    @Bind(R.id.main_error_view)
+    @BindView(R.id.main_error_view)
     LinearLayout mErrorView;
 
-    @Bind(R.id.main_foreign_linear_layout)
+    @BindView(R.id.main_foreign_linear_layout)
     LinearLayout mForeignLinerLayout;
 
-    @Bind(R.id.main_azn_linear_layout)
+    @BindView(R.id.main_azn_linear_layout)
     LinearLayout mAznLinearLayout;
 
-    @Bind(R.id.recyclerview_main)
+    @BindView(R.id.recyclerview_main)
     RecyclerView mRecyclerView;
 
-    @Bind(R.id.main_foreign_amount_textview)
+    @BindView(R.id.main_foreign_amount_textview)
     TextView mMainForeignAmountTextView;
 
-    @Bind(R.id.main_azn_amount_textview)
+    @BindView(R.id.main_azn_amount_textview)
     TextView mMainAznAmountTextView;
 
-    @Bind(R.id.main_foreign_currency_text)
+    @BindView(R.id.main_foreign_currency_text)
     TextView mMainForeignCurrencyText;
 
-    @Bind(R.id.main_date_text)
+    @BindView(R.id.main_date_text)
     TextView mMainDateTextView;
 
-    @Bind(R.id.main_rate_text)
+    @BindView(R.id.main_rate_text)
     TextView mMainRateTextView;
 
-    @Bind(R.id.toolbar_main)
+    @BindView(R.id.toolbar_main)
     Toolbar mToolbar;
 
-    @Bind(R.id.snackBar_layout)
+    @BindView(R.id.snackBar_layout)
     FrameLayout mFrameLayout;
 
     @Nullable
-    @Bind(R.id.adView)
+    @BindView(R.id.adView)
     AdView mAdView;
+
+    private Unbinder mUnbinder;
 
     public MainActivityFragment() {
     }
@@ -161,7 +162,7 @@ public class MainActivityFragment extends Fragment
         setRetainInstance(true);
 
         // Create an auto-managed GoogleApiClient with access to App Invites.
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+        GoogleApiClient googleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(AppInvite.API)
                 .enableAutoManage(getActivity(), this)
                 .build();
@@ -175,7 +176,7 @@ public class MainActivityFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        ButterKnife.bind(this, rootView);
+        mUnbinder = ButterKnife.bind(this, rootView);
 
         //Initialize Toolbar
         initToolbar();
@@ -269,7 +270,7 @@ public class MainActivityFragment extends Fragment
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        mUnbinder.unbind();
     }
 
     @Override

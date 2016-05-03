@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import manat.ogasimli.org.manat.R;
 
@@ -71,13 +71,13 @@ public class SelectCurrencyAdapter extends RecyclerView.Adapter<SelectCurrencyAd
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @Bind(R.id.list_item_country_flag)
+        @BindView(R.id.list_item_country_flag)
         ImageView mCountryFlag;
 
-        @Bind(R.id.list_item_currency_name_textview)
+        @BindView(R.id.list_item_currency_name_textview)
         TextView mCountryName;
 
-        @Bind(R.id.list_item_currency_textview)
+        @BindView(R.id.list_item_currency_textview)
         TextView mCurrency;
 
         public ViewHolder(View itemView) {

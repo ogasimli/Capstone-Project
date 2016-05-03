@@ -10,7 +10,7 @@ import com.github.mikephil.charting.utils.Utils;
 import android.content.Context;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import manat.ogasimli.org.manat.R;
 
@@ -23,10 +23,10 @@ public class CustomChartMarker extends MarkerView {
 
     private LineChart mChart;
 
-    @Bind(R.id.marker_y_text_view)
+    @BindView(R.id.marker_y_text_view)
     TextView markerYTextView;
 
-    @Bind(R.id.marker_x_text_view)
+    @BindView(R.id.marker_x_text_view)
     TextView markerXTextView;
 
     /**
