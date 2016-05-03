@@ -4,6 +4,7 @@ import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 
 import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import manat.ogasimli.org.manat.R;
 
@@ -12,7 +13,7 @@ import manat.ogasimli.org.manat.R;
  *
  * Created by Orkhan Gasimli on 16.04.2016.
  */
-public class ManatApplication extends Application {
+public class ManatApplication extends MultiDexApplication {
 
     private Tracker mTracker;
 
