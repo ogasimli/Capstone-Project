@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/abc_action_bar_default_height_material"
+    android:paddingLeft="@dimen/activity_horizontal_padding"
+    android:paddingStart="@dimen/activity_horizontal_padding"
+    android:paddingRight="@dimen/activity_horizontal_padding"
+    android:paddingEnd="@dimen/activity_horizontal_padding"
+    android:background="@color/colorAccent"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/widget_list_item_country_flag"
+        android:layout_gravity="center"
+        android:layout_width="@dimen/flag_width"
+        android:layout_height="@dimen/flag_height"
+        android:background="@color/colorTextPrimary"
+        android:padding="0.5dp"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:scaleType="fitXY"
+        android:contentDescription="@string/country_flag_image_description"
+        tools:src="@drawable/usd"/>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="7"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/widget_list_item_currency_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textColor="@color/colorTextPrimary"
+            tools:text="USD"/>
+
+        <TextView
+            android:id="@+id/widget_list_item_currency_name_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/colorTextSecondary"
+            tools:text="United States"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/widget_list_item_rate_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_gravity="end|center_vertical"
+        android:gravity="end"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="@dimen/recyclerView_rate_text_size"
+        tools:text="1,56"/>
+
+    <ImageView
+        android:id="@+id/widget_list_item_trend_imageview"
+        android:layout_width="@dimen/trend_image_width"
+        android:layout_height="@dimen/trend_image_height"
+        android:layout_gravity="end|center_vertical"
+        android:gravity="end"
+        android:contentDescription="@string/trending_image_description"
+        tools:src="@drawable/ic_trending_up"/>
+
+</LinearLayout>

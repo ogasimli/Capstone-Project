@@ -162,7 +162,7 @@ public class MainActivityFragment extends Fragment
         setRetainInstance(true);
 
         // Create an auto-managed GoogleApiClient with access to App Invites.
-        GoogleApiClient googleApiClient = new GoogleApiClient.Builder(getActivity())
+        new GoogleApiClient.Builder(getActivity())
                 .addApi(AppInvite.API)
                 .enableAutoManage(getActivity(), this)
                 .build();
@@ -566,7 +566,14 @@ public class MainActivityFragment extends Fragment
                     new CurrencySaver(getActivity(), mDateString).execute(mCurrencyList);
                     Log.d(LOG_TAG, "Inserted into DB");
                     showResultView();
-                    updateWidgets();
+
+                    //Update widget if today rates are updated
+                    DateTime dateTime = new DateTime();
+                    String dateString = Constants.DATE_FORMATTER_WITH_DASH.print(dateTime)
+                            + Constants.DATE_APPENDIX;
+                    if (dateString.equals(mDateString)) {
+                        updateWidgets();
+                    }
                 } else {
                     showErrorView();
                 }

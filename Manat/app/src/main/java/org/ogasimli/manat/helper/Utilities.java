@@ -109,6 +109,22 @@ public class Utilities {
     }
 
     /*
+    * Helper method to get trend image content description by currency trend
+    */
+    public static String getTrendImageDescription(Context context, String trendString) {
+        int trend = Integer.parseInt(trendString);
+        switch (trend) {
+            case -1:
+                return context.getString(R.string.trend_down_image_description);
+            case 0:
+                return context.getString(R.string.trend_flat_image_description);
+            case 1:
+                return context.getString(R.string.trend_up_image_description);
+            default:
+                return context.getString(R.string.trend_down_image_description);
+        }
+    }
+    /*
     * Helper method to modify date string to use in query
     */
     public static String modifyDateString(String dateString, DateTimeFormatter beforeFormatter,

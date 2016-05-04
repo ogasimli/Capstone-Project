@@ -71,13 +71,13 @@ public class SelectCurrencyAdapter extends RecyclerView.Adapter<SelectCurrencyAd
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @BindView(R.id.list_item_country_flag)
+        @BindView(R.id.select_list_item_country_flag)
         ImageView mCountryFlag;
 
-        @BindView(R.id.list_item_currency_name_textview)
+        @BindView(R.id.select_list_item_currency_name_textview)
         TextView mCountryName;
 
-        @BindView(R.id.list_item_currency_textview)
+        @BindView(R.id.select_list_item_currency_textview)
         TextView mCurrency;
 
         public ViewHolder(View itemView) {

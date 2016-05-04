@@ -21,7 +21,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/list_item_country_flag"
+            android:id="@+id/main_list_item_country_flag"
             android:layout_gravity="center"
             android:layout_width="@dimen/flag_width"
             android:layout_height="@dimen/flag_height"
@@ -40,14 +40,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/list_item_currency_textview"
+                android:id="@+id/main_list_item_currency_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 tools:text="USD"/>
 
             <TextView
-                android:id="@+id/list_item_currency_name_textview"
+                android:id="@+id/main_list_item_currency_name_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -57,7 +57,7 @@
         </LinearLayout>
 
         <org.ogasimli.manat.customview.MyTextViewLight
-            android:id="@+id/list_item_rate_textview"
+            android:id="@+id/main_list_item_rate_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
@@ -67,7 +67,7 @@
             tools:text="1,56"/>
 
         <ImageView
-            android:id="@+id/list_item_trend_imageview"
+            android:id="@+id/main_list_item_trend_imageview"
             android:layout_width="@dimen/trend_image_width"
             android:layout_height="@dimen/trend_image_height"
             android:layout_gravity="end|center_vertical"

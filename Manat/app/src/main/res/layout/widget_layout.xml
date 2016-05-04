@@ -10,17 +10,17 @@
     <FrameLayout
         android:id="@+id/widget_heading"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="@dimen/abc_action_bar_default_height_material"
         android:background="@color/colorPrimary">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
             android:layout_gravity="center"
             android:gravity="center"
             android:drawableLeft="@drawable/ic_app_name"
-            android:drawableStart="@drawable/ic_app_name"/>
+            android:drawableStart="@drawable/ic_app_name"
+            android:contentDescription="@string/app_name"/>
     </FrameLayout>
 
     <FrameLayout
@@ -33,17 +33,13 @@
             android:id="@+id/rate_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
-            tools:visibility="visible"
-            tools:listitem="@layout/main_currency_item"/>
+            tools:listitem="@layout/widget_currency_item"/>
 
         <include
             android:id="@+id/widget_error_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             layout="@layout/widget_error_view"
-            android:visibility="visible"
-            tools:visibility="gone"
             android:layout_gravity="center"/>
 
     </FrameLayout>

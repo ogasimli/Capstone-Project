@@ -6,7 +6,7 @@
     android:minResizeHeight="@dimen/widget_detail_min_resize_height"
     android:minResizeWidth="@dimen/widget_detail_min_resize_width"
     android:minWidth="@dimen/widget_detail_default_width"
-    android:updatePeriodMillis="14400000"
+    android:updatePeriodMillis="7200000"
     android:previewImage="@drawable/appwidget_preview"
     android:resizeMode="vertical"
     android:widgetCategory="home_screen|keyguard"

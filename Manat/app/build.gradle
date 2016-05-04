@@ -10,14 +10,13 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        // Enabling VectorDrawables
-        /*vectorDrawables.useSupportLibrary = true*/
         // Enabling multidex support.
         multiDexEnabled true
     }
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         buildTypes.each {
