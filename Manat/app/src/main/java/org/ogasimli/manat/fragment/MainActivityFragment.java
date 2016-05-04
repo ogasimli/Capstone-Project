@@ -28,6 +28,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -681,6 +682,13 @@ public class MainActivityFragment extends Fragment
                 mCurrencyList = savedInstanceState.getParcelableArrayList(Constants.LIST_STATE_KEY);
                 showResultView();
                 break;
+        }
+
+        //Set RecyclerView unfocusable on orientation change in order to prevent converter from
+        // scrolling up
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            mRecyclerView.setFocusable(false);
         }
     }
 
