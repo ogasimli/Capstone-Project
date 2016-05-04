@@ -88,19 +88,19 @@ public class CurrencyListAdapter extends RecyclerView.Adapter<CurrencyListAdapte
     class ViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener, View.OnLongClickListener {
 
-        @BindView(R.id.list_item_country_flag)
+        @BindView(R.id.main_list_item_country_flag)
         ImageView mCountryFlag;
 
-        @BindView(R.id.list_item_currency_name_textview)
+        @BindView(R.id.main_list_item_currency_name_textview)
         TextView mCurrencyName;
 
-        @BindView(R.id.list_item_currency_textview)
+        @BindView(R.id.main_list_item_currency_textview)
         TextView mCurrency;
 
-        @BindView(R.id.list_item_rate_textview)
+        @BindView(R.id.main_list_item_rate_textview)
         MyTextViewLight mRate;
 
-        @BindView(R.id.list_item_trend_imageview)
+        @BindView(R.id.main_list_item_trend_imageview)
         ImageView mRateTrend;
 
         public ViewHolder(View itemView) {
