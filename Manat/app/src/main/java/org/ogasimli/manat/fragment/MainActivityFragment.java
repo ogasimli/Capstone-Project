@@ -693,7 +693,7 @@ public class MainActivityFragment extends Fragment
 
             //swap layouts
             mRootView.addView(mForeignLinerLayout, mRootView.getChildCount());
-            mRootView.addView(mAznLinearLayout, 0);
+            mRootView.addView(mAznLinearLayout, 1);
 
             //enable/disable ripple effects
             mMainForeignAmountTextView.setBackgroundResource(0);
@@ -741,7 +741,7 @@ public class MainActivityFragment extends Fragment
             case 0:
                 //swap layouts
                 mRootView.addView(mForeignLinerLayout, mRootView.getChildCount());
-                mRootView.addView(mAznLinearLayout, 0);
+                mRootView.addView(mAznLinearLayout, 1);
 
                 //enable/disable ripple effects
                 mMainForeignAmountTextView.setBackgroundResource(0);
@@ -752,7 +752,7 @@ public class MainActivityFragment extends Fragment
                 break;
             case 1:
                 //swap layouts
-                mRootView.addView(mForeignLinerLayout, 0);
+                mRootView.addView(mForeignLinerLayout, 1);
                 mRootView.addView(mAznLinearLayout, mRootView.getChildCount());
 
                 //enable/disable ripple effects

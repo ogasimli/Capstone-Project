@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_converter_root_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
 
     <org.ogasimli.manat.customview.MyTextViewLight
         android:id="@+id/main_date_text"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_marginBottom="@dimen/converter_margin"
-        android:layout_marginTop="@dimen/converter_margin"
+        android:layout_marginTop="@dimen/converter_vertical_margin"
+        android:layout_marginBottom="@dimen/converter_vertical_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:padding="@dimen/date_text_padding"
         android:gravity="center"
@@ -25,121 +27,124 @@
         tools:text="4 February 2016"/>
 
     <LinearLayout
-        android:id="@+id/main_converter_root_view"
+        android:id="@+id/main_foreign_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_horizontal_padding"
         android:paddingLeft="@dimen/activity_horizontal_padding"
         android:paddingEnd="@dimen/activity_horizontal_padding"
         android:paddingStart="@dimen/activity_horizontal_padding"
-        android:paddingRight="@dimen/activity_horizontal_padding"
-        android:orientation="vertical"
-        android:layout_below="@id/main_date_text">
+        android:layout_marginBottom="@dimen/converter_vertical_margin"
+        android:layout_marginTop="@dimen/converter_vertical_margin"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/main_foreign_linear_layout"
+        <org.ogasimli.manat.customview.MyTextViewLight
+            android:id="@+id/main_foreign_currency_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:gravity="center"
+            android:freezesText="true"
+            tools:text="USD"
+            android:textSize="@dimen/currency_text_size"
+            android:background="@drawable/background_oval_primary_with_stroke"
+            android:textColor="@color/colorAccent"/>
+
+        <org.ogasimli.manat.customview.MyTextViewLight
+            android:id="@+id/main_foreign_amount_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <org.ogasimli.manat.customview.MyTextViewLight
-                android:id="@+id/main_foreign_currency_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|center_vertical"
-                android:gravity="center"
-                android:freezesText="true"
-                tools:text="USD"
-                android:textSize="@dimen/currency_text_size"
-                android:background="@drawable/background_oval_primary_with_stroke"
-                android:textColor="@color/colorAccent"/>
-
-            <org.ogasimli.manat.customview.MyTextViewLight
-                android:id="@+id/main_foreign_amount_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="end"
-                android:freezesText="true"
-                android:text="@string/converter_amount_zero_text"
-                android:textSize="@dimen/amount_text_size"
-                android:textColor="@color/colorAccent"
-                android:background="?attr/selectableItemBackground"/>
-
-        </LinearLayout>
-
-        <FrameLayout
-            android:id="@+id/main_divider_frame_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorAccent"
-                android:layout_gravity="center"/>
-
-            <!-- Fix padding for pre-lollipop devices -->
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/main_swap_fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/fab_margin"
-                android:layout_gravity="start|center_vertical"
-                android:src="@drawable/ic_swap"
-                app:fabSize="mini"
-                android:elevation="@dimen/fab_elevation"
-                android:translationZ="@dimen/fab_translationZ"
-                tools:targetApi="lollipop"/>
-
-            <TextView
-                android:id="@+id/main_rate_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/main_rate_padding"
-                android:layout_gravity="end|center_vertical"
-                android:gravity="end"
-                android:freezesText="true"
-                tools:text="1.5626"
-                android:textSize="@dimen/currency_text_size"
-                android:textColor="@color/colorAccent"
-                android:background="@drawable/background_color_primary_stroke"/>
-        </FrameLayout>
-
-        <LinearLayout
-            android:id="@+id/main_azn_linear_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <org.ogasimli.manat.customview.MyTextViewLight
-                android:id="@+id/main_azn_currency_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|center_vertical"
-                android:gravity="center"
-                android:text="@string/azn_text"
-                android:textSize="@dimen/currency_text_size"
-                android:background="@drawable/background_oval_primary"
-                android:textColor="@color/colorAccent"/>
-
-            <org.ogasimli.manat.customview.MyTextViewLight
-                android:id="@+id/main_azn_amount_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="end"
-                android:freezesText="true"
-                android:text="@string/converter_amount_zero_text"
-                android:textSize="@dimen/amount_text_size"
-                android:textColor="@color/colorAccent"
-                android:background="?attr/selectableItemBackground"/>
-
-        </LinearLayout>
+            android:layout_gravity="center"
+            android:gravity="end"
+            android:freezesText="true"
+            android:text="@string/converter_amount_zero_text"
+            android:textSize="@dimen/amount_text_size"
+            android:textColor="@color/colorAccent"
+            android:background="?attr/selectableItemBackground"/>
 
     </LinearLayout>
 
-</RelativeLayout>
+    <FrameLayout
+        android:id="@+id/main_divider_frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:background="@color/colorAccent"
+            android:layout_gravity="center"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/main_swap_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/fab_vertical_margin"
+            android:layout_marginBottom="@dimen/fab_vertical_margin"
+            android:src="@drawable/ic_swap"
+            app:fabSize="mini"
+            android:elevation="@dimen/fab_elevation"
+            android:translationZ="@dimen/fab_translationZ"
+            tools:targetApi="lollipop"/>
+
+        <TextView
+            android:id="@+id/main_rate_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:padding="@dimen/main_rate_padding"
+            android:layout_gravity="end|center_vertical"
+            android:gravity="end"
+            android:freezesText="true"
+            tools:text="1.5626"
+            android:textSize="@dimen/currency_text_size"
+            android:textColor="@color/colorAccent"
+            android:background="@drawable/background_color_primary_stroke"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/main_azn_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/activity_horizontal_padding"
+        android:paddingLeft="@dimen/activity_horizontal_padding"
+        android:paddingEnd="@dimen/activity_horizontal_padding"
+        android:paddingStart="@dimen/activity_horizontal_padding"
+        android:layout_marginBottom="@dimen/converter_vertical_margin"
+        android:layout_marginTop="@dimen/converter_vertical_margin"
+        android:orientation="horizontal">
+
+        <org.ogasimli.manat.customview.MyTextViewLight
+            android:id="@+id/main_azn_currency_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:gravity="center"
+            android:text="@string/azn_text"
+            android:textSize="@dimen/currency_text_size"
+            android:background="@drawable/background_oval_primary"
+            android:textColor="@color/colorAccent"/>
+
+        <org.ogasimli.manat.customview.MyTextViewLight
+            android:id="@+id/main_azn_amount_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="end"
+            android:freezesText="true"
+            android:text="@string/converter_amount_zero_text"
+            android:textSize="@dimen/amount_text_size"
+            android:textColor="@color/colorAccent"
+            android:background="?attr/selectableItemBackground"/>
+
+    </LinearLayout>
+
+</LinearLayout>

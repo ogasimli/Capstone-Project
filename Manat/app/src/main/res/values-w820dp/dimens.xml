@@ -6,7 +6,7 @@
     <dimen name="activity_horizontal_padding">24dp</dimen>
     <dimen name="main_fragment_width">650dp</dimen>
     <dimen name="date_text_padding">10dp</dimen>
-    <dimen name="converter_margin">10dp</dimen>
+    <dimen name="converter_vertical_margin">16dp</dimen>
     <dimen name="currency_text_size">16sp</dimen>
     <dimen name="amount_text_size">24sp</dimen>
     <dimen name="main_rate_padding">5dp</dimen>
