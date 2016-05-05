@@ -58,6 +58,8 @@ public class Constants {
     public static final String VIEW_STATE_KEY = "VIEW_STATE_KEY";
     public static final String PRESSED_AMOUNT_FIELD_KEY = "PRESSED_AMOUNT_FIELD_KEY";
     public static final String BUTTON_STATE_KEY = "BUTTON_STATE_KEY";
+    public static final String IGNORE_CHANGE_KEY = "IGNORE_CHANGE_KEY";
+    public static final String SWAP_ORDER_KEY = "SWAP_ORDER_KEY";
 
     //Activity state keys
     public static final int VIEW_STATE_ERROR = 0;

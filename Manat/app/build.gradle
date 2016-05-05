@@ -77,6 +77,9 @@ dependencies {
 
     //EvalEx
     compile 'com.udojava:EvalEx:1.2'
+
+    //Backport transition animations library
+    compile "com.andkulikov:transitionseverywhere:1.6.3"
 }
 
 apply plugin: 'com.google.gms.google-services'

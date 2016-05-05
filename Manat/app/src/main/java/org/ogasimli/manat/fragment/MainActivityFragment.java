@@ -9,6 +9,9 @@ import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import com.transitionseverywhere.ChangeBounds;
+import com.transitionseverywhere.TransitionManager;
+
 import org.joda.time.DateTime;
 import org.ogasimli.manat.ManatApplication;
 import org.ogasimli.manat.activity.DetailActivity;
@@ -30,6 +33,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -49,6 +53,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -105,11 +110,11 @@ public class MainActivityFragment extends Fragment
 
     private int mAmountField = 0;
 
-    private Tracker mTracker;
+    private int mSwapOrder = 0;
 
-    float viewHeight;
-    boolean noSwap = true;
-    private static int ANIMATION_DURATION = 300;
+    private Unbinder mUnbinder;
+
+    private Tracker mTracker;
 
     @BindView(R.id.main_result_view)
     LinearLayout mResultView;
@@ -117,8 +122,14 @@ public class MainActivityFragment extends Fragment
     @BindView(R.id.main_error_view)
     LinearLayout mErrorView;
 
+    @BindView(R.id.main_converter_root_view)
+    LinearLayout mRootView;
+
     @BindView(R.id.main_foreign_linear_layout)
     LinearLayout mForeignLinerLayout;
+
+    @BindView(R.id.main_divider_frame_layout)
+    FrameLayout mDividerLayout;
 
     @BindView(R.id.main_azn_linear_layout)
     LinearLayout mAznLinearLayout;
@@ -150,8 +161,6 @@ public class MainActivityFragment extends Fragment
     @Nullable
     @BindView(R.id.adView)
     AdView mAdView;
-
-    private Unbinder mUnbinder;
 
     public MainActivityFragment() {
     }
@@ -231,18 +240,6 @@ public class MainActivityFragment extends Fragment
             restoreInstanceState(savedInstanceState);
         }
 
-/*        ViewTreeObserver viewTreeObserver = mMainAznAmountTextView.getViewTreeObserver();
-        if (viewTreeObserver.isAlive()) {
-            viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    mMainAznAmountTextView.getViewTreeObserver().addOnGlobalLayoutListener(this);
-                    viewHeight = (float) (mMainAznAmountTextView.getHeight() * 3.5);
-                    mMainAznAmountTextView.getLayoutParams();
-                }
-            });
-        }*/
-
         return rootView;
     }
 
@@ -265,6 +262,8 @@ public class MainActivityFragment extends Fragment
 
         outState.putInt(Constants.VIEW_STATE_KEY, state);
         outState.putInt(Constants.PRESSED_AMOUNT_FIELD_KEY, mAmountField);
+        outState.putBoolean(Constants.IGNORE_CHANGE_KEY, mIgnoreChange);
+        outState.putInt(Constants.SWAP_ORDER_KEY, mSwapOrder);
         outState.putParcelableArrayList(Constants.LIST_STATE_KEY, mCurrencyList);
     }
 
@@ -446,7 +445,7 @@ public class MainActivityFragment extends Fragment
             double rate = Double.parseDouble(rateString.replace(",", "."));
             double result;
             String resultString;
-            switch (mAmountField) {
+            switch (mSwapOrder) {
                 case 0:
                     result = fAmount * rate;
                     resultString = String.format(Locale.getDefault(), "%.2f", result);
@@ -672,8 +671,11 @@ public class MainActivityFragment extends Fragment
     */
     private void restoreInstanceState(Bundle savedInstanceState) {
         mAmountField = savedInstanceState.getInt(Constants.PRESSED_AMOUNT_FIELD_KEY);
+        mIgnoreChange = savedInstanceState.getBoolean(Constants.IGNORE_CHANGE_KEY);
+        mSwapOrder = savedInstanceState.getInt(Constants.SWAP_ORDER_KEY);
         int state = savedInstanceState.getInt(Constants.VIEW_STATE_KEY,
                 Constants.VIEW_STATE_ERROR);
+
         switch (state) {
             case Constants.VIEW_STATE_ERROR:
                 showErrorView();
@@ -684,6 +686,20 @@ public class MainActivityFragment extends Fragment
                 break;
         }
 
+        if (mSwapOrder == 1) {
+            TransitionManager.beginDelayedTransition(mRootView, new ChangeBounds());
+            mRootView.removeView(mForeignLinerLayout);
+            mRootView.removeView(mAznLinearLayout);
+
+            //swap layouts
+            mRootView.addView(mForeignLinerLayout, mRootView.getChildCount());
+            mRootView.addView(mAznLinearLayout, 0);
+
+            //enable/disable ripple effects
+            mMainForeignAmountTextView.setBackgroundResource(0);
+            setRipple(mMainAznAmountTextView);
+        }
+
         //Set RecyclerView unfocusable on orientation change in order to prevent converter from
         // scrolling up
         int orientation = getResources().getConfiguration().orientation;
@@ -692,7 +708,22 @@ public class MainActivityFragment extends Fragment
         }
     }
 
+    /*
+    * Helper method to set ripple effect to view
+    */
+    private void setRipple(View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            // If we're running on Honeycomb or newer, then we can use the Theme's
+            // selectableItemBackground to ensure that the View has a pressed state
+            TypedValue tValue = new TypedValue();
+            getContext().getTheme().resolveAttribute(R.attr.selectableItemBackground, tValue, true);
+            view.setBackgroundResource(tValue.resourceId);
+        }
+    }
 
+    /*
+    * Helper method to update app widget
+    */
     private void updateWidgets() {
         Context context = getContext();
         Intent dataUpdatedIntent = new Intent(Constants.ACTION_DATA_UPDATED)
@@ -700,38 +731,38 @@ public class MainActivityFragment extends Fragment
         context.sendBroadcast(dataUpdatedIntent);
     }
 
-    //TODO: Enhance swap animation
     @OnClick(R.id.main_swap_fab)
     public void swapLayouts(FloatingActionButton swapFab) {
-/*        if (noSwap) {
-            TranslateAnimation ta1 = new TranslateAnimation(0, 0, 0, viewHeight);
-            ta1.setDuration(ANIMATION_DURATION);
-            ta1.setFillAfter(true);
-            mForeignLinerLayout.startAnimation(ta1);
-            mForeignLinerLayout.bringToFront();
+        TransitionManager.beginDelayedTransition(mRootView, new ChangeBounds());
+        mRootView.removeView(mForeignLinerLayout);
+        mRootView.removeView(mAznLinearLayout);
 
-            TranslateAnimation ta2 = new TranslateAnimation(0, 0, 0, -viewHeight);
-            ta2.setDuration(ANIMATION_DURATION);
-            ta2.setFillAfter(true);
-            mAznLinearLayout.startAnimation(ta2);
-            mAznLinearLayout.bringToFront();
+        switch (mSwapOrder) {
+            case 0:
+                //swap layouts
+                mRootView.addView(mForeignLinerLayout, mRootView.getChildCount());
+                mRootView.addView(mAznLinearLayout, 0);
 
-            noSwap = false;
-        } else {
-            TranslateAnimation ta1 = new TranslateAnimation(0, 0, viewHeight, 0);
-            ta1.setDuration(ANIMATION_DURATION);
-            ta1.setFillAfter(true);
-            mForeignLinerLayout.startAnimation(ta1);
-            mForeignLinerLayout.bringToFront();
+                //enable/disable ripple effects
+                mMainForeignAmountTextView.setBackgroundResource(0);
+                setRipple(mMainAznAmountTextView);
 
-            TranslateAnimation ta2 = new TranslateAnimation(0, 0, -viewHeight, 0);
-            ta2.setDuration(ANIMATION_DURATION);
-            ta2.setFillAfter(true);
-            mAznLinearLayout.startAnimation(ta2);
-            mAznLinearLayout.bringToFront();
+                //set swap order
+                mSwapOrder++;
+                break;
+            case 1:
+                //swap layouts
+                mRootView.addView(mForeignLinerLayout, 0);
+                mRootView.addView(mAznLinearLayout, mRootView.getChildCount());
 
-            noSwap = true;
-        }*/
+                //enable/disable ripple effects
+                mMainAznAmountTextView.setBackgroundResource(0);
+                setRipple(mMainForeignAmountTextView);
+
+                //set swap order
+                mSwapOrder--;
+                break;
+        }
     }
 
     @OnClick(R.id.reload_text)
@@ -746,14 +777,18 @@ public class MainActivityFragment extends Fragment
 
     @OnClick(R.id.main_foreign_amount_textview)
     public void foreignAmountTextViewClick(TextView textView) {
-        mAmountField = 0;
-        showCalculatorDialog(mAmountField);
+        if (mSwapOrder == 0) {
+            mAmountField = 0;
+            showCalculatorDialog(mAmountField);
+        }
     }
 
     @OnClick(R.id.main_azn_amount_textview)
     public void aznAmountTextViewClick(TextView textView) {
-        mAmountField = 1;
-        showCalculatorDialog(mAmountField);
+        if (mSwapOrder == 1) {
+            mAmountField = 1;
+            showCalculatorDialog(mAmountField);
+        }
     }
 
     @OnClick(R.id.main_foreign_currency_text)

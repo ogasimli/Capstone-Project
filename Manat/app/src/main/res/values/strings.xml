@@ -16,6 +16,9 @@
     <string name="no_result_image_description">No result image</string>
     <string name="country_flag_image_description">Country flag</string>
     <string name="trending_image_description">Trending status image</string>
+    <string name="trend_down_image_description">Rate is decreased</string>
+    <string name="trend_flat_image_description">Rate does not change</string>
+    <string name="trend_up_image_description">Rate is increased</string>
 
     <!-- Menu items -->
     <string name="menu_refresh_text">Refresh</string>
@@ -78,53 +81,20 @@
     <string name="widget_no_result_message">Data is currently unavailable</string>
     <string name="line_chart_no_data_text">No data available to illustrate.</string>
 
-    <!-- Currency abbreviations -->
-    <string-array name="currency_codes" translatable="false">
-        <item>USD</item>
-        <item>EUR</item>
-        <item>GBP</item>
-        <item>RUB</item>
-        <item>TRY</item>
-        <item>AED</item>
-        <item>ARS</item>
-        <item>AUD</item>
-        <item>BRL</item>
-        <item>BYR</item>
-        <item>CAD</item>
-        <item>CHF</item>
-        <item>CLP</item>
-        <item>CNY</item>
-        <item>CZK</item>
-        <item>DKK</item>
-        <item>EGP</item>
-        <item>GEL</item>
-        <item>HKD</item>
-        <item>IDR</item>
-        <item>ILS</item>
-        <item>INR</item>
-        <item>IRR</item>
-        <item>JPY</item>
-        <item>KGS</item>
-        <item>KRW</item>
-        <item>KWD</item>
-        <item>KZT</item>
-        <item>LBP</item>
-        <item>MDL</item>
-        <item>MXN</item>
-        <item>MYR</item>
-        <item>NOK</item>
-        <item>NZD</item>
-        <item>PLN</item>
-        <item>SAR</item>
-        <item>SEK</item>
-        <item>SGD</item>
-        <item>TJS</item>
-        <item>TMT</item>
-        <item>TWD</item>
-        <item>UAH</item>
-        <item>UZS</item>
-        <item>ZAR</item>
-    </string-array>
+    <!-- Ad Unit ID -->
+    <!-- TODO: Replace with real Ad Unit ID -->
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+
+    <!-- Google AppInvite string resources -->
+    <string name="invitation_title">Send App Invite Quickstart Invitation</string>
+    <string name="invitation_message">This app is terrific, give it a try!</string>
+    <string name="invitation_image">
+        https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    </string>
+    <string name="invitation_cta">Install!</string>
+    <string name="send_failed">Sending invitations failed</string>
+    <string name="sent_invitations_fmt" formatted="false">Sent %d invitations</string>
+    <string name="google_play_services_error">Google Play Services Error</string>
 
     <!-- Currency names -->
     <string-array name="currency_names">
@@ -174,21 +144,51 @@
         <item>South African Rand</item>
     </string-array>
 
-    <!-- Ad Unit ID -->
-    <!-- TODO: Replace with real Ad Unit ID -->
-    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-
-    <!-- Google AppInvite string resources -->
-    <string name="invitation_title">Send App Invite Quickstart Invitation</string>
-    <string name="invitation_message">This app is terrific, give it a try!</string>
-    <string name="invitation_image">
-        https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
-    </string>
-    <string name="invitation_cta">Install!</string>
-    <string name="send_failed">Sending invitations failed</string>
-    <string name="sent_invitations_fmt" formatted="false">Sent %d invitations</string>
-    <string name="google_play_services_error">Google Play Services Error</string>
-    <string name="trend_down_image_description">Rate is decreased</string>
-    <string name="trend_flat_image_description">Rate does not change</string>
-    <string name="trend_up_image_description">Rate is increased</string>
+    <!-- Currency abbreviations -->
+    <string-array name="currency_codes" translatable="false">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>GBP</item>
+        <item>RUB</item>
+        <item>TRY</item>
+        <item>AED</item>
+        <item>ARS</item>
+        <item>AUD</item>
+        <item>BRL</item>
+        <item>BYR</item>
+        <item>CAD</item>
+        <item>CHF</item>
+        <item>CLP</item>
+        <item>CNY</item>
+        <item>CZK</item>
+        <item>DKK</item>
+        <item>EGP</item>
+        <item>GEL</item>
+        <item>HKD</item>
+        <item>IDR</item>
+        <item>ILS</item>
+        <item>INR</item>
+        <item>IRR</item>
+        <item>JPY</item>
+        <item>KGS</item>
+        <item>KRW</item>
+        <item>KWD</item>
+        <item>KZT</item>
+        <item>LBP</item>
+        <item>MDL</item>
+        <item>MXN</item>
+        <item>MYR</item>
+        <item>NOK</item>
+        <item>NZD</item>
+        <item>PLN</item>
+        <item>SAR</item>
+        <item>SEK</item>
+        <item>SGD</item>
+        <item>TJS</item>
+        <item>TMT</item>
+        <item>TWD</item>
+        <item>UAH</item>
+        <item>UZS</item>
+        <item>ZAR</item>
+    </string-array>
 </resources>
