@@ -14,7 +14,7 @@
         android:alpha="0.2"
         android:contentDescription="@string/no_result_image_description"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_cloud_outline"/>
+        android:src="@drawable/ic_empty_glas"/>
 
     <TextView
         android:layout_width="wrap_content"
