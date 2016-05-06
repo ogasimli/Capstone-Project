@@ -32,6 +32,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.drawable.AnimatedVectorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -151,6 +152,9 @@ public class MainActivityFragment extends Fragment
 
     @BindView(R.id.main_rate_text)
     TextView mMainRateTextView;
+
+    @BindView(R.id.main_swap_fab)
+    FloatingActionButton mSwapFab;
 
     @BindView(R.id.toolbar_main)
     Toolbar mToolbar;
@@ -733,6 +737,17 @@ public class MainActivityFragment extends Fragment
 
     @OnClick(R.id.main_swap_fab)
     public void swapLayouts(FloatingActionButton swapFab) {
+        //Animate fab
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            AnimatedVectorDrawable fabRotation = (AnimatedVectorDrawable) getActivity().
+                    getDrawable(R.drawable.fab_anim_vector_drawable);
+            mSwapFab.setImageDrawable(fabRotation);
+            if (fabRotation != null) {
+                fabRotation.start();
+            }
+        }
+
+        //Swap layouts
         TransitionManager.beginDelayedTransition(mRootView, new ChangeBounds());
         mRootView.removeView(mForeignLinerLayout);
         mRootView.removeView(mAznLinearLayout);
