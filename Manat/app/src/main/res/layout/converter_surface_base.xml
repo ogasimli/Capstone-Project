@@ -47,7 +47,7 @@
             android:freezesText="true"
             tools:text="USD"
             android:textSize="@dimen/currency_text_size"
-            android:background="@drawable/background_oval_primary_with_stroke"
+            android:background="@drawable/background_oval_primary_stroke"
             android:textColor="@color/colorAccent"/>
 
         <org.ogasimli.manat.customview.MyTextViewLight

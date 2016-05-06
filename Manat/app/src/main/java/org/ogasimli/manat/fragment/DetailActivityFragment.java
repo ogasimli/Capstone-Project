@@ -18,13 +18,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -45,10 +42,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import butterknife.BindColor;
-import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Optional;
 import butterknife.Unbinder;
 import manat.ogasimli.org.manat.R;
 import retrofit.Callback;
@@ -129,14 +126,6 @@ public class DetailActivityFragment extends Fragment {
     @BindView(R.id.yearly_btn)
     Button mYearlyBtn;
 
-    @BindDrawable(R.drawable.background_color_accent)
-    Drawable mSelectedBackground;
-
-    @BindDrawable(R.drawable.background_color_primary_stroke)
-    Drawable mUnselectedBackground;
-
-    Drawable mUnselectedRippleBackground;
-
     @BindColor(R.color.colorPrimary)
     ColorStateList mColorPrimary;
 
@@ -194,12 +183,6 @@ public class DetailActivityFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
         mUnbinder = ButterKnife.bind(this, rootView);
-
-        //Getting ripple drawable manually
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mUnselectedRippleBackground = ContextCompat.getDrawable(getContext(),
-                    R.drawable.ripple_color_primary_stroke);
-        }
 
         //initToolbar();
         initToolbar();
@@ -366,8 +349,6 @@ public class DetailActivityFragment extends Fragment {
         ChartMaker chartMaker = new ChartMaker(getActivity(), mChart, mSecondaryCurrencyList);
         chartMaker.createChart();
 
-        changeBtnState(mPressedBtnNum);
-
         //Analyze and set values to TextViews
         HashMap<String, String> map = Utilities.processData(mSecondaryCurrencyList, mTillDateString);
         mCurrentRateTextView.setText(map.get(Constants.CURRENT_RATE_KEY));
@@ -402,7 +383,7 @@ public class DetailActivityFragment extends Fragment {
     private void showErrorView() {
 
         //View and hide relevant LinearLayouts
-        mToolbar.setVisibility(View.GONE );
+        mToolbar.setVisibility(View.GONE);
         mResultView.setVisibility(View.GONE);
         if (mFab != null) {
             mFab.setVisibility(View.GONE);
@@ -510,35 +491,17 @@ public class DetailActivityFragment extends Fragment {
     }
 
     /*
-    * Helper method to set background drawables for buttons
-    */
-    private void setDrawable(View view, Drawable drawable) {
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            //noinspection deprecation
-            view.setBackgroundDrawable(drawable);
-        } else {
-            view.setBackground(drawable);
-        }
-    }
-
-    /*
     * Helper method to change state of buttons
     */
     private void setButtonStyle(Button button, boolean selected) {
         if (selected) {
             //Make button selected
-            setDrawable(button, mSelectedBackground);
             button.setTextColor(mColorPrimary);
-            button.setClickable(false);
+            button.setEnabled(false);
         } else {
             //Make button unselected
-            if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                setDrawable(button, mUnselectedBackground);
-            } else {
-                setDrawable(button, mUnselectedRippleBackground);
-            }
             button.setTextColor(mColorAccent);
-            button.setClickable(true);
+            button.setEnabled(true);
         }
     }
 
@@ -547,8 +510,7 @@ public class DetailActivityFragment extends Fragment {
         loadData();
     }
 
-    @SuppressWarnings("NullableProblems")
-    @Nullable
+    @Optional
     @OnClick(R.id.fab_share_details)
     public void shareStatistics(FloatingActionButton fab) {
         trackShare();
@@ -574,7 +536,7 @@ public class DetailActivityFragment extends Fragment {
         startActivity(Intent.createChooser(intent, getString(R.string.share_rate_statistics_title)));
     }
 
-    //TODO: Move heavy loading data processing into background thread
+    //TODO: Optimize data processing
     @OnClick({R.id.weekly_btn, R.id.monthly_btn, R.id.quarterly_btn,
             R.id.semi_annually_btn, R.id.yearly_btn})
     public void showStatistics(Button button) {
@@ -603,6 +565,8 @@ public class DetailActivityFragment extends Fragment {
                 mPressedBtnNum = Constants.WEEKLY_BTN_SELECTED;
                 break;
         }
+
+        changeBtnState(mPressedBtnNum);
 
         mSecondaryCurrencyList = Utilities.getDataForPeriod(mMainCurrencyList, mPressedBtnNum);
         if (mSecondaryCurrencyList != null && mSecondaryCurrencyList.size() > 0) {
