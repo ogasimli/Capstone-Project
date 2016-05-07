@@ -314,7 +314,7 @@ public class Utilities {
         return currencyList;
     }
 
-    public static class CurrencyCodeComparator implements Comparator<Currency> {
+    private static class CurrencyCodeComparator implements Comparator<Currency> {
 
         public int compare(Currency before, Currency after) {
             return before.getCode().compareTo(after.getCode());

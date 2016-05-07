@@ -345,6 +345,8 @@ public class DetailActivityFragment extends Fragment {
      */
     private void showResultView() {
 
+        changeBtnState(mPressedBtnNum);
+
         //Instantiate and create LineChart
         ChartMaker chartMaker = new ChartMaker(getActivity(), mChart, mSecondaryCurrencyList);
         chartMaker.createChart();
@@ -565,8 +567,6 @@ public class DetailActivityFragment extends Fragment {
                 mPressedBtnNum = Constants.WEEKLY_BTN_SELECTED;
                 break;
         }
-
-        changeBtnState(mPressedBtnNum);
 
         mSecondaryCurrencyList = Utilities.getDataForPeriod(mMainCurrencyList, mPressedBtnNum);
         if (mSecondaryCurrencyList != null && mSecondaryCurrencyList.size() > 0) {

@@ -11,7 +11,8 @@
         android:id="@+id/widget_heading"
         android:layout_width="match_parent"
         android:layout_height="@dimen/abc_action_bar_default_height_material"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        tools:ignore="PrivateResource">
 
         <TextView
             android:layout_width="wrap_content"

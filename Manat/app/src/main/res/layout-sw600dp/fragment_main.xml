@@ -63,6 +63,7 @@
                     android:id="@+id/recyclerview_main"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/ad_banner_height"
                     app:layoutManager="LinearLayoutManager"
                     tools:listitem="@layout/main_currency_item"
                     android:elevation="@dimen/converter_elevation"

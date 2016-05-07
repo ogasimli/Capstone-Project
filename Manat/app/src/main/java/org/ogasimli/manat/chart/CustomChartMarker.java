@@ -21,7 +21,7 @@ import manat.ogasimli.org.manat.R;
  */
 public class CustomChartMarker extends MarkerView {
 
-    private LineChart mChart;
+    private final LineChart mChart;
 
     @BindView(R.id.marker_y_text_view)
     TextView markerYTextView;
@@ -49,9 +49,9 @@ public class CustomChartMarker extends MarkerView {
 
         if (e instanceof CandleEntry) {
             CandleEntry ce = (CandleEntry) e;
-            markerYTextView.setText("" + Utils.formatNumber(ce.getHigh(), 4, true));
+            markerYTextView.setText(Utils.formatNumber(ce.getHigh(), 4, true));
         } else {
-            markerYTextView.setText("" + Utils.formatNumber(e.getVal(), 4, true));
+            markerYTextView.setText(Utils.formatNumber(e.getVal(), 4, true));
         }
 
         markerXTextView.setText(mChart.getData().getXVals().get(e.getXIndex()));

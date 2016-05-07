@@ -1,7 +1,6 @@
 <resources>
-    <!-- Activity labels -->
+    <!-- App labels -->
     <string name="app_name">Manat</string>
-    <string name="title_activity_select_currency">Select Currency</string>
 
     <!-- Ungrouped -->
     <string name="converter_amount_zero_text" translatable="false">0,00</string>
@@ -44,12 +43,12 @@
 
     <!-- Share rate strings -->
     <string name="share_rate_statistics_title">Share rate statistics via</string>
-    <string name="share_statistics_text" formatted="false">Check out rate statistics of \""%s"\"
-        for period from "%s" till "%s":\n
-        Current rate - "%s"\n
-        Average rate - "%s"\n
-        Maximum rate - "%s"\n
-        Minimum rate - "%s"
+    <string name="share_statistics_text" formatted="false">Check out rate statistics of \"%1$s\"
+        for period from %2$s till %3$s:\n
+        Current rate - %4$s\n
+        Average rate - %5$s\n
+        Maximum rate - %6$s\n
+        Minimum rate - %7$s
     </string>
 
     <!-- Calculator strings -->
@@ -76,12 +75,11 @@
     <string name="express_exception_message">Invalid input! Enter correct values!</string>
     <string name="arithmetical_exception_message">Invalid input! There is an arithmetic problem!
     </string>
-    <string name="error_no_connection">Please check your internet connection.</string>
     <string name="main_no_result_message">Oops, something went wrong whilst retrieving the rates.
         Please try again&#8230;</string>
-    <string name="widget_no_result_message">Data is currently unavailable</string>
-    <string name="line_chart_no_data_text">Looks like there\'s no rates to display. Try checking
-        again soon&#8230;</string>
+    <string name="widget_no_result_message">Looks like there\'s no rates to display here. Try
+        checking again soon&#8230;</string>
+    <string name="line_chart_no_data_text">Looks like there\'s no data to illustrate</string>
 
     <!-- Ad Unit ID -->
     <!-- TODO: Replace with real Ad Unit ID -->

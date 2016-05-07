@@ -27,13 +27,13 @@ import manat.ogasimli.org.manat.R;
  */
 public class ChartMaker {
 
-    private Context mContext;
+    private final Context mContext;
 
     private Typeface tf;
 
-    private LineChart mChart;
+    private final LineChart mChart;
 
-    ArrayList<Currency> mCurrencyList;
+    private final ArrayList<Currency> mCurrencyList;
 
     public ChartMaker(Context context, LineChart lineChart, ArrayList<Currency> currencyList) {
         mContext = context;
@@ -92,7 +92,6 @@ public class ChartMaker {
         y.setTextColor(Color.WHITE);
         y.setTypeface(tf);
         y.setLabelCount(6, false);
-        y.setStartAtZero(false);
         y.setLabelCount(8, true);
         y.setValueFormatter(new MyYAxisValueFormatter());
 

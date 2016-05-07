@@ -26,7 +26,7 @@ public class SelectCurrencyAdapter extends RecyclerView.Adapter<SelectCurrencyAd
 
     final private Context mContext;
 
-    private ArrayList<String> currencyCodes;
+    private final ArrayList<String> currencyCodes;
 
     private static ClickListener mClickListener;
 

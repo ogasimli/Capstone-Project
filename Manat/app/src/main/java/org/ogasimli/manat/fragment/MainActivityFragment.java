@@ -129,9 +129,6 @@ public class MainActivityFragment extends Fragment
     @BindView(R.id.main_foreign_linear_layout)
     LinearLayout mForeignLinerLayout;
 
-    @BindView(R.id.main_divider_frame_layout)
-    FrameLayout mDividerLayout;
-
     @BindView(R.id.main_azn_linear_layout)
     LinearLayout mAznLinearLayout;
 

@@ -10,9 +10,9 @@ import java.text.DecimalFormat;
  *
  * Created by Orkhan Gasimli on 19.04.2016.
  */
-public class MyYAxisValueFormatter implements YAxisValueFormatter {
+class MyYAxisValueFormatter implements YAxisValueFormatter {
 
-    private DecimalFormat mFormat;
+    private final DecimalFormat mFormat;
 
     public MyYAxisValueFormatter() {
         mFormat = new DecimalFormat("###,###,##0.0000"); // use two decimal

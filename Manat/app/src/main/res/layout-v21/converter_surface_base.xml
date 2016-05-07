@@ -84,8 +84,7 @@
             android:src="@drawable/ic_swap"
             app:fabSize="mini"
             android:elevation="@dimen/fab_elevation"
-            android:translationZ="@dimen/fab_translationZ"
-            tools:targetApi="lollipop"/>
+            android:translationZ="@dimen/fab_translationZ"/>
 
         <TextView
             android:id="@+id/main_rate_text"

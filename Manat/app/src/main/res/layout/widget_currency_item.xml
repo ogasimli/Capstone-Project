@@ -11,7 +11,8 @@
     android:paddingRight="@dimen/activity_horizontal_padding"
     android:paddingEnd="@dimen/activity_horizontal_padding"
     android:background="@color/colorAccent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:ignore="PrivateResource">
 
     <ImageView
         android:id="@+id/widget_list_item_country_flag"
