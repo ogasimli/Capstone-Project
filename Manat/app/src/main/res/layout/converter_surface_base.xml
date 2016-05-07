@@ -60,6 +60,7 @@
             android:text="@string/converter_amount_zero_text"
             android:textSize="@dimen/amount_text_size"
             android:textColor="@color/colorAccent"
+            android:maxLines="2"
             android:background="?attr/selectableItemBackground"/>
 
     </LinearLayout>
@@ -143,7 +144,7 @@
             android:text="@string/converter_amount_zero_text"
             android:textSize="@dimen/amount_text_size"
             android:textColor="@color/colorAccent"
-            android:background="?attr/selectableItemBackground"/>
+            android:maxLines="2"/>
 
     </LinearLayout>
 
