@@ -80,6 +80,9 @@
     <string name="widget_no_result_message">Looks like there\'s no rates to display here. Try
         checking again soon&#8230;</string>
     <string name="line_chart_no_data_text">Looks like there\'s no data to illustrate</string>
+    <string name="google_play_missing_error_message">You need to download Google Play Services in
+        order to be able to invite friends
+    </string>
 
     <!-- Ad Unit ID -->
     <!-- TODO: Replace with real Ad Unit ID -->

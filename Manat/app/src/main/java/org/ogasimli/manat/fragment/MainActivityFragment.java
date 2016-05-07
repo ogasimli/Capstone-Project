@@ -7,6 +7,7 @@ import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.appinvite.AppInvite;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import com.transitionseverywhere.ChangeBounds;
@@ -46,6 +47,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -360,11 +362,11 @@ public class MainActivityFragment extends Fragment
     private void showMessage(String msg) {
         final Snackbar snackbar = Snackbar.make(mFrameLayout, msg, Snackbar.LENGTH_LONG);
         snackbar.setAction(android.R.string.ok, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        snackbar.dismiss();
-                    }
-                });
+            @Override
+            public void onClick(View v) {
+                snackbar.dismiss();
+            }
+        });
         ViewGroup viewGroup = (ViewGroup) snackbar.getView();
         viewGroup.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
         snackbar.show();
@@ -384,12 +386,22 @@ public class MainActivityFragment extends Fragment
      * Helper method to invite friends
      */
     private void onInviteClicked() {
-        Intent intent = new AppInviteInvitation.IntentBuilder(getString(R.string.invitation_title))
-                .setMessage(getString(R.string.invitation_message))
-                .setCustomImage(Uri.parse(getString(R.string.invitation_image)))
-                .setCallToActionText(getString(R.string.invitation_cta))
-                .build();
-        startActivityForResult(intent, Constants.INVITATION_REQUEST_RESULT);
+        GoogleApiAvailability api = GoogleApiAvailability.getInstance();
+        int code = api.isGooglePlayServicesAvailable(getActivity());
+        if (code == ConnectionResult.SUCCESS) {
+            Intent intent = new AppInviteInvitation.IntentBuilder(getString(R.string.invitation_title))
+                    .setMessage(getString(R.string.invitation_message))
+                    .setCustomImage(Uri.parse(getString(R.string.invitation_image)))
+                    .setCallToActionText(getString(R.string.invitation_cta))
+                    .build();
+            startActivityForResult(intent, Constants.INVITATION_REQUEST_RESULT);
+        } else {
+            AlertDialog alertDialog =
+                    new AlertDialog.Builder(getActivity(), R.style.DatePickerDialogStyle).setMessage(
+                            getActivity().getString(R.string.google_play_missing_error_message))
+                            .create();
+            alertDialog.show();
+        }
     }
 
     /**
@@ -654,7 +666,7 @@ public class MainActivityFragment extends Fragment
     /*
     * Helper method to load ad banner
     */
-    private void loadAd(AdView adView){
+    private void loadAd(AdView adView) {
         // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
