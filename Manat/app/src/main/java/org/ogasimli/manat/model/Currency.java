@@ -76,6 +76,9 @@ public class Currency implements Parcelable {
     }
 
     public String getTrend() {
+        if (this.trend == null) {
+            setTrend("0");
+        }
         return trend;
     }
 

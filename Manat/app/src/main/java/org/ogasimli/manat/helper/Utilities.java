@@ -290,26 +290,28 @@ public class Utilities {
         Currency currency;
         //Sort list by code
         Collections.sort(currencyList, new CurrencyCodeComparator());
-        //USD
-        currency = currencyList.get(41);
-        currencyList.remove(41);
-        currencyList.add(0, currency);
-        //EUR
-        currency = currencyList.get(13);
-        currencyList.remove(13);
-        currencyList.add(1, currency);
-        //GBP
-        currency = currencyList.get(14);
-        currencyList.remove(14);
-        currencyList.add(2, currency);
-        //RUB
-        currency = currencyList.get(33);
-        currencyList.remove(33);
-        currencyList.add(3, currency);
-        //TRY
-        currency = currencyList.get(39);
-        currencyList.remove(39);
-        currencyList.add(4, currency);
+        if (currencyList.size() >= 41) {
+            //USD
+            currency = currencyList.get(41);
+            currencyList.remove(41);
+            currencyList.add(0, currency);
+            //EUR
+            currency = currencyList.get(13);
+            currencyList.remove(13);
+            currencyList.add(1, currency);
+            //GBP
+            currency = currencyList.get(14);
+            currencyList.remove(14);
+            currencyList.add(2, currency);
+            //RUB
+            currency = currencyList.get(33);
+            currencyList.remove(33);
+            currencyList.add(3, currency);
+            //TRY
+            currency = currencyList.get(39);
+            currencyList.remove(39);
+            currencyList.add(4, currency);
+        }
 
         return currencyList;
     }
