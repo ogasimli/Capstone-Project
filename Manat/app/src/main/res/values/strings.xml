@@ -75,7 +75,7 @@
     <string name="express_exception_message">Invalid input! Enter correct values!</string>
     <string name="arithmetical_exception_message">Invalid input! There is an arithmetic problem!
     </string>
-    <string name="main_no_result_message">Oops, something went wrong whilst retrieving the rates.
+    <string name="main_no_result_message">Oops, something went wrong whilst retrieving rates.
         Please try again&#8230;</string>
     <string name="widget_no_result_message">Looks like there\'s no rates to display here. Try
         checking again soon&#8230;</string>

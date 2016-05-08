@@ -15,3 +15,10 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-dontwarn org.joda.convert.**
+-dontwarn com.squareup.okhttp.**
+-dontwarn io.realm.**
+-dontwarn rx.**
+-dontwarn com.google.appengine.api.urlfetch.**
+-dontwarn okio.BufferedSink

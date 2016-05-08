@@ -13,11 +13,20 @@ android {
         // Enabling multiDex support.
         multiDexEnabled true
     }
+    signingConfigs {
+        release {
+            storeFile file("${manatReleaseKeystoreLocation}")
+            keyAlias "${manatReleaseKeyAlias}"
+            storePassword "${manatReleaseStorePassword}"
+            keyPassword "${manatReleaseKeyPassword}"
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
         buildTypes.each {
             it.buildConfigField 'String', 'API_KEY', API_KEY
