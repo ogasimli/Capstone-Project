@@ -11,12 +11,11 @@ import org.joda.time.format.DateTimeFormatter;
 public class Constants {
 
     //MongoDB query constants
-    public static final String BASE_URL = "https://api.mlab" +
-            ".com/api/1/databases/fxrates/collections/";
-    public static final String API_QUERY_PARAM = "q";
-    public static final String API_EXCLUDE_FIELDS_PARAM = "f";
-    public static final String API_EXCLUDE_FIELD_STRING = "{\"value\":1,\"date\":1}";
-    public static final String API_KEY = "apiKey";
+    public static final String BASE_URL = "https://manat.herokuapp.com";
+    public static final String FROM_DATE_QUERY_PARAM = "fromDate";
+    public static final String TILL_DATE_QUERY_PARAM = "tillDate";
+    public static final String CODE_QUERY_PARAM = "code";
+    public static final String TYPE_QUERY_PARAM = "type";
 
     //Intent extra keys
     public static final String CODE = "CODE";

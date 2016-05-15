@@ -16,7 +16,6 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -261,35 +260,11 @@ public class Utilities {
     }
 
     /**
-     * Helper method to build query string
-     */
-    public static String buildQueryString(String fromDate, String tillDate,
-                                          String code) {
-        String queryString;
-
-        if (tillDate == null || tillDate.isEmpty()) {
-            if (code == null || !code.isEmpty()) {
-                queryString = "{\"$and\":[{\"date\":\"" + fromDate + "\"},{\"type\":\"1\"}]}";
-
-            } else {
-                queryString = "{\"$and\":[{\"date\":\"" + fromDate + "\"},{\"code\":\"" + code
-                        + "\"}]}";
-            }
-        } else {
-            queryString = "{\"$and\":[{\"date\":{\"$gt\":\"" + fromDate + "\"," +
-                    "\"$lte\":\"" + tillDate + "\"}},{\"code\":\"" + code + "\"}]}";
-        }
-
-        return queryString;
-    }
-
-    /**
      * Helper method to sort currency list
      */
     public static ArrayList<Currency> sortList(ArrayList<Currency> currencyList) {
         Currency currency;
         //Sort list by code
-        Collections.sort(currencyList, new CurrencyCodeComparator());
         if (currencyList.size() >= 41) {
             //USD
             currency = currencyList.get(41);
@@ -314,12 +289,5 @@ public class Utilities {
         }
 
         return currencyList;
-    }
-
-    private static class CurrencyCodeComparator implements Comparator<Currency> {
-
-        public int compare(Currency before, Currency after) {
-            return before.getCode().compareTo(after.getCode());
-        }
     }
 }

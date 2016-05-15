@@ -105,8 +105,6 @@ public class MainActivityFragment extends Fragment
 
     private String mDateBeforeChange;
 
-    private String mQueryString;
-
     private String[] mCodes;
 
     private boolean mIgnoreChange = false;
@@ -565,7 +563,7 @@ public class MainActivityFragment extends Fragment
         //Load data from API
         RestAdapter adapter = RetrofitAdapter.getRestAdapter();
         ApiService service = adapter.create(ApiService.class);
-        service.getCurrencyByDate(mQueryString, new Callback<ArrayList<Currency>>() {
+        service.getCurrencyByDate(mDateString, new Callback<ArrayList<Currency>>() {
             @SuppressWarnings("unchecked")
             @Override
             public void success(ArrayList<Currency> currencyList, Response response) {
@@ -609,7 +607,6 @@ public class MainActivityFragment extends Fragment
                 Constants.DATE_FORMATTER_DDMMMYYYY,
                 Constants.DATE_FORMATTER_WITH_DASH,
                 Constants.DATE_APPENDIX);
-        mQueryString = Utilities.buildQueryString(mDateString, null, null);
         mCodes = getResources().getStringArray(R.array.currency_codes);
     }
 

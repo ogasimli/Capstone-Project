@@ -72,7 +72,7 @@ public class DetailActivityFragment extends Fragment {
 
     private ProgressDialog mProgressDialog;
 
-    private String mQueryString;
+    private String mFromDateString;
 
     private String mTillDateString;
 
@@ -303,7 +303,7 @@ public class DetailActivityFragment extends Fragment {
         //Load data from API
         RestAdapter adapter = RetrofitAdapter.getRestAdapter();
         ApiService service = adapter.create(ApiService.class);
-        service.getCurrencyByPeriod(mQueryString, Constants.API_EXCLUDE_FIELD_STRING,
+        service.getCurrencyByPeriod(mFromDateString, mTillDateString, mCurrencyCode,
                 new Callback<ArrayList<Currency>>() {
                     @Override
                     public void success(ArrayList<Currency> currencyList, Response response) {
@@ -333,11 +333,10 @@ public class DetailActivityFragment extends Fragment {
     private void buildQueryString() {
         DateTime tillDate = new DateTime();
         DateTime fromDate = tillDate.minusYears(1);
-        String fromDateString = Constants.DATE_FORMATTER_WITH_DASH.print(fromDate)
+        mFromDateString = Constants.DATE_FORMATTER_WITH_DASH.print(fromDate)
                 + Constants.DATE_APPENDIX;
         mTillDateString = Constants.DATE_FORMATTER_WITH_DASH.print(tillDate)
                 + Constants.DATE_APPENDIX;
-        mQueryString = Utilities.buildQueryString(fromDateString, mTillDateString, mCurrencyCode);
     }
 
     /**

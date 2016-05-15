@@ -16,11 +16,12 @@ import retrofit.http.Query;
 public interface ApiService {
 
     @GET("/rates")
-    void getCurrencyByDate(@Query(Constants.API_QUERY_PARAM) String queryStringByDate,
+    void getCurrencyByDate(@Query(Constants.FROM_DATE_QUERY_PARAM) String fromDate,
                            retrofit.Callback<ArrayList<Currency>> callback);
 
     @GET("/rates")
-    void getCurrencyByPeriod(@Query(Constants.API_QUERY_PARAM) String queryStringByPeriod,
-                             @Query(Constants.API_EXCLUDE_FIELDS_PARAM) String excludeFieldString,
+    void getCurrencyByPeriod(@Query(Constants.FROM_DATE_QUERY_PARAM) String fromDate,
+                             @Query(Constants.TILL_DATE_QUERY_PARAM) String tillDate,
+                             @Query(Constants.CODE_QUERY_PARAM) String code,
                              retrofit.Callback<ArrayList<Currency>> callback);
 }
