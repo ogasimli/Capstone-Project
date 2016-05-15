@@ -31,9 +31,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
-        buildTypes.each {
-            it.buildConfigField 'String', 'API_KEY', API_KEY
-        }
     }
 }
 
