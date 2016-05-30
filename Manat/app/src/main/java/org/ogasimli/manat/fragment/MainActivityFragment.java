@@ -2,19 +2,17 @@ package org.ogasimli.manat.fragment;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.appinvite.AppInvite;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import com.transitionseverywhere.ChangeBounds;
 import com.transitionseverywhere.TransitionManager;
 
 import org.joda.time.DateTime;
-import org.ogasimli.manat.ManatApplication;
 import org.ogasimli.manat.activity.DetailActivity;
 import org.ogasimli.manat.adapter.CurrencyListAdapter;
 import org.ogasimli.manat.asynctask.CurrencyLoader;
@@ -115,7 +113,7 @@ public class MainActivityFragment extends Fragment
 
     private Unbinder mUnbinder;
 
-    private Tracker mTracker;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @BindView(R.id.main_result_view)
     LinearLayout mResultView;
@@ -178,9 +176,8 @@ public class MainActivityFragment extends Fragment
                 .enableAutoManage(getActivity(), this)
                 .build();
 
-        // Obtain the shared Tracker instance.
-        ManatApplication application = (ManatApplication) getActivity().getApplication();
-        mTracker = application.getDefaultTracker();
+        // Initialize the FirebaseAnalytics object
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
     }
 
     @Override
@@ -245,11 +242,19 @@ public class MainActivityFragment extends Fragment
     }
 
     @Override
+    public void onPause() {
+        if (mAdView != null) {
+            mAdView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
-        Log.i(LOG_TAG, "Setting screen name: " + Constants.MAIN_ACTIVITY_SCREEN_NAME);
-        mTracker.setScreenName("Screen:" + Constants.MAIN_ACTIVITY_SCREEN_NAME);
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        if (mAdView != null) {
+            mAdView.resume();
+        }
     }
 
     @Override
@@ -270,6 +275,9 @@ public class MainActivityFragment extends Fragment
 
     @Override
     public void onDestroyView() {
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
         super.onDestroyView();
         mUnbinder.unbind();
     }
@@ -323,7 +331,6 @@ public class MainActivityFragment extends Fragment
                     // (one for each contact select by the user). You can use these for analytics
                     // as the ID will be consistent on the sending and receiving devices.
                     String[] ids = AppInviteInvitation.getInvitationIds(resultCode, data);
-                    trackInvite();
                     Log.d(LOG_TAG, getString(R.string.sent_invitations_fmt, ids.length));
                 } else {
                     // Sending failed or it was canceled, show failure message to the user
@@ -368,16 +375,6 @@ public class MainActivityFragment extends Fragment
         ViewGroup viewGroup = (ViewGroup) snackbar.getView();
         viewGroup.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
         snackbar.show();
-    }
-
-    /**
-     * Track invite clicks
-     */
-    private void trackInvite() {
-        mTracker.send(new HitBuilders.EventBuilder()
-                .setCategory(Constants.ACTION_TYPE)
-                .setAction(Constants.INVITE_ACTION)
-                .build());
     }
 
     /**
@@ -851,6 +848,8 @@ public class MainActivityFragment extends Fragment
             String code = mCurrencyList.get(position).getCode();
             intent.putExtra(Constants.SELECTED_CODE_KEY, code);
             startActivity(intent);
+
+            trackCurrencyClicks(code);
         }
 
         @Override
@@ -858,6 +857,15 @@ public class MainActivityFragment extends Fragment
             //TODO: Implement long click on list item
         }
     };
+
+    /**
+     * Track currency item clicks
+     */
+    private void trackCurrencyClicks(String selectedCode) {
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, selectedCode);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+    }
 
     /* Callbacks to query data from movie table */
     @Override

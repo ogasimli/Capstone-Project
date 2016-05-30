@@ -1,7 +1,9 @@
 {
   "project_info": {
     "project_number": "461186020502",
-    "project_id": "manat-1986"
+    "firebase_url": "https://manat-1986.firebaseio.com",
+    "project_id": "manat-1986",
+    "storage_bucket": "manat-1986.appspot.com"
   },
   "client": [
     {
@@ -13,12 +15,24 @@
       },
       "oauth_client": [
         {
+          "client_id": "461186020502-33ioqdaqdbmcsddqih5883q0vkq48pb4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.ogasimli.manat",
+            "certificate_hash": "F5E760405A9886BAD4F9B3D349072B59B5556398"
+          }
+        },
+        {
           "client_id": "461186020502-ghiglj6tgbkl49rad97q3fkjjpgq8hch.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "org.ogasimli.manat",
             "certificate_hash": "8D5D96CF9D4D549CE8E73A1F49E0237CA85281E8"
           }
+        },
+        {
+          "client_id": "461186020502-5rbtvqk196fs0bc123gk3i2mhksq90q3.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
@@ -35,7 +49,12 @@
         },
         "appinvite_service": {
           "status": 2,
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "461186020502-5rbtvqk196fs0bc123gk3i2mhksq90q3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 1

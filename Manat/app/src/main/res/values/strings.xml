@@ -85,8 +85,9 @@
     </string>
 
     <!-- Ad Unit ID -->
-    <!-- TODO: Replace with real Ad Unit ID -->
+    <!-- TODO: Replace with real Ad Unit ID (ca-app-pub-6584361863324742~3118993114) -->
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_ad_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
 
     <!-- Google AppInvite string resources -->
     <string name="invitation_title">Send App Invite Quickstart Invitation</string>

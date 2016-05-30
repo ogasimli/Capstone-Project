@@ -1,12 +1,7 @@
 package org.ogasimli.manat;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.Tracker;
-
 import android.app.Application;
 import android.support.multidex.MultiDexApplication;
-
-import manat.ogasimli.org.manat.R;
 
 /**
  * Application class
@@ -15,12 +10,12 @@ import manat.ogasimli.org.manat.R;
  */
 public class ManatApplication extends MultiDexApplication {
 
-    private Tracker mTracker;
+    /*private Tracker mTracker;
 
-    /**
+    *//**
      * Gets the default {@link Tracker} for this {@link Application}.
      * @return tracker
-     */
+     *//*
     synchronized public Tracker getDefaultTracker() {
         if (mTracker == null) {
             GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
@@ -30,5 +25,5 @@ public class ManatApplication extends MultiDexApplication {
             mTracker.enableAdvertisingIdCollection(true);
         }
         return mTracker;
-    }
+    }*/
 }

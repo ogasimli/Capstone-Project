@@ -1,5 +1,7 @@
 package org.ogasimli.manat.activity;
 
+import com.google.android.gms.ads.MobileAds;
+
 import org.ogasimli.manat.fragment.MainActivityFragment;
 import org.ogasimli.manat.helper.Constants;
 
@@ -19,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Initialize the Mobile Ads SDK.
+        MobileAds.initialize(getApplicationContext(), getString(R.string.banner_ad_app_id));
 
         if (savedInstanceState == null) {
             MainActivityFragment fragment = new MainActivityFragment();
