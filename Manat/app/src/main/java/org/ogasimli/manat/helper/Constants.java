@@ -84,13 +84,6 @@ public class Constants {
     //First available date
     public static final String MIN_DATE = "25 11 1993";
 
-    //Google Analytics constants
-    public static final String MAIN_ACTIVITY_SCREEN_NAME = "Main Activity";
-    public static final String DETAIL_ACTIVITY_SCREEN_NAME = "Detail Activity";
-    public static final String ACTION_TYPE = "Action";
-    public static final String INVITE_ACTION = "Invite";
-    public static final String SHARE_ACTION = "Share";
-
     //BroadcastReceiver key to update widgets
     // Setting the package ensures that only components in our app will receive the broadcast
     public static final String ACTION_DATA_UPDATED = "org.ogasimli.manat.ACTION_DATA_UPDATED";
