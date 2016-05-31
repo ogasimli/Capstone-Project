@@ -15,7 +15,6 @@ public class Constants {
     public static final String FROM_DATE_QUERY_PARAM = "fromDate";
     public static final String TILL_DATE_QUERY_PARAM = "tillDate";
     public static final String CODE_QUERY_PARAM = "code";
-    public static final String TYPE_QUERY_PARAM = "type";
 
     //Intent extra keys
     public static final String CODE = "CODE";

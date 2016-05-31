@@ -13,8 +13,6 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        // Enabling multiDex support.
-        multiDexEnabled true
     }
     signingConfigs {
         release {
@@ -54,9 +52,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     //TODO: remove unnecessary libs
-    //multidex
-    compile 'com.android.support:multidex:1.0.1'
-
     //Android Libraries
     compile 'com.android.support:design:23.4.0'
     compile 'com.android.support:support-v4:23.4.0'
