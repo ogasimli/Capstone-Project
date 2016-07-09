@@ -18,21 +18,21 @@
         android:textSize="@dimen/chart_marker_text_size"
         android:textColor="@color/colorPrimary"
         android:ellipsize="end"
-        android:singleLine="true"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        tools:ignore="SmallSp"/>
+        tools:ignore="SmallSp"
+        android:maxLines="1"/>
 
     <TextView
         android:id="@+id/marker_x_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        tools:text="1.528"
+        tools:text="1 Jan 2016"
         android:textSize="@dimen/chart_marker_text_size"
         android:textColor="@color/colorPrimary"
         android:ellipsize="end"
-        android:singleLine="true"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        tools:ignore="SmallSp"/>
+        tools:ignore="SmallSp"
+        android:maxLines="1"/>
 
 </LinearLayout>
