@@ -2,8 +2,6 @@ package org.ogasimli.manat.dialog;
 
 import com.udojava.evalex.Expression;
 
-import org.ogasimli.manat.customview.MyButtonLight;
-import org.ogasimli.manat.customview.MyTextViewLight;
 import org.ogasimli.manat.helper.Constants;
 import org.ogasimli.manat.helper.Utilities;
 
@@ -17,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Locale;
@@ -39,7 +38,7 @@ public class CalculatorDialogFragment extends DialogFragment {
     private int mButtonKey = 0;
 
     @BindView(R.id.calc_edit_textview)
-    MyTextViewLight mEditTextView;
+    TextView mEditTextView;
 
     private Unbinder mUnbinder;
 
@@ -93,7 +92,7 @@ public class CalculatorDialogFragment extends DialogFragment {
             R.id.calc_seven_textview, R.id.calc_eight_textview, R.id.calc_nine_textview,
             R.id.calc_zero_textview, R.id.calc_divide_textview, R.id.calc_multiply_textview,
             R.id.calc_plus_textview, R.id.calc_minus_textview, R.id.calc_delimiter_textview})
-    public void editTextClick(MyButtonLight button) {
+    public void editTextClick(Button button) {
         String buttonText = button.getText().toString();
         String editText = mEditTextView.getText().toString();
         double zero = 0;
@@ -107,7 +106,7 @@ public class CalculatorDialogFragment extends DialogFragment {
     }
 
     @OnClick(R.id.calc_backspace_textview)
-    public void backspaceClick(MyButtonLight button) {
+    public void backspaceClick(Button button) {
         String editText = mEditTextView.getText().toString();
         double zero = 0;
         String zeroStr = String.format(Locale.getDefault(), "%.2f", zero);
@@ -122,7 +121,7 @@ public class CalculatorDialogFragment extends DialogFragment {
     }
 
     @OnClick(R.id.calc_clear_textview)
-    public void clearClick(MyButtonLight button) {
+    public void clearClick(Button button) {
         String editText = mEditTextView.getText().toString();
         double zero = 0;
         String zeroStr = String.format(Locale.getDefault(), "%.2f", zero);
@@ -133,18 +132,18 @@ public class CalculatorDialogFragment extends DialogFragment {
     }
 
     @OnClick(R.id.calc_equals_textview)
-    public void equalsClick(MyButtonLight button) {
+    public void equalsClick(Button button) {
         String editText = mEditTextView.getText().toString();
         try {
             editText = Utilities.evalMathString(editText);
             mEditTextView.setText(editText);
         } catch (Expression.ExpressionException expressException) {
             Log.d(LOG_TAG, expressException.toString());
-            Toast.makeText(getActivity(), "Invalid input! Enter correct values!", Toast
+            Toast.makeText(getActivity(), R.string.express_exception_message, Toast
                     .LENGTH_LONG).show();
         } catch (ArithmeticException arithmeticException) {
             Log.d(LOG_TAG, arithmeticException.toString());
-            Toast.makeText(getActivity(), "Invalid input! There is an arithmetic problem!", Toast
+            Toast.makeText(getActivity(), R.string.arithmetical_exception_message, Toast
                     .LENGTH_LONG).show();
         }
     }

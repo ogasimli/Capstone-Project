@@ -21,7 +21,7 @@
             app:rowCount="7">
 
             <!-- TODO: fix maxLines -->
-            <org.ogasimli.manat.customview.MyTextViewLight
+            <TextView
                 android:id="@+id/calc_edit_textview"
                 android:layout_width="0dp"
                 android:gravity="center_vertical|end"
@@ -34,10 +34,12 @@
                 app:layout_column="0"
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_edittext_padding"
+                fontPath="@string/roboto_light"
                 android:background="@drawable/calculator_edittext_right_border"
-                tools:text="7"/>
+                tools:text="7"
+                tools:ignore="MissingPrefix"/>
 
-            <org.ogasimli.manat.customview.MyButtonLight
+            <Button
                 android:id="@+id/calc_backspace_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
@@ -50,9 +52,11 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_button_padding"
                 style="?attr/borderlessButtonStyle"
-                android:text="@string/calc_backspace_text"/>
+                android:text="@string/calc_backspace_text"
+                fontPath="@string/roboto_light"
+                tools:ignore="MissingPrefix"/>
 
-            <org.ogasimli.manat.customview.MyButtonLight
+            <Button
                 android:id="@+id/calc_clear_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
@@ -65,14 +69,16 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_button_padding"
                 style="?attr/borderlessButtonStyle"
-                android:text="@string/calc_clear_text"/>
+                android:text="@string/calc_clear_text"
+                fontPath="@string/roboto_light"
+                tools:ignore="MissingPrefix"/>
 
             <View
                 android:layout_height="1dp"
                 app:layout_columnSpan="4"
                 android:background="@color/colorAccent"/>
 
-            <org.ogasimli.manat.customview.MyButtonLight
+            <Button
                 android:id="@+id/calc_seven_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
@@ -83,9 +89,11 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_button_padding"
                 style="?attr/borderlessButtonStyle"
-                android:text="@string/calc_7_text"/>
+                android:text="@string/calc_7_text"
+                fontPath="@string/roboto_light"
+                tools:ignore="MissingPrefix"/>
 
-            <org.ogasimli.manat.customview.MyButtonLight
+            <Button
                 android:id="@+id/calc_eight_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
@@ -96,9 +104,11 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_button_padding"
                 style="?attr/borderlessButtonStyle"
-                android:text="@string/calc_8_text"/>
+                android:text="@string/calc_8_text"
+                fontPath="@string/roboto_light"
+                tools:ignore="MissingPrefix"/>
 
-            <org.ogasimli.manat.customview.MyButtonLight
+            <Button
                 android:id="@+id/calc_nine_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
@@ -109,9 +119,11 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_button_padding"
                 style="?attr/borderlessButtonStyle"
-                android:text="@string/calc_9_text"/>
+                android:text="@string/calc_9_text"
+                fontPath="@string/roboto_light"
+                tools:ignore="MissingPrefix"/>
 
-            <org.ogasimli.manat.customview.MyButtonLight
+            <Button
                 android:id="@+id/calc_divide_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
@@ -122,9 +134,11 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_button_padding"
                 style="?attr/borderlessButtonStyle"
-                android:text="@string/calc_divide_text"/>
+                android:text="@string/calc_divide_text"
+                fontPath="@string/roboto_light"
+                tools:ignore="MissingPrefix"/>
 
-            <org.ogasimli.manat.customview.MyButtonLight
+            <Button
                 android:id="@+id/calc_four_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
@@ -135,9 +149,11 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_button_padding"
                 style="?attr/borderlessButtonStyle"
-                android:text="@string/calc_4_text"/>
+                android:text="@string/calc_4_text"
+                fontPath="@string/roboto_light"
+                tools:ignore="MissingPrefix"/>
 
-            <org.ogasimli.manat.customview.MyButtonLight
+            <Button
                 android:id="@+id/calc_five_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
@@ -148,9 +164,11 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_button_padding"
                 style="?attr/borderlessButtonStyle"
-                android:text="@string/calc_5_text"/>
+                android:text="@string/calc_5_text"
+                fontPath="@string/roboto_light"
+                tools:ignore="MissingPrefix"/>
 
-            <org.ogasimli.manat.customview.MyButtonLight
+            <Button
                 android:id="@+id/calc_six_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
@@ -161,9 +179,11 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_button_padding"
                 style="?attr/borderlessButtonStyle"
-                android:text="@string/calc_6_text"/>
+                android:text="@string/calc_6_text"
+                fontPath="@string/roboto_light"
+                tools:ignore="MissingPrefix"/>
 
-            <org.ogasimli.manat.customview.MyButtonLight
+            <Button
                 android:id="@+id/calc_multiply_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
@@ -174,9 +194,11 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_button_padding"
                 style="?attr/borderlessButtonStyle"
-                android:text="@string/calc_multiply_text"/>
+                android:text="@string/calc_multiply_text"
+                fontPath="@string/roboto_light"
+                tools:ignore="MissingPrefix"/>
 
-            <org.ogasimli.manat.customview.MyButtonLight
+            <Button
                 android:id="@+id/calc_one_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
@@ -187,9 +209,11 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_button_padding"
                 style="?attr/borderlessButtonStyle"
-                android:text="@string/calc_1_text"/>
+                android:text="@string/calc_1_text"
+                fontPath="@string/roboto_light"
+                tools:ignore="MissingPrefix"/>
 
-            <org.ogasimli.manat.customview.MyButtonLight
+            <Button
                 android:id="@+id/calc_two_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
@@ -200,9 +224,11 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_button_padding"
                 style="?attr/borderlessButtonStyle"
-                android:text="@string/calc_2_text"/>
+                android:text="@string/calc_2_text"
+                fontPath="@string/roboto_light"
+                tools:ignore="MissingPrefix"/>
 
-            <org.ogasimli.manat.customview.MyButtonLight
+            <Button
                 android:id="@+id/calc_three_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
@@ -213,9 +239,11 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_button_padding"
                 style="?attr/borderlessButtonStyle"
-                android:text="@string/calc_3_text"/>
+                android:text="@string/calc_3_text"
+                fontPath="@string/roboto_light"
+                tools:ignore="MissingPrefix"/>
 
-            <org.ogasimli.manat.customview.MyButtonLight
+            <Button
                 android:id="@+id/calc_minus_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
@@ -226,9 +254,11 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_button_padding"
                 style="?attr/borderlessButtonStyle"
-                android:text="@string/calc_minus_text"/>
+                android:text="@string/calc_minus_text"
+                fontPath="@string/roboto_light"
+                tools:ignore="MissingPrefix"/>
 
-            <org.ogasimli.manat.customview.MyButtonLight
+            <Button
                 android:id="@+id/calc_delimiter_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
@@ -239,9 +269,11 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_button_padding"
                 style="?attr/borderlessButtonStyle"
-                android:text="@string/calc_delimiter_text"/>
+                android:text="@string/calc_delimiter_text"
+                fontPath="@string/roboto_light"
+                tools:ignore="MissingPrefix"/>
 
-            <org.ogasimli.manat.customview.MyButtonLight
+            <Button
                 android:id="@+id/calc_zero_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
@@ -252,9 +284,11 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_button_padding"
                 style="?attr/borderlessButtonStyle"
-                android:text="@string/calc_0_text"/>
+                android:text="@string/calc_0_text"
+                fontPath="@string/roboto_light"
+                tools:ignore="MissingPrefix"/>
 
-            <org.ogasimli.manat.customview.MyButtonLight
+            <Button
                 android:id="@+id/calc_equals_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
@@ -265,9 +299,11 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_button_padding"
                 style="?attr/borderlessButtonStyle"
-                android:text="@string/calc_equals_text"/>
+                android:text="@string/calc_equals_text"
+                fontPath="@string/roboto_light"
+                tools:ignore="MissingPrefix"/>
 
-            <org.ogasimli.manat.customview.MyButtonLight
+            <Button
                 android:id="@+id/calc_plus_textview"
                 android:layout_width="0dp"
                 android:gravity="center"
@@ -278,7 +314,9 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_button_padding"
                 style="?attr/borderlessButtonStyle"
-                android:text="@string/calc_plus_text"/>
+                android:text="@string/calc_plus_text"
+                fontPath="@string/roboto_light"
+                tools:ignore="MissingPrefix"/>
 
         </android.support.v7.widget.GridLayout>
 

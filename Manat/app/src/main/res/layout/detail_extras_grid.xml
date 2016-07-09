@@ -21,7 +21,7 @@
         android:layout_weight="2"
         app:columnCount="2">
 
-        <org.ogasimli.manat.customview.MyTextViewMedium
+        <TextView
             android:id="@+id/detail_statistic_label_text_view"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -33,7 +33,9 @@
             app:layout_columnWeight="1"
             app:layout_gravity="fill"
             app:layout_rowWeight="1"
-            app:layout_columnSpan="2"/>
+            app:layout_columnSpan="2"
+            fontPath="@string/roboto_medium"
+            tools:ignore="MissingPrefix"/>
 
         <TextView
             android:layout_height="wrap_content"
@@ -45,15 +47,16 @@
             app:layout_gravity="fill"
             app:layout_rowWeight="1"/>
 
-        <org.ogasimli.manat.customview.MyTextViewLight
+        <TextView
             android:id="@+id/detail_current_rate_textview"
             android:gravity="center_vertical"
             android:textColor="@color/colorTextPrimary"
             android:textSize="@dimen/statistics_rates_text_size"
             android:paddingBottom="@dimen/statistics_items_bottom_padding"
             app:layout_gravity="right"
+            fontPath="@string/roboto_light"
             tools:text="1.5571"
-            tools:ignore="SpUsage"/>
+            tools:ignore="MissingPrefix,SpUsage"/>
 
         <TextView
             android:layout_height="wrap_content"
@@ -65,15 +68,16 @@
             app:layout_gravity="fill"
             app:layout_rowWeight="1"/>
 
-        <org.ogasimli.manat.customview.MyTextViewLight
+        <TextView
             android:id="@+id/detail_average_rate_textview"
             android:gravity="center_vertical"
             android:textColor="@color/colorTextPrimary"
             android:textSize="@dimen/statistics_rates_text_size"
             android:paddingBottom="@dimen/statistics_items_bottom_padding"
             app:layout_gravity="right"
+            fontPath="@string/roboto_light"
             tools:text="1.567"
-            tools:ignore="SpUsage"/>
+            tools:ignore="MissingPrefix,SpUsage"/>
 
         <TextView
             android:layout_height="wrap_content"
@@ -86,15 +90,16 @@
             app:layout_rowWeight="1"/>
 
 
-        <org.ogasimli.manat.customview.MyTextViewLight
+        <TextView
             android:id="@+id/detail_max_rate_textview"
             android:gravity="center_vertical"
             android:textColor="@color/colorTextPrimary"
             android:textSize="@dimen/statistics_rates_text_size"
             android:paddingBottom="@dimen/statistics_items_bottom_padding"
             app:layout_gravity="right"
+            fontPath="@string/roboto_light"
             tools:text="1.602"
-            tools:ignore="SpUsage"/>
+            tools:ignore="MissingPrefix,SpUsage"/>
 
         <TextView
             android:layout_height="wrap_content"
@@ -107,15 +112,16 @@
             app:layout_rowWeight="1"/>
 
 
-        <org.ogasimli.manat.customview.MyTextViewLight
+        <TextView
             android:id="@+id/detail_min_rate_textview"
             android:gravity="center_vertical"
             android:textColor="@color/colorTextPrimary"
             android:textSize="@dimen/statistics_rates_text_size"
             android:paddingBottom="@dimen/statistics_items_bottom_padding"
             app:layout_gravity="right"
+            fontPath="@string/roboto_light"
             tools:text="1.5571"
-            tools:ignore="SpUsage"/>
+            tools:ignore="MissingPrefix,SpUsage"/>
 
     </android.support.v7.widget.GridLayout>
 

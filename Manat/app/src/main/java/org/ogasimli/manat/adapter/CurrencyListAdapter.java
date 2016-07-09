@@ -1,6 +1,5 @@
 package org.ogasimli.manat.adapter;
 
-import org.ogasimli.manat.customview.MyTextViewLight;
 import org.ogasimli.manat.helper.Utilities;
 import org.ogasimli.manat.model.Currency;
 
@@ -98,7 +97,7 @@ public class CurrencyListAdapter extends RecyclerView.Adapter<CurrencyListAdapte
         TextView mCurrency;
 
         @BindView(R.id.main_list_item_rate_textview)
-        MyTextViewLight mRate;
+        TextView mRate;
 
         @BindView(R.id.main_list_item_trend_imageview)
         ImageView mRateTrend;

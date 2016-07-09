@@ -3,11 +3,13 @@ package org.ogasimli.manat.activity;
 import org.ogasimli.manat.fragment.DetailActivityFragment;
 import org.ogasimli.manat.helper.Constants;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import manat.ogasimli.org.manat.R;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * DetailActivity class
@@ -52,5 +54,10 @@ public class DetailActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

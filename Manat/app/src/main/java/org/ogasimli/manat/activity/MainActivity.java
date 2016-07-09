@@ -5,10 +5,12 @@ import com.google.android.gms.ads.MobileAds;
 import org.ogasimli.manat.fragment.MainActivityFragment;
 import org.ogasimli.manat.helper.Constants;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import manat.ogasimli.org.manat.R;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * MainActivity class
@@ -32,5 +34,10 @@ public class MainActivity extends AppCompatActivity {
                     .replace(R.id.main_container, fragment, Constants.MAIN_ACTIVITY_FRAGMENT_TAG)
                     .commit();
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

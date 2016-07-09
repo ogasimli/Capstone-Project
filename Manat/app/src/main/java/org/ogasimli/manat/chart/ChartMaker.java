@@ -42,7 +42,7 @@ public class ChartMaker {
     }
 
     public void createChart(){
-        tf = Typeface.createFromAsset(mContext.getAssets(), "Roboto-Light.ttf");
+        tf = Typeface.createFromAsset(mContext.getAssets(), mContext.getString(R.string.roboto_light));
 
         // no description text
         mChart.setDescription("");

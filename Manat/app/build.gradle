@@ -87,6 +87,9 @@ dependencies {
 
     //Backport transition animations library
     compile "com.andkulikov:transitionseverywhere:1.6.3"
+
+    //Calligraphy font library
+    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
