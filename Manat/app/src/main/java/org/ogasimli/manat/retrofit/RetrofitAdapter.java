@@ -14,7 +14,6 @@ public class RetrofitAdapter {
 
     private static RestAdapter mRestAdapter;
 
-    //TODO: change log level before release
     public static RestAdapter getRestAdapter() {
         if (mRestAdapter == null) {
             mRestAdapter = new RestAdapter.Builder()
