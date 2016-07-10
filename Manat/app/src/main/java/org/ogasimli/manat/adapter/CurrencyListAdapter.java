@@ -102,7 +102,7 @@ public class CurrencyListAdapter extends RecyclerView.Adapter<CurrencyListAdapte
         @BindView(R.id.main_list_item_trend_imageview)
         ImageView mRateTrend;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);

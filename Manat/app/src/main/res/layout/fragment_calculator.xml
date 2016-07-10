@@ -272,7 +272,7 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_button_padding"
                 style="?attr/borderlessButtonStyle"
-                android:text="@string/calc_delimiter_text"
+                tools:text="@string/calc_delimiter_text"
                 fontPath="@string/roboto_light"
                 tools:ignore="MissingPrefix"/>
 

@@ -30,16 +30,30 @@ import manat.ogasimli.org.manat.R;
 public class Utilities {
 
     /*
-    * Helper method to format decimal separators of amounts
+    * Helper method to get decimal separators of amounts
     */
-    public static String formatAmount(String amount) {
+    public static String getDecimalSeparator() {
         NumberFormat numberFormat = NumberFormat.getNumberInstance();
-        String decimalSeparator = ",";
-        if (numberFormat instanceof DecimalFormat) {
-            DecimalFormatSymbols symbols = ((DecimalFormat) numberFormat).getDecimalFormatSymbols();
-            decimalSeparator = String.valueOf(symbols.getDecimalSeparator());
-        }
-        return amount.replace(",", decimalSeparator);
+        DecimalFormatSymbols symbols = ((DecimalFormat) numberFormat).getDecimalFormatSymbols();
+        return String.valueOf(symbols.getDecimalSeparator());
+    }
+
+    /*
+    * Helper method to get decimal separators of amounts
+    */
+    private static String getThousandsSeparator() {
+        NumberFormat numberFormat = NumberFormat.getNumberInstance();
+        DecimalFormatSymbols symbols = ((DecimalFormat) numberFormat).getDecimalFormatSymbols();
+        return String.valueOf(symbols.getGroupingSeparator());
+    }
+
+    /*
+    * Helper method to reformat amounts to be able to make calculations on it
+    */
+    public static String reformatAmount(String amount) {
+        return amount
+                .replace(getThousandsSeparator(),"")
+                .replace(getDecimalSeparator(),".");
     }
 
     /*
@@ -47,9 +61,9 @@ public class Utilities {
     */
     public static String evalMathString(String string) {
         BigDecimal result;
-        Expression expression = new Expression(string.replace(",", "."));
+        Expression expression = new Expression(reformatAmount(string));
         result = expression.eval();
-        return String.format(Locale.getDefault(), "%.2f", result);
+        return String.format(Locale.getDefault(), "%,.2f", result);
     }
 
     /*

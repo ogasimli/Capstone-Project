@@ -201,9 +201,9 @@ public class MainActivityFragment extends Fragment
         String foreignAmount = mMainForeignAmountTextView.getText().toString();
         String aznAmount = mMainAznAmountTextView.getText().toString();
         mIgnoreChange = true;
-        mMainForeignAmountTextView.setText(Utilities.formatAmount(foreignAmount));
+        mMainForeignAmountTextView.setText(foreignAmount.replace(",", Utilities.getDecimalSeparator()));
         mIgnoreChange = true;
-        mMainAznAmountTextView.setText(Utilities.formatAmount(aznAmount));
+        mMainAznAmountTextView.setText(aznAmount.replace(",", Utilities.getDecimalSeparator()));
 
         //Set TextWatchers
         mMainDateTextView.addTextChangedListener(mDateWatcher);
@@ -304,10 +304,10 @@ public class MainActivityFragment extends Fragment
                     String amount = bundle.getString(Constants.AMOUNT);
                     String resultString = null;
                     if (amount != null) {
-                        resultString = amount.replace(",", ".");
+                        resultString = Utilities.reformatAmount(amount);
                     }
                     Double result = Double.parseDouble(resultString);
-                    resultString = String.format(Locale.getDefault(), "%.2f", result);
+                    resultString = String.format(Locale.getDefault(), "%,.2f", result);
                     mAmountField = bundle.getInt(Constants.BUTTON_KEY);
                     switch (mAmountField) {
                         case 0:
@@ -448,20 +448,20 @@ public class MainActivityFragment extends Fragment
             String fAmountString = mMainForeignAmountTextView.getText().toString();
             String aAmountString = mMainAznAmountTextView.getText().toString();
             String rateString = mMainRateTextView.getText().toString();
-            double fAmount = Double.parseDouble(fAmountString.replace(",", "."));
-            double aAmount = Double.parseDouble(aAmountString.replace(",", "."));
-            double rate = Double.parseDouble(rateString.replace(",", "."));
+            double fAmount = Double.parseDouble(Utilities.reformatAmount(fAmountString));
+            double aAmount = Double.parseDouble(Utilities.reformatAmount(aAmountString));
+            double rate = Double.parseDouble(Utilities.reformatAmount(rateString));
             double result;
             String resultString;
             switch (mSwapOrder) {
                 case 0:
                     result = fAmount * rate;
-                    resultString = String.format(Locale.getDefault(), "%.2f", result);
+                    resultString = String.format(Locale.getDefault(), "%,.2f", result);
                     mMainAznAmountTextView.setText(resultString);
                     break;
                 case 1:
                     result = aAmount / rate;
-                    resultString = String.format(Locale.getDefault(), "%.2f", result);
+                    resultString = String.format(Locale.getDefault(), "%,.2f", result);
                     mMainForeignAmountTextView.setText(resultString);
                     break;
             }
@@ -488,10 +488,10 @@ public class MainActivityFragment extends Fragment
                 mIgnoreChange = true;
                 String amountString = mMainAznAmountTextView.getText().toString();
                 String rateString = mMainRateTextView.getText().toString();
-                double amount = Double.parseDouble(amountString.replace(",", "."));
-                double rate = Double.parseDouble(rateString.replace(",", "."));
+                double amount = Double.parseDouble(Utilities.reformatAmount(amountString));
+                double rate = Double.parseDouble(Utilities.reformatAmount(rateString));
                 double result = amount / rate;
-                String resultString = String.format(Locale.getDefault(), "%.2f", result);
+                String resultString = String.format(Locale.getDefault(), "%,.2f", result);
                 mMainForeignAmountTextView.setText(resultString);
             } else {
                 mIgnoreChange = false;
@@ -519,10 +519,10 @@ public class MainActivityFragment extends Fragment
                 mIgnoreChange = true;
                 String amountString = mMainForeignAmountTextView.getText().toString();
                 String rateString = mMainRateTextView.getText().toString();
-                double amount = Double.parseDouble(amountString.replace(",", "."));
-                double rate = Double.parseDouble(rateString.replace(",", "."));
+                double amount = Double.parseDouble(Utilities.reformatAmount(amountString));
+                double rate = Double.parseDouble(Utilities.reformatAmount(rateString));
                 double result = amount * rate;
-                String resultString = String.format(Locale.getDefault(), "%.2f", result);
+                String resultString = String.format(Locale.getDefault(), "%,.2f", result);
                 mMainAznAmountTextView.setText(resultString);
             } else {
                 mIgnoreChange = false;

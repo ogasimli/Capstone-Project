@@ -59,7 +59,7 @@
     <string name="calc_minus_text" translatable="false">-</string>
     <string name="calc_plus_text" translatable="false">+</string>
     <string name="calc_equals_text" translatable="false">=</string>
-    <string name="calc_delimiter_text" translatable="false">.</string>
+    <string name="calc_delimiter_text" translatable="false">,</string>
     <string name="calc_1_text">1</string>
     <string name="calc_2_text">2</string>
     <string name="calc_3_text">3</string>

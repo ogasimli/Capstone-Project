@@ -38,6 +38,9 @@ public class CalculatorDialogFragment extends DialogFragment {
 
     private int mButtonKey = 0;
 
+    @BindView(R.id.calc_delimiter_textview)
+    Button mCalcDelimiterTextView;
+
     @BindView(R.id.calc_edit_textview)
     AutofitTextView mEditTextView;
 
@@ -59,6 +62,9 @@ public class CalculatorDialogFragment extends DialogFragment {
         mUnbinder = ButterKnife.bind(this, rootView);
 
         mButtonKey = getArguments().getInt(Constants.CALCULATOR_BUNDLE_KEY);
+
+        //Set system decimal separator as text of delimiter button
+        mCalcDelimiterTextView.setText(Utilities.getDecimalSeparator());
 
         //Prevent mEditTextView from resizing
         mEditTextView.setMaxWidth(mEditTextView.getWidth());
