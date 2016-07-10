@@ -89,6 +89,9 @@ dependencies {
 
     //Calligraphy font library
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
+
+    //Auto-fit TextView library
+    compile 'me.grantland:autofittextview:0.2.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

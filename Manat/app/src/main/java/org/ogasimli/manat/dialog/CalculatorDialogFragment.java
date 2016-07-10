@@ -10,12 +10,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Locale;
@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import manat.ogasimli.org.manat.R;
+import me.grantland.widget.AutofitTextView;
 
 /**
  * DialogFragment class for Calculator
@@ -38,7 +39,7 @@ public class CalculatorDialogFragment extends DialogFragment {
     private int mButtonKey = 0;
 
     @BindView(R.id.calc_edit_textview)
-    TextView mEditTextView;
+    AutofitTextView mEditTextView;
 
     private Unbinder mUnbinder;
 
@@ -62,6 +63,7 @@ public class CalculatorDialogFragment extends DialogFragment {
         //Prevent mEditTextView from resizing
         mEditTextView.setMaxWidth(mEditTextView.getWidth());
         mEditTextView.setMaxHeight(mEditTextView.getHeight());
+        mEditTextView.setMovementMethod(new ScrollingMovementMethod());
 
         //Set mEditTextView text to zero
         double zero = 0;
@@ -98,11 +100,10 @@ public class CalculatorDialogFragment extends DialogFragment {
         double zero = 0;
         String zeroStr = String.format(Locale.getDefault(), "%.2f", zero);
         if (!editText.equals(zeroStr)) {
-            editText = editText + buttonText;
+            mEditTextView.append(buttonText);
         } else {
-            editText = buttonText;
+            mEditTextView.setText(buttonText);
         }
-        mEditTextView.setText(editText);
     }
 
     @OnClick(R.id.calc_backspace_textview)

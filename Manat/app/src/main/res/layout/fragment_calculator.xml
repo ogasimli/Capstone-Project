@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:autofit="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scroll_view"
@@ -20,13 +21,14 @@
             app:columnCount="4"
             app:rowCount="7">
 
-            <!-- TODO: fix maxLines -->
-            <TextView
+            <me.grantland.widget.AutofitTextView
                 android:id="@+id/calc_edit_textview"
                 android:layout_width="0dp"
-                android:gravity="center_vertical|end"
+                android:gravity="bottom|end"
                 android:textColor="@color/colorAccent"
+                android:maxLines="2"
                 android:textSize="26sp"
+                autofit:minTextSize="18sp"
                 app:layout_columnSpan="3"
                 app:layout_rowWeight="2"
                 app:layout_rowSpan="2"
@@ -35,6 +37,7 @@
                 app:layout_gravity="fill"
                 android:padding="@dimen/calculator_edittext_padding"
                 fontPath="@string/roboto_light"
+                android:scrollbars="vertical"
                 android:background="@drawable/calculator_edittext_right_border"
                 tools:text="7"
                 tools:ignore="MissingPrefix"/>
