@@ -1,0 +1,117 @@
+<resources>
+    <!-- Ungrouped -->
+    <string name="error_view_click_to_reload_text">Yenidən yüklə</string>
+
+    <!-- Progress dialog strings -->
+    <string name="progress_dialog_title">Zəhmət olmasa gözləyin</string>
+    <string name="progress_dialog_content">Yüklənir</string>
+
+    <!-- Image descriptions -->
+    <string name="no_result_image_description">Şəkil mövcud deyil</string>
+    <string name="country_flag_image_description">Bayraq</string>
+    <string name="trending_image_description">Məzənnə trendini bildirən şəkil</string>
+    <string name="trend_down_image_description">Məzənnə artmışdır</string>
+    <string name="trend_flat_image_description">Məzənnə dəyişməmişdir</string>
+    <string name="trend_up_image_description">Məzənnə azalmışdır</string>
+
+    <!-- Menu items -->
+    <string name="menu_refresh_text">Yenilə</string>
+    <string name="menu_share_text">Paylaş</string>
+    <string name="menu_invite_text">Dostlarını dəvət et</string>
+
+    <!-- Statistical info labels -->
+    <string name="detail_statistics_label">"%s" Statistika</string>
+    <string name="statistics_label_weekly">Həftəlik</string>
+    <string name="statistics_label_quarterly">Rüblük</string>
+    <string name="statistics_label_monthly">Aylıq</string>
+    <string name="statistics_label_semi_annually">Yarımillik</string>
+    <string name="statistics_label_yearly">İllik</string>
+    <string name="week_button_text">Həftə</string>
+    <string name="month_button_text">Ay</string>
+    <string name="quarter_button_text">3 Ay</string>
+    <string name="semi_annual_button_text">6 Ay</string>
+    <string name="year_button_text">İl</string>
+    <string name="current_rate_text">Cari məzənnə</string>
+    <string name="average_rate_text">Ortalama məzənnə</string>
+    <string name="maximum_rate_text">Maksimum məzənnə</string>
+    <string name="minimum_rate_text">Minimum məzənnə</string>
+
+    <!-- Share rate strings -->
+    <string name="share_rate_statistics_title">Məzənnə üzrə statistik məlumatı paylaş</string>
+    <string name="share_statistics_text" formatted="false">\"%1$s\" üzrə %2$s tarixindən %3$s
+        tarixinədək oland dövr üzrə statistik məlumat:\n
+        Cari məzənnə - %4$s\n
+        Ortalama məzənnə - %5$s\n
+        Maksimum məzənnə - %6$s\n
+        Minimum məzənnə - %7$s
+    </string>
+
+    <!-- Error messages -->
+    <string name="express_exception_message">Zəhmət olmasa, daxil edilmiş məlumatın düzgünlüyünü
+        bir daha yoxlayın!</string>
+    <string name="arithmetical_exception_message">Yanlış məlumat daxil edilib! Hesablama xətası
+        baş verdi!</string>
+    <string name="main_no_result_message">Məzənnələrin yüklənməsi zamanı xəta baş verdi.
+        Bir daha cəhd edin&#8230;</string>
+    <string name="widget_no_result_message">Məzənnələrlə bağlı məlumat mövcud deyil.
+        Bir qədər sonra yenidən cəhd edin&#8230;</string>
+    <string name="line_chart_no_data_text">Təsvir ediləcək məlumat tapılmadı</string>
+    <string name="google_play_missing_error_message">Dostlarını dəvət edə bilmək üçün Google Play
+        Xidmətinin yüklənməsi tələb olunur</string>
+
+    <!-- Google AppInvite string resources -->
+    <string name="invitation_title">Dostlarını Dəvət Et</string>
+    <string name="invitation_message">Bu tətbiqi çox bəyənəcəksən! Yüklə və yoxla!</string>
+    <string name="invitation_cta">Quraşdır!</string>
+    <string name="send_failed">Dəvətnamənin göndərilməsində xəta baş verdi</string>
+    <string name="sent_invitations_fmt" formatted="false">%d dəvətnamə göndərildi</string>
+    <string name="google_play_services_error">Google Play Xidmətində Xəta</string>
+
+    <!-- Currency names -->
+    <string-array name="currency_names">
+        <item>ABŞ Dolları</item>
+        <item>Avro</item>
+        <item>İngilis Funt Sterlinqi</item>
+        <item>Rusiya Rublu</item>
+        <item>Türk Lirəsi</item>
+        <item>BƏƏ Dirhəmi</item>
+        <item>Argentina Pesosu</item>
+        <item>Avstraliya Dolları</item>
+        <item>Braziliya Rialı</item>
+        <item>Belarus Rublu</item>
+        <item>Kanada Dolları</item>
+        <item>İsveçrə Frankı</item>
+        <item>Çili Pesosu</item>
+        <item>Çin Yuanı</item>
+        <item>Çexiya Kronu</item>
+        <item>Danimarka Kronu</item>
+        <item>Misir Funtu</item>
+        <item>Gürcü Larisi</item>
+        <item>Honq Konq Dolları</item>
+        <item>İndoneziya Rupiası</item>
+        <item>İsrail Şekeli</item>
+        <item>Hindistan Rupisi</item>
+        <item>İran Rialı</item>
+        <item>Yapon Yeni</item>
+        <item>Qırğız Somu</item>
+        <item>Cənubi Korea Vonu</item>
+        <item>Küveyt Dinarı</item>
+        <item>Qazaxıstan Tengəsi</item>
+        <item>Livan Funtu</item>
+        <item>Moldova Leyi</item>
+        <item>Meksika Pesosu</item>
+        <item>Malayziya Rinqqiti</item>
+        <item>Norveç Kronu</item>
+        <item>Yeni Zelandiya Dolları</item>
+        <item>Polşa Zlotası</item>
+        <item>Səudiyyə Ərəbistanı Rialı</item>
+        <item>İsveç Kronu</item>
+        <item>Sinqapur Dolları</item>
+        <item>Tacik Somonisi</item>
+        <item>Yeni Türkmən Manatı</item>
+        <item>Tayvan Dolları</item>
+        <item>Ukrayna Qrivnası</item>
+        <item>Özbək Somu</item>
+        <item>Cənubi Afrika Randı</item>
+    </string-array>
+</resources>

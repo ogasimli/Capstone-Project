@@ -1,6 +1,6 @@
 <resources>
     <!-- App labels -->
-    <string name="app_name">Manat</string>
+    <string name="app_name" translatable="false">Manat</string>
 
     <!-- Ungrouped -->
     <string name="converter_amount_zero_text" translatable="false">0,00</string>
@@ -81,8 +81,7 @@
         checking again soon&#8230;</string>
     <string name="line_chart_no_data_text">Looks like there\'s no data to illustrate</string>
     <string name="google_play_missing_error_message">You need to download Google Play Services in
-        order to be able to invite friends
-    </string>
+        order to be able to invite friends</string>
 
     <!-- Ad Unit ID -->
     <!-- TODO: Replace with real Ad Unit ID (ca-app-pub-6584361863324742/7549192711) -->
@@ -91,7 +90,7 @@
     <string name="banner_ad_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
 
     <!-- Google AppInvite string resources -->
-    <string name="invitation_title">Send App Invite Quickstart Invitation</string>
+    <string name="invitation_title">Send App Invite</string>
     <string name="invitation_message">This app is terrific, give it a try!</string>
     <string name="invitation_image" translatable="false">
         https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
@@ -160,7 +159,7 @@
         <item>ARS</item>
         <item>AUD</item>
         <item>BRL</item>
-        <item>BYR</item>
+        <item>BYN</item>
         <item>CAD</item>
         <item>CHF</item>
         <item>CLP</item>

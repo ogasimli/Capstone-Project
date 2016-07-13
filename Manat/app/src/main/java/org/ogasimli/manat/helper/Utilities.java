@@ -95,12 +95,13 @@ public class Utilities {
     */
     public static int getCurrencyImage(Context context, String code) {
         switch (code) {
+            // Special case for TRY in order to escape java's built-in try statement
             case "TRY":
                 return context.getResources().getIdentifier("trl", "drawable",
                         context.getPackageName());
             default:
-                return context.getResources().getIdentifier(code.toLowerCase(), "drawable",
-                        context.getPackageName());
+                return context.getResources().getIdentifier(code.toLowerCase(Locale.ENGLISH),
+                        "drawable", context.getPackageName());
         }
     }
 
