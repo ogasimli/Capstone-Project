@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="roboto_light">fonts/Roboto-Light.ttf</string>
-    <string name="roboto_medium">fonts/Roboto-Mediumt.ttf</string>
+    <string name="roboto_light" translatable="false">fonts/Roboto-Light.ttf</string>
+    <string name="roboto_medium" translatable="false">fonts/Roboto-Mediumt.ttf</string>
 </resources>
