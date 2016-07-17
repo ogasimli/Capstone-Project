@@ -51,9 +51,36 @@ public class Utilities {
     * Helper method to reformat amounts to be able to make calculations on it
     */
     public static String reformatAmount(String amount) {
-        return amount
+        return convertToEnglishDigits(amount
+                .trim()
                 .replace(getThousandsSeparator(),"")
-                .replace(getDecimalSeparator(),".");
+                .replace(getDecimalSeparator(),"."));
+    }
+
+    /*
+    * Helper method to convert hindi digits to english
+    */
+    private static String convertToEnglishDigits(String value)
+    {
+                //Hindi digits
+        return value.replace("١", "1").replace("٢", "2").replace("٣", "3").replace("٤", "4")
+                .replace("٥", "5").replace("٦", "6").replace("٧", "7").replace("٨", "8")
+                .replace("٩", "9").replace("٠", "0")
+
+                //Persian & Urdu digits
+                .replace("۱", "1").replace("۲", "2").replace("۳", "3").replace("۴", "4")
+                .replace("۵", "5").replace("۶", "6").replace("۷", "7").replace("۸", "8")
+                .replace("۹", "9").replace("۰", "0")
+
+                //Devanagari digits
+                .replace("१", "1").replace("२", "2").replace("३", "3").replace("४", "4")
+                .replace("५", "5").replace("६", "6").replace("७", "7").replace("८", "8")
+                .replace("९", "9").replace("०", "0")
+
+                //Tamil digits
+                .replace("௧", "1").replace("௨", "2").replace("௩", "3").replace("௪", "4")
+                .replace("௫", "5").replace("௬", "6").replace("௭", "7").replace("௮", "8")
+                .replace("௯", "9").replace("௰", "10").replace("௱", "100").replace("௲", "1000");
     }
 
     /*
