@@ -210,7 +210,11 @@ public class DetailActivityFragment extends Fragment {
                     mSecondaryCurrencyList = savedInstanceState.getParcelableArrayList
                             (Constants.SECONDARY_LIST_STATE_KEY);
 
-                    showResultView();
+                    if (mMainCurrencyList != null || mSecondaryCurrencyList != null) {
+                        showResultView();
+                    } else {
+                        loadData();
+                    }
                     break;
             }
         }
@@ -221,6 +225,11 @@ public class DetailActivityFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+
         mUnbinder.unbind();
     }
 

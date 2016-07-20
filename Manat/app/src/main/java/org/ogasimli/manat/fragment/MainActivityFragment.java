@@ -279,6 +279,11 @@ public class MainActivityFragment extends Fragment
             mAdView.destroy();
         }
         super.onDestroyView();
+
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+
         mUnbinder.unbind();
     }
 
@@ -306,7 +311,12 @@ public class MainActivityFragment extends Fragment
                     if (amount != null) {
                         resultString = Utilities.reformatAmount(amount);
                     }
-                    Double result = Double.parseDouble(resultString);
+                    Double result = 0.0;
+                    try {
+                        result = Double.parseDouble(resultString);
+                    } catch (NumberFormatException e) {
+                        Log.e(LOG_TAG, e.toString());
+                    }
                     resultString = String.format(Locale.getDefault(), "%,.2f", result);
                     mAmountField = bundle.getInt(Constants.BUTTON_KEY);
                     switch (mAmountField) {
@@ -447,7 +457,13 @@ public class MainActivityFragment extends Fragment
             mIgnoreChange = true;
             String fAmountString = mMainForeignAmountTextView.getText().toString();
             String aAmountString = mMainAznAmountTextView.getText().toString();
-            String rateString = mMainRateTextView.getText().toString();
+            String rateString;
+            if (mMainRateTextView.getText().toString().isEmpty() ||
+                    mMainRateTextView.getText().toString().equals("")) {
+                rateString = "1";
+            } else {
+                rateString = mMainRateTextView.getText().toString();
+            }
             double fAmount = Double.parseDouble(Utilities.reformatAmount(fAmountString));
             double aAmount = Double.parseDouble(Utilities.reformatAmount(aAmountString));
             double rate = Double.parseDouble(Utilities.reformatAmount(rateString));
@@ -487,7 +503,13 @@ public class MainActivityFragment extends Fragment
             if (!mIgnoreChange) {
                 mIgnoreChange = true;
                 String amountString = mMainAznAmountTextView.getText().toString();
-                String rateString = mMainRateTextView.getText().toString();
+                String rateString;
+                if (mMainRateTextView.getText().toString().isEmpty() ||
+                        mMainRateTextView.getText().toString().equals("")) {
+                    rateString = "1";
+                } else {
+                    rateString = mMainRateTextView.getText().toString();
+                }
                 double amount = Double.parseDouble(Utilities.reformatAmount(amountString));
                 double rate = Double.parseDouble(Utilities.reformatAmount(rateString));
                 double result = amount / rate;
@@ -518,7 +540,13 @@ public class MainActivityFragment extends Fragment
             if (!mIgnoreChange) {
                 mIgnoreChange = true;
                 String amountString = mMainForeignAmountTextView.getText().toString();
-                String rateString = mMainRateTextView.getText().toString();
+                String rateString;
+                if (mMainRateTextView.getText().toString().isEmpty() ||
+                        mMainRateTextView.getText().toString().equals("")) {
+                    rateString = "1";
+                } else {
+                    rateString = mMainRateTextView.getText().toString();
+                }
                 double amount = Double.parseDouble(Utilities.reformatAmount(amountString));
                 double rate = Double.parseDouble(Utilities.reformatAmount(rateString));
                 double result = amount * rate;
@@ -566,7 +594,7 @@ public class MainActivityFragment extends Fragment
             public void success(ArrayList<Currency> currencyList, Response response) {
                 mCurrencyList = new ArrayList<>();
                 mCurrencyList = currencyList;
-                if (mCurrencyList != null && mCurrencyList.size() > 0) {
+                if (mCurrencyList != null && mCurrencyList.size() == 44) {
                     //Sort list in desired order
                     mCurrencyList = Utilities.sortList(mCurrencyList);
                     Log.d(LOG_TAG, "Loaded from API");
@@ -688,7 +716,11 @@ public class MainActivityFragment extends Fragment
                 break;
             case Constants.VIEW_STATE_RESULTS:
                 mCurrencyList = savedInstanceState.getParcelableArrayList(Constants.LIST_STATE_KEY);
-                showResultView();
+                if (mCurrencyList != null && mCurrencyList.size() == 44) {
+                    showResultView();
+                } else {
+                    loadData();
+                }
                 break;
         }
 
