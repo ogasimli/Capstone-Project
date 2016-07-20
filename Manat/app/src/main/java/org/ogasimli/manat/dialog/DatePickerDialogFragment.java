@@ -61,10 +61,7 @@ public class DatePickerDialogFragment extends DialogFragment
         dialog.getDatePicker().setMinDate(minDateMillis);
 
         //Set max date
-        DateTime maxDate = new DateTime()
-                .withHourOfDay(23)
-                .withMinuteOfHour(59)
-                .withSecondOfMinute(59);
+        DateTime maxDate = new DateTime();
         dialog.getDatePicker().setMaxDate(maxDate.getMillis());
 
         return dialog;
