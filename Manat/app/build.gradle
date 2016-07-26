@@ -11,11 +11,8 @@ android {
         applicationId "org.ogasimli.manat"
         minSdkVersion 14
         targetSdkVersion 24
-        versionCode 4
-        versionName "1.0.3"
-
-        //Use support library for VectorDrawables
-        vectorDrawables.useSupportLibrary = true
+        versionCode 6
+        versionName "1.0.5"
     }
     signingConfigs {
         release {
