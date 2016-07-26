@@ -1,5 +1,9 @@
 <resources>
+    <!-- App labels -->
+    <string name="app_name">Manat</string>
+
     <!-- Ungrouped -->
+    <string name="converter_amount_zero_text">0,00</string>
     <string name="error_view_click_to_reload_text">Yenidən yüklə</string>
 
     <!-- Progress dialog strings -->
@@ -45,6 +49,18 @@
         Maksimum məzənnə - %6$s\n
         Minimum məzənnə - %7$s
     </string>
+
+    <!-- Calculator strings -->
+    <string name="calc_1_text">1</string>
+    <string name="calc_2_text">2</string>
+    <string name="calc_3_text">3</string>
+    <string name="calc_4_text">4</string>
+    <string name="calc_5_text">5</string>
+    <string name="calc_6_text">6</string>
+    <string name="calc_7_text">7</string>
+    <string name="calc_8_text">8</string>
+    <string name="calc_9_text">9</string>
+    <string name="calc_0_text">0</string>
 
     <!-- Error messages -->
     <string name="express_exception_message">Zəhmət olmasa, daxil edilmiş məlumatın düzgünlüyünü

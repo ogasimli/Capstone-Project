@@ -1,9 +1,9 @@
 <resources>
     <!-- App labels -->
-    <string name="app_name" translatable="false">Manat</string>
+    <string name="app_name">Manat</string>
 
     <!-- Ungrouped -->
-    <string name="converter_amount_zero_text" translatable="false">0,00</string>
+    <string name="converter_amount_zero_text">0,00</string>
     <string name="azn_text" translatable="false">AZN</string>
     <string name="error_view_click_to_reload_text">Reload</string>
 
@@ -60,16 +60,16 @@
     <string name="calc_plus_text" translatable="false">+</string>
     <string name="calc_equals_text" translatable="false">=</string>
     <string name="calc_delimiter_text" translatable="false">,</string>
-    <string name="calc_1_text" translatable="false">1</string>
-    <string name="calc_2_text" translatable="false">2</string>
-    <string name="calc_3_text" translatable="false">3</string>
-    <string name="calc_4_text" translatable="false">4</string>
-    <string name="calc_5_text" translatable="false">5</string>
-    <string name="calc_6_text" translatable="false">6</string>
-    <string name="calc_7_text" translatable="false">7</string>
-    <string name="calc_8_text" translatable="false">8</string>
-    <string name="calc_9_text" translatable="false">9</string>
-    <string name="calc_0_text" translatable="false">0</string>
+    <string name="calc_1_text">1</string>
+    <string name="calc_2_text">2</string>
+    <string name="calc_3_text">3</string>
+    <string name="calc_4_text">4</string>
+    <string name="calc_5_text">5</string>
+    <string name="calc_6_text">6</string>
+    <string name="calc_7_text">7</string>
+    <string name="calc_8_text">8</string>
+    <string name="calc_9_text">9</string>
+    <string name="calc_0_text">0</string>
 
     <!-- Error messages -->
     <string name="express_exception_message">Invalid input! Enter correct values!</string>
