@@ -2,6 +2,7 @@ package org.ogasimli.manat.dialog;
 
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.ogasimli.manat.helper.Constants;
 import org.ogasimli.manat.helper.Utilities;
 
@@ -61,8 +62,12 @@ public class DatePickerDialogFragment extends DialogFragment
         dialog.getDatePicker().setMinDate(minDateMillis);
 
         //Set max date
-        DateTime maxDate = new DateTime();
-        dialog.getDatePicker().setMaxDate(maxDate.getMillis());
+        DateTime maxDate = new DateTime(DateTimeZone.getDefault())
+                .withHourOfDay(23)
+                .withMinuteOfHour(59)
+                .withSecondOfMinute(59);
+        long maxDateMillis = maxDate.getMillis();
+        dialog.getDatePicker().setMaxDate(maxDateMillis);
 
         return dialog;
     }
