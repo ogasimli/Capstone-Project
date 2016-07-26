@@ -34,7 +34,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -318,7 +317,6 @@ public class DetailActivityFragment extends Fragment {
                     @Override
                     public void failure(RetrofitError error) {
                         showErrorView();
-                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
                         Log.d("RetrofitError", error.toString());
                     }
                 });
