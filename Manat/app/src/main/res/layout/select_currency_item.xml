@@ -24,6 +24,7 @@
             android:layout_gravity="center"
             android:layout_width="@dimen/flag_width"
             android:layout_height="@dimen/flag_height"
+            android:background="@drawable/background_color_accent_black_stroke"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:scaleType="fitXY"
