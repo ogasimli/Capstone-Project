@@ -85,7 +85,8 @@
 
     <!-- Google AppInvite string resources -->
     <string name="invitation_title">Send App Invite</string>
-    <string name="invitation_message">This app is terrific, give it a try!</string>
+    <string name="invitation_message">Manat is #1 currency converter app! I used it and highly
+        recommend you to give it a try!</string>
     <string name="invitation_image" translatable="false">
         https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
     </string>

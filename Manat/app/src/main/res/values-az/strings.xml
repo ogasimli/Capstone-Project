@@ -77,7 +77,8 @@
 
     <!-- Google AppInvite string resources -->
     <string name="invitation_title">Dostlarını Dəvət Et</string>
-    <string name="invitation_message">Bu tətbiqi çox bəyənəcəksən! Yüklə və yoxla!</string>
+    <string name="invitation_message">Manat #1 məzənnə tətbiqidir! Mən istifadə etdim və çox
+        bəyəndim. Sən də yüklə və yoxla!</string>
     <string name="invitation_cta">Quraşdır!</string>
     <string name="send_failed">Dəvətnamənin göndərilməsində xəta baş verdi</string>
     <string name="sent_invitations_fmt" formatted="false">%d dəvətnamə göndərildi</string>
