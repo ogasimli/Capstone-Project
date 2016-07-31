@@ -2,5 +2,4 @@
 <resources>
     <dimen name="activity_horizontal_margin">24dp</dimen>
     <dimen name="activity_horizontal_padding">24dp</dimen>
-    <dimen name="main_fragment_width">450dp</dimen>
 </resources>

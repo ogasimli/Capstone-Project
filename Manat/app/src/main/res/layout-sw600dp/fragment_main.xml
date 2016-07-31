@@ -46,8 +46,10 @@
 
             <LinearLayout
                 android:id="@+id/main_result_view"
-                android:layout_width="@dimen/main_fragment_width"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingLeft="@dimen/main_fragment_land_padding"
+                android:paddingRight="@dimen/main_fragment_land_padding"
                 android:orientation="vertical"
                 android:visibility="gone"
                 tools:visibility="visible"

@@ -224,6 +224,7 @@ public class MainActivityFragment extends Fragment
         mRecyclerView.setAdapter(mCurrencyListAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mCurrencyListAdapter.setOnItemClickListener(itemClickListener);
+        mRecyclerView.setNestedScrollingEnabled(!isLandscape());
 
         /*
         * loadData if savedInstanceState is null, load from already fetched data
@@ -734,12 +735,16 @@ public class MainActivityFragment extends Fragment
             setRipple(mMainAznAmountTextView);
         }
 
-        //Set RecyclerView unfocusable on orientation change in order to prevent converter from
-        // scrolling up
+        //Disable scrolling of RecyclerView on orientation change
+        mRecyclerView.setNestedScrollingEnabled(!isLandscape());
+    }
+
+    /*
+    * Helper method to know if device is in landscape mode
+    */
+    private boolean isLandscape() {
         int orientation = getResources().getConfiguration().orientation;
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            mRecyclerView.setFocusable(false);
-        }
+        return orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
     /*
