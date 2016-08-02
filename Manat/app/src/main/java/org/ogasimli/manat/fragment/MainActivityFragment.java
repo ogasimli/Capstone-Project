@@ -224,7 +224,9 @@ public class MainActivityFragment extends Fragment
         mRecyclerView.setAdapter(mCurrencyListAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mCurrencyListAdapter.setOnItemClickListener(itemClickListener);
-        mRecyclerView.setNestedScrollingEnabled(!isLandscape());
+        if (isLandscape()) {
+            mRecyclerView.setNestedScrollingEnabled(false);
+        }
 
         /*
         * loadData if savedInstanceState is null, load from already fetched data
@@ -735,8 +737,11 @@ public class MainActivityFragment extends Fragment
             setRipple(mMainAznAmountTextView);
         }
 
-        //Disable scrolling of RecyclerView on orientation change
-        mRecyclerView.setNestedScrollingEnabled(!isLandscape());
+        //Disable scrolling of RecyclerView on orientation change and disable focusing
+        if (isLandscape()) {
+            mRecyclerView.setFocusable(false);
+            mRecyclerView.setNestedScrollingEnabled(false);
+        }
     }
 
     /*
