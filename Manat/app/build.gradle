@@ -11,8 +11,8 @@ android {
         applicationId "org.ogasimli.manat"
         minSdkVersion 14
         targetSdkVersion 24
-        versionCode 8
-        versionName "1.0.8"
+        versionCode 9
+        versionName "1.0.9"
     }
     signingConfigs {
         release {

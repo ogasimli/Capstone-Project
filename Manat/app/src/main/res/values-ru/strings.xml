@@ -1,0 +1,132 @@
+<resources>
+    <!-- App labels -->
+    <string name="app_name">Манат</string>
+
+    <!-- Ungrouped -->
+    <string name="converter_amount_zero_text">0,00</string>
+    <string name="error_view_click_to_reload_text">Перезагрузи</string>
+
+    <!-- Progress dialog strings -->
+    <string name="progress_dialog_title">Пожалуйста, подождите</string>
+    <string name="progress_dialog_content">Загрузка данных</string>
+
+    <!-- Image descriptions -->
+    <string name="no_result_image_description">Нет резултата</string>
+    <string name="country_flag_image_description">Флаг</string>
+    <string name="trending_image_description">Тенденция курс валют</string>
+    <string name="trend_down_image_description">Курс валюты снизился</string>
+    <string name="trend_flat_image_description">Курс валюты не изменился</string>
+    <string name="trend_up_image_description">Курс валюты поднялся</string>
+
+    <!-- Menu items -->
+    <string name="menu_refresh_text">Обнови</string>
+    <string name="menu_share_text">Поделись</string>
+    <string name="menu_invite_text">Пригласи друзей</string>
+
+    <!-- Statistical info labels -->
+    <string name="detail_statistics_label">"%s" Статистика</string>
+    <string name="statistics_label_weekly">Недельная</string>
+    <string name="statistics_label_quarterly">Квартальная</string>
+    <string name="statistics_label_monthly">Месячная</string>
+    <string name="statistics_label_semi_annually">Полугодавая</string>
+    <string name="statistics_label_yearly">Годавая</string>
+    <string name="week_button_text">Неделя</string>
+    <string name="month_button_text">Месяц</string>
+    <string name="quarter_button_text">3 Мес.</string>
+    <string name="semi_annual_button_text">6 Мес.</string>
+    <string name="year_button_text">Год</string>
+    <string name="current_rate_text">Текущий курс</string>
+    <string name="average_rate_text">Средний курс</string>
+    <string name="maximum_rate_text">Максимальный курс</string>
+    <string name="minimum_rate_text">Минимальный курс</string>
+
+    <!-- Share rate strings -->
+    <string name="share_rate_statistics_title">Поделись статистикой курс</string>
+    <string name="share_statistics_text" formatted="false">Статистика \"%1$s\" за %2$s - %3$s:\n
+        Текущий курс - %4$s\n
+        Средний курс - %5$s\n
+        Максимальный курс - %6$s\n
+        Минимальный курс - %7$s
+    </string>
+
+    <!-- Calculator strings -->
+    <string name="calc_1_text">1</string>
+    <string name="calc_2_text">2</string>
+    <string name="calc_3_text">3</string>
+    <string name="calc_4_text">4</string>
+    <string name="calc_5_text">5</string>
+    <string name="calc_6_text">6</string>
+    <string name="calc_7_text">7</string>
+    <string name="calc_8_text">8</string>
+    <string name="calc_9_text">9</string>
+    <string name="calc_0_text">0</string>
+
+    <!-- Error messages -->
+    <string name="express_exception_message">Неправильный ввод! Введите правильные значения!</string>
+    <string name="arithmetical_exception_message">Неправильный ввод! Произошла арифметическая
+        ошибка!</string>
+    <string name="main_no_result_message">К сожалению, что-то пошло не так во время извлечения
+        данных. Пожалуйста, попробуйте еще раз&#8230;</string>
+    <string name="widget_no_result_message">Похоже, что нет данных для отображения. Попробуйте
+        посмотреть попоздже&#8230;</string>
+    <string name="line_chart_no_data_text">Похоже, что нет данных для отображения</string>
+    <string name="google_play_missing_error_message">Необходимо скачать службы Google Play, чтобы
+        пригласить друзей</string>
+
+    <!-- Google AppInvite string resources -->
+    <string name="invitation_title">Пригласи друзей</string>
+    <string name="invitation_message">Манат #1 приложение для конвертации валют!
+        Рекомендую устоновить и попробовать!</string>
+    <string name="invitation_cta">Устонови!</string>
+    <string name="send_failed">Ошибка при отправке приглашения</string>
+    <string name="sent_invitations_fmt" formatted="false">%d приглашений отправлено</string>
+    <string name="google_play_services_error">Ошибка в службе Google Play</string>
+
+    <!-- Currency names -->
+    <string-array name="currency_names">
+        <item>Доллар США</item>
+        <item>Евро</item>
+        <item>Фунт Стерлинг</item>
+        <item>Российский Рубль</item>
+        <item>Турецкая Лира</item>
+        <item>Дирхам ОАЭ</item>
+        <item>Аргентинский Песо</item>
+        <item>Австралийский Доллар</item>
+        <item>Бразильский Реал</item>
+        <item>Белорусский Рубль</item>
+        <item>Канадский Доллар</item>
+        <item>Швейцарский Франк</item>
+        <item>Чилийское Песо</item>
+        <item>Китайский Юань</item>
+        <item>Чешских Крон</item>
+        <item>Датская Крона</item>
+        <item>Египетский Фунт</item>
+        <item>Грузинское Лари</item>
+        <item>Гонконгский Доллар</item>
+        <item>Индонезийская Рупия</item>
+        <item>Израильский Шекель</item>
+        <item>Индийская Рупия</item>
+        <item>Иранский Риал</item>
+        <item>Японский Иен</item>
+        <item>Киргизский Сом</item>
+        <item>Корейский Вон</item>
+        <item>Кувейтский Динар</item>
+        <item>Казахстанский Тенге</item>
+        <item>Ливанский Фунт</item>
+        <item>Молдавский Лей</item>
+        <item>Мексиканское Песо</item>
+        <item>Малайзийский Ринггит</item>
+        <item>Норвежских Крон</item>
+        <item>Новозеландский Доллар</item>
+        <item>Польский Злотый</item>
+        <item>Саудовский Риял</item>
+        <item>Шведских Крон</item>
+        <item>Сингапурский Доллар</item>
+        <item>Таджикский Сомони </item>
+        <item>Новый Туркменский Манат</item>
+        <item>Тайваньский Доллар</item>
+        <item>Украинская Гривна </item>
+        <item>Узбекский Сум</item>
+        <item>Южный Африканский Рэнд</item>
+    </string-array>
+</resources>

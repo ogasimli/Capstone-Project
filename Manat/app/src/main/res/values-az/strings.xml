@@ -11,12 +11,12 @@
     <string name="progress_dialog_content">Yüklənir</string>
 
     <!-- Image descriptions -->
-    <string name="no_result_image_description">Şəkil mövcud deyil</string>
+    <string name="no_result_image_description">Məlumat tapılmadı</string>
     <string name="country_flag_image_description">Bayraq</string>
     <string name="trending_image_description">Məzənnə trendini bildirən şəkil</string>
-    <string name="trend_down_image_description">Məzənnə artmışdır</string>
+    <string name="trend_down_image_description">Məzənnə azalmışdır</string>
     <string name="trend_flat_image_description">Məzənnə dəyişməmişdir</string>
-    <string name="trend_up_image_description">Məzənnə azalmışdır</string>
+    <string name="trend_up_image_description">Məzənnə artmışdır</string>
 
     <!-- Menu items -->
     <string name="menu_refresh_text">Yenilə</string>
