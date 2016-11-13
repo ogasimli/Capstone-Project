@@ -353,8 +353,12 @@ public class DetailActivityFragment extends Fragment {
         mMinRateTextView.setText(map.get(Constants.MIN_RATE_KEY));
 
         //View and hide relevant LinearLayouts
-        mToolbar.setVisibility(View.VISIBLE);
-        mResultView.setVisibility(View.VISIBLE);
+        if (mToolbar != null) {
+            mToolbar.setVisibility(View.VISIBLE);
+        }
+        if (mResultView != null) {
+            mResultView.setVisibility(View.VISIBLE);
+        }
 
         if (mFab != null) {
             if (mFab.getVisibility() == View.GONE) {
@@ -364,8 +368,9 @@ public class DetailActivityFragment extends Fragment {
                 mFab.startAnimation(animation);
             }
         }
-
-        mErrorView.setVisibility(View.GONE);
+        if (mErrorView != null) {
+            mErrorView.setVisibility(View.GONE);
+        }
 
         //Hide ProgressDialog
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
@@ -379,12 +384,18 @@ public class DetailActivityFragment extends Fragment {
     private void showErrorView() {
 
         //View and hide relevant LinearLayouts
-        mToolbar.setVisibility(View.GONE);
-        mResultView.setVisibility(View.GONE);
+        if (mToolbar != null) {
+            mToolbar.setVisibility(View.GONE);
+        }
+        if (mResultView != null) {
+            mResultView.setVisibility(View.GONE);
+        }
         if (mFab != null) {
             mFab.setVisibility(View.GONE);
         }
-        mErrorView.setVisibility(View.VISIBLE);
+        if (mErrorView != null) {
+            mErrorView.setVisibility(View.VISIBLE);
+        }
 
         //Hide ProgressDialog
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
