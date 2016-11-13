@@ -642,8 +642,12 @@ public class MainActivityFragment extends Fragment
     private void showResultView() {
 
         //View and hide relevant LinearLayouts
-        mResultView.setVisibility(View.VISIBLE);
-        mErrorView.setVisibility(View.GONE);
+        if (mResultView != null) {
+            mResultView.setVisibility(View.VISIBLE);
+        }
+        if (mErrorView != null) {
+            mErrorView.setVisibility(View.GONE);
+        }
 
         //Set adapter to RecyclerView
         mCurrencyListAdapter.setCurrencyList(mCurrencyList);
@@ -663,8 +667,12 @@ public class MainActivityFragment extends Fragment
     private void showErrorView() {
 
         //View and hide relevant LinearLayouts
-        mResultView.setVisibility(View.GONE);
-        mErrorView.setVisibility(View.VISIBLE);
+        if (mResultView != null) {
+            mResultView.setVisibility(View.GONE);
+        }
+        if (mErrorView != null) {
+            mErrorView.setVisibility(View.VISIBLE);
+        }
 
         //Hide ProgressDialog
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
