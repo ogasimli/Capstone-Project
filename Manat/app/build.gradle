@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "23.0.3"
+    buildToolsVersion '26.0.0'
     dexOptions{
         maxProcessCount 2
         javaMaxHeapSize "2g"
@@ -48,48 +48,37 @@ buildscript {
 apply plugin: 'com.neenbedankt.android-apt'
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-
     //Android Libraries
-    compile 'com.android.support:design:25.0.0'
-    compile 'com.android.support:support-v4:25.0.0'
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.android.support:recyclerview-v7:25.0.0'
-    compile 'com.android.support:cardview-v7:25.0.0'
-    compile 'com.android.support:gridlayout-v7:25.0.0'
-
+    compile 'com.android.support:design:25.4.0'
+    compile 'com.android.support:support-v4:25.4.0'
+    compile 'com.android.support:appcompat-v7:25.4.0'
+    compile 'com.android.support:recyclerview-v7:25.4.0'
+    compile 'com.android.support:cardview-v7:25.4.0'
+    compile 'com.android.support:gridlayout-v7:25.4.0'
     //Firebase
-    compile 'com.google.firebase:firebase-analytics:9.0.1'
-    compile 'com.google.firebase:firebase-invites:9.0.1'
-    compile 'com.google.firebase:firebase-ads:9.0.1'
-    compile 'com.google.firebase:firebase-crash:9.0.1'
-
+    compile 'com.google.firebase:firebase-analytics:11.0.1'
+    compile 'com.google.firebase:firebase-invites:11.0.1'
+    compile 'com.google.firebase:firebase-ads:11.0.1'
+    compile 'com.google.firebase:firebase-crash:11.0.1'
     //ButterKnife
-    compile 'com.jakewharton:butterknife:8.0.1'
-    apt 'com.jakewharton:butterknife-compiler:8.0.1'
-
+    compile 'com.jakewharton:butterknife:8.5.1'
+    apt 'com.jakewharton:butterknife-compiler:8.5.1'
     //MPAndroidChart
     compile 'com.github.PhilJay:MPAndroidChart:v2.2.4'
-
     //Joda Time
     compile 'joda-time:joda-time:2.9.3'
-
     //Retrofit
     compile 'com.squareup.retrofit:retrofit:1.9.0'
-
     //ProviGen
     compile 'com.github.provigen:ProviGen-lib:2.0.1'
-
     //EvalEx
     compile 'com.udojava:EvalEx:1.2'
-
     //Backport transition animations library
-    compile "com.andkulikov:transitionseverywhere:1.6.3"
-
+    compile 'com.andkulikov:transitionseverywhere:1.6.3'
     //Calligraphy font library
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
-
     //Auto-fit TextView library
     compile 'me.grantland:autofittextview:0.2.1'
 }
