@@ -28,7 +28,7 @@ public class DetailActivity extends AppCompatActivity {
         if (extras != null) {
             code = extras.getString(Constants.SELECTED_CODE_KEY);
         } else {
-            throw new NullPointerException("No movie found in extras");
+            throw new NullPointerException("No currency found in extras");
         }
 
         if (savedInstanceState == null) {
