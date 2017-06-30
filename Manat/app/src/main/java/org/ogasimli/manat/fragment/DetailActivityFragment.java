@@ -539,8 +539,11 @@ public class DetailActivityFragment extends Fragment {
                 mMaxRateTextView.getText().toString(),
                 mMinRateTextView.getText().toString()));
         intent.setType("text/plain");
-        startActivity(Intent.createChooser(intent, getString(R.string.share_rate_statistics_title)));
-
+        String chooserTitle = getString(R.string.share_rate_statistics_title);
+        // Create intent to show the chooser dialog
+        Intent chooser = Intent.createChooser(intent, chooserTitle);
+        // Verify that the intent will resolve to an activity
+        startActivity(chooser);
         trackShare();
     }
 
