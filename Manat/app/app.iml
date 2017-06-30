@@ -121,6 +121,7 @@
     <orderEntry type="library" exported="" name="firebase-core-11.0.1" level="project" />
     <orderEntry type="library" exported="" name="support-fragment-25.4.0" level="project" />
     <orderEntry type="library" exported="" name="support-core-utils-25.4.0" level="project" />
+    <orderEntry type="library" exported="" name="firebase-messaging-11.0.1" level="project" />
     <orderEntry type="library" exported="" name="butterknife-annotations-8.5.1" level="project" />
     <orderEntry type="library" exported="" name="transitionseverywhere-1.6.3" level="project" />
     <orderEntry type="library" exported="" name="play-services-clearcut-11.0.1" level="project" />

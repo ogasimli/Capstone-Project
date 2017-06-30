@@ -62,6 +62,7 @@ dependencies {
     compile 'com.google.firebase:firebase-invites:11.0.1'
     compile 'com.google.firebase:firebase-ads:11.0.1'
     compile 'com.google.firebase:firebase-crash:11.0.1'
+    compile 'com.google.firebase:firebase-messaging:11.0.1'
     //ButterKnife
     compile 'com.jakewharton:butterknife:8.5.1'
     apt 'com.jakewharton:butterknife-compiler:8.5.1'
