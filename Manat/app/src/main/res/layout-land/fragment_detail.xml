@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            tools:context="org.ogasimli.manat.fragment.DetailActivityFragment">
+            tools:context="org.ogasimli.manat.ui.fragment.DetailActivityFragment">
 
             <android.support.design.widget.AppBarLayout
                 android:layout_height="wrap_content"

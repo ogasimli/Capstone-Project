@@ -4,7 +4,7 @@ import org.joda.time.DateTime;
 import org.ogasimli.manat.helper.Constants;
 import org.ogasimli.manat.helper.Utilities;
 import org.ogasimli.manat.model.Currency;
-import org.ogasimli.manat.provigen.ManatContract;
+import org.ogasimli.manat.database.provigen.ManatContract;
 
 import android.content.Intent;
 import android.database.Cursor;

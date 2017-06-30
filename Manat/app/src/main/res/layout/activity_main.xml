@@ -6,5 +6,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:layout="@layout/fragment_main"
-    tools:context="org.ogasimli.manat.activity.MainActivity"
+    tools:context="org.ogasimli.manat.ui.activity.MainActivity"
     tools:ignore="MergeRootFrame"/>

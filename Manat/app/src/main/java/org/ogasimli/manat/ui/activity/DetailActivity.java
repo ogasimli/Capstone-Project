@@ -1,6 +1,6 @@
-package org.ogasimli.manat.activity;
+package org.ogasimli.manat.ui.activity;
 
-import org.ogasimli.manat.fragment.DetailActivityFragment;
+import org.ogasimli.manat.ui.fragment.DetailActivityFragment;
 import org.ogasimli.manat.helper.Constants;
 
 import android.content.Context;

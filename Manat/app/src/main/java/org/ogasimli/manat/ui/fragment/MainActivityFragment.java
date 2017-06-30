@@ -1,4 +1,4 @@
-package org.ogasimli.manat.fragment;
+package org.ogasimli.manat.ui.fragment;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -13,18 +13,18 @@ import com.transitionseverywhere.ChangeBounds;
 import com.transitionseverywhere.TransitionManager;
 
 import org.joda.time.DateTime;
-import org.ogasimli.manat.activity.DetailActivity;
-import org.ogasimli.manat.adapter.CurrencyListAdapter;
-import org.ogasimli.manat.asynctask.CurrencyLoader;
-import org.ogasimli.manat.asynctask.CurrencySaver;
-import org.ogasimli.manat.dialog.CalculatorDialogFragment;
-import org.ogasimli.manat.dialog.DatePickerDialogFragment;
-import org.ogasimli.manat.dialog.SelectCurrencyDialogFragment;
+import org.ogasimli.manat.ui.activity.DetailActivity;
+import org.ogasimli.manat.ui.adapter.CurrencyListAdapter;
+import org.ogasimli.manat.database.asynctask.CurrencyLoader;
+import org.ogasimli.manat.database.asynctask.CurrencySaver;
+import org.ogasimli.manat.ui.dialog.CalculatorDialogFragment;
+import org.ogasimli.manat.ui.dialog.DatePickerDialogFragment;
+import org.ogasimli.manat.ui.dialog.SelectCurrencyDialogFragment;
 import org.ogasimli.manat.helper.Constants;
 import org.ogasimli.manat.helper.Utilities;
 import org.ogasimli.manat.model.Currency;
-import org.ogasimli.manat.retrofit.ApiService;
-import org.ogasimli.manat.retrofit.RetrofitAdapter;
+import org.ogasimli.manat.network.retrofit.ApiService;
+import org.ogasimli.manat.network.retrofit.RetrofitAdapter;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

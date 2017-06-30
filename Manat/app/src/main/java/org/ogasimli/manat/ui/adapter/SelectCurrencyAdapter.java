@@ -1,4 +1,4 @@
-package org.ogasimli.manat.adapter;
+package org.ogasimli.manat.ui.adapter;
 
 import org.ogasimli.manat.helper.Utilities;
 

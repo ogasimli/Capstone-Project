@@ -1,16 +1,16 @@
-package org.ogasimli.manat.fragment;
+package org.ogasimli.manat.ui.fragment;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import com.github.mikephil.charting.charts.LineChart;
 
 import org.joda.time.DateTime;
-import org.ogasimli.manat.chart.ChartMaker;
+import org.ogasimli.manat.ui.chart.ChartMaker;
 import org.ogasimli.manat.helper.Constants;
 import org.ogasimli.manat.helper.Utilities;
 import org.ogasimli.manat.model.Currency;
-import org.ogasimli.manat.retrofit.ApiService;
-import org.ogasimli.manat.retrofit.RetrofitAdapter;
+import org.ogasimli.manat.network.retrofit.ApiService;
+import org.ogasimli.manat.network.retrofit.RetrofitAdapter;
 
 import android.app.ProgressDialog;
 import android.content.Intent;

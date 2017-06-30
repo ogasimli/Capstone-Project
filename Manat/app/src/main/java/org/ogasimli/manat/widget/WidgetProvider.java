@@ -1,6 +1,6 @@
 package org.ogasimli.manat.widget;
 
-import org.ogasimli.manat.activity.MainActivity;
+import org.ogasimli.manat.ui.activity.MainActivity;
 import org.ogasimli.manat.helper.Constants;
 
 import android.annotation.TargetApi;

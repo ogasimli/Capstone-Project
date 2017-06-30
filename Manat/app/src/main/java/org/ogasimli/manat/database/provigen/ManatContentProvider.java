@@ -1,4 +1,4 @@
-package org.ogasimli.manat.provigen;
+package org.ogasimli.manat.database.provigen;
 
 import com.tjeannin.provigen.ProviGenOpenHelper;
 import com.tjeannin.provigen.ProviGenProvider;

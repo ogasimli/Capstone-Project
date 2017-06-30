@@ -1,4 +1,4 @@
-package org.ogasimli.manat.dialog;
+package org.ogasimli.manat.ui.dialog;
 
 import com.udojava.evalex.Expression;
 

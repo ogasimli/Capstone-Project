@@ -1,4 +1,4 @@
-package org.ogasimli.manat.chart;
+package org.ogasimli.manat.ui.chart;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;

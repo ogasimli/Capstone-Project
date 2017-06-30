@@ -1,8 +1,8 @@
-package org.ogasimli.manat.activity;
+package org.ogasimli.manat.ui.activity;
 
 import com.google.android.gms.ads.MobileAds;
 
-import org.ogasimli.manat.fragment.MainActivityFragment;
+import org.ogasimli.manat.ui.fragment.MainActivityFragment;
 import org.ogasimli.manat.helper.Constants;
 
 import android.content.Context;

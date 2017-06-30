@@ -1,7 +1,7 @@
-package org.ogasimli.manat.asynctask;
+package org.ogasimli.manat.database.asynctask;
 
 import org.ogasimli.manat.model.Currency;
-import org.ogasimli.manat.provigen.ManatContract;
+import org.ogasimli.manat.database.provigen.ManatContract;
 
 import android.support.v4.content.AsyncTaskLoader;
 import android.content.Context;

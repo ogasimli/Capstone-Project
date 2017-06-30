@@ -1,4 +1,4 @@
-package org.ogasimli.manat.retrofit;
+package org.ogasimli.manat.network.retrofit;
 
 import org.ogasimli.manat.helper.Constants;
 import org.ogasimli.manat.model.Currency;

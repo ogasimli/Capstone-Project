@@ -1,6 +1,6 @@
-package org.ogasimli.manat.dialog;
+package org.ogasimli.manat.ui.dialog;
 
-import org.ogasimli.manat.adapter.SelectCurrencyAdapter;
+import org.ogasimli.manat.ui.adapter.SelectCurrencyAdapter;
 import org.ogasimli.manat.helper.Constants;
 
 import android.app.Activity;
