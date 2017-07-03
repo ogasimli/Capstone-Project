@@ -43,7 +43,7 @@ public class CurrencySaverIntentService extends IntentService {
 
             //Insert new values
             ArrayList<Currency> currencyList =
-                    intent.getParcelableArrayListExtra(Constants.CURRENCY_SVER_LIST_EXTRA_KEY);
+                    intent.getParcelableArrayListExtra(Constants.CURRENCY_SAVER_LIST_EXTRA_KEY);
             for (Currency currency : currencyList) {
                 ContentValues newValues = new ContentValues();
                 newValues.put(ManatContract.CODE, currency.getCode());
@@ -55,7 +55,9 @@ public class CurrencySaverIntentService extends IntentService {
             }
 
             //Update UI if today rates are updated
-            if (dateString.equals(ManatApplication.globalSelectedDate)) {
+            boolean manualRefresh = intent
+                    .getBooleanExtra(Constants.CURRENCY_SAVER_SWITCH_EXTRA_KEY, false);
+            if (!manualRefresh && dateString.equals(ManatApplication.globalSelectedDate)) {
                 LocalBroadcastManager.getInstance(this)
                         .sendBroadcast(new Intent(Constants.ACTION_DB_DATA_UPDATED));
             }

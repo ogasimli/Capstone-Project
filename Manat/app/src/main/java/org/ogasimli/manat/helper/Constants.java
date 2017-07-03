@@ -92,7 +92,8 @@ public class Constants {
 
     //Intent extra keys for CurrencySaverIntentService
     public static String CURRENCY_SAVER_DATE_EXTRA_KEY = "DATE_EXTRA";
-    public static String CURRENCY_SVER_LIST_EXTRA_KEY = "CURRENCY_LIST_EXTRA";
+    public static String CURRENCY_SAVER_LIST_EXTRA_KEY = "CURRENCY_LIST_EXTRA";
+    public static String CURRENCY_SAVER_SWITCH_EXTRA_KEY = "MANUAL_REFRESH";
 
     //Topic name for FCM
     public static String FCM_TOPIC_NAME = "update";

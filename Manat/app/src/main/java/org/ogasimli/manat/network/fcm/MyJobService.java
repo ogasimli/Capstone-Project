@@ -86,7 +86,7 @@ public class MyJobService extends JobService {
      */
     private void saveCurrencyList(ArrayList<Currency> currencyList, String dateString) {
         Intent intent = new Intent(this, CurrencySaverIntentService.class);
-        intent.putParcelableArrayListExtra(Constants.CURRENCY_SVER_LIST_EXTRA_KEY, currencyList);
+        intent.putParcelableArrayListExtra(Constants.CURRENCY_SAVER_LIST_EXTRA_KEY, currencyList);
         intent.putExtra(Constants.CURRENCY_SAVER_DATE_EXTRA_KEY, dateString);
         startService(intent);
     }

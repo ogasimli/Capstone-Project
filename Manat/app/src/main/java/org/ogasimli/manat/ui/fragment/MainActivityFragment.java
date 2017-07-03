@@ -36,7 +36,6 @@ import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -374,7 +373,7 @@ public class MainActivityFragment extends Fragment
 
         switch (id) {
             case R.id.menu_refresh:
-                refreshData();
+                refreshData(true);
                 break;
             case R.id.menu_invite:
                 onInviteClicked();
@@ -607,7 +606,7 @@ public class MainActivityFragment extends Fragment
     /**
      * Helper method to refresh rates
      */
-    private void refreshData() {
+    private void refreshData(final boolean manualRefresh) {
         //Show ProgressDialog if not visible
         if (mProgressDialog == null || !mProgressDialog.isShowing()) {
             showProgressDialog(true);
@@ -627,7 +626,7 @@ public class MainActivityFragment extends Fragment
                     mCurrencyList = Utilities.sortList(mCurrencyList);
                     Log.d(LOG_TAG, "Loaded from API");
                     //Delete old data and insert new
-                    saveCurrencyList(mCurrencyList, mDateString);
+                    saveCurrencyList(mCurrencyList, mDateString, manualRefresh);
                     Log.d(LOG_TAG, "Inserted into DB");
                     showResultView();
                 } else {
@@ -646,10 +645,12 @@ public class MainActivityFragment extends Fragment
     /**
      * Helper method to start CurrencySaverIntentService
      */
-    private void saveCurrencyList(ArrayList<Currency> currencyList, String dateString) {
+    private void saveCurrencyList(ArrayList<Currency> currencyList, String dateString,
+                                  boolean manualRefresh) {
         Intent intent = new Intent(getActivity(), CurrencySaverIntentService.class);
-        intent.putParcelableArrayListExtra(Constants.CURRENCY_SVER_LIST_EXTRA_KEY, currencyList);
+        intent.putParcelableArrayListExtra(Constants.CURRENCY_SAVER_LIST_EXTRA_KEY, currencyList);
         intent.putExtra(Constants.CURRENCY_SAVER_DATE_EXTRA_KEY, dateString);
+        intent.putExtra(Constants.CURRENCY_SAVER_SWITCH_EXTRA_KEY, manualRefresh);
         getActivity().startService(intent);
     }
 
@@ -845,7 +846,7 @@ public class MainActivityFragment extends Fragment
 
     @OnClick(R.id.reload_text)
     public void reloadTextViewClick(Button button) {
-        refreshData();
+        refreshData(true);
     }
 
     @OnClick(R.id.main_date_text)
@@ -942,7 +943,7 @@ public class MainActivityFragment extends Fragment
             Log.d(LOG_TAG, "Loaded from DB");
             showResultView();
         } else {
-            refreshData();
+            refreshData(false);
         }
     }
 
