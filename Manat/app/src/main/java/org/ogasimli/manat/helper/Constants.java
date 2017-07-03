@@ -42,6 +42,8 @@ public class Constants {
             DateTimeFormat.forPattern("dd MMMM yyyy");
     public static final DateTimeFormatter DATE_FORMATTER_WITH_DASH = 
             DateTimeFormat.forPattern("yyyy-MM-dd");
+    public static final DateTimeFormatter DATE_FORMATTER_DDMMYYYY_WITH_DOT =
+            DateTimeFormat.forPattern("dd.MM.yyyy");
     public static final String DATE_APPENDIX = "T00:00:00.000+04:00";
 
     //SharedPreference keys
@@ -83,7 +85,15 @@ public class Constants {
     //First available date
     public static final String MIN_DATE = "25 11 1993";
 
-    //BroadcastReceiver key to update widgets
+    //BroadcastReceiver keys
     // Setting the package ensures that only components in our app will receive the broadcast
-    public static final String ACTION_DATA_UPDATED = "org.ogasimli.manat.ACTION_DATA_UPDATED";
+    public static final String ACTION_WIDGET_DATA_UPDATED = "org.ogasimli.manat.ACTION_WIDGET_DATA_UPDATED";
+    public static final String ACTION_DB_DATA_UPDATED = "org.ogasimli.manat.ACTION_DB_DATA_UPDATED";
+
+    //Intent extra keys for CurrencySaverIntentService
+    public static String CURRENCY_SAVER_DATE_EXTRA_KEY = "DATE_EXTRA";
+    public static String CURRENCY_SVER_LIST_EXTRA_KEY = "CURRENCY_LIST_EXTRA";
+
+    //Topic name for FCM
+    public static String FCM_TOPIC_NAME = "update";
 }

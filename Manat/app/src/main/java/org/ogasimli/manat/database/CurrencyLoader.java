@@ -1,4 +1,4 @@
-package org.ogasimli.manat.database.asynctask;
+package org.ogasimli.manat.database;
 
 import org.ogasimli.manat.model.Currency;
 import org.ogasimli.manat.database.provigen.ManatContract;

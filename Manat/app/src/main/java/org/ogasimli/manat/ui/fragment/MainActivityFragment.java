@@ -13,23 +13,26 @@ import com.transitionseverywhere.ChangeBounds;
 import com.transitionseverywhere.TransitionManager;
 
 import org.joda.time.DateTime;
-import org.ogasimli.manat.ui.activity.DetailActivity;
-import org.ogasimli.manat.ui.adapter.CurrencyListAdapter;
-import org.ogasimli.manat.database.asynctask.CurrencyLoader;
-import org.ogasimli.manat.database.asynctask.CurrencySaver;
-import org.ogasimli.manat.ui.dialog.CalculatorDialogFragment;
-import org.ogasimli.manat.ui.dialog.DatePickerDialogFragment;
-import org.ogasimli.manat.ui.dialog.SelectCurrencyDialogFragment;
+import org.ogasimli.manat.ManatApplication;
+import org.ogasimli.manat.database.CurrencyLoader;
+import org.ogasimli.manat.database.CurrencySaverIntentService;
 import org.ogasimli.manat.helper.Constants;
 import org.ogasimli.manat.helper.Utilities;
 import org.ogasimli.manat.model.Currency;
 import org.ogasimli.manat.network.retrofit.ApiService;
 import org.ogasimli.manat.network.retrofit.RetrofitAdapter;
+import org.ogasimli.manat.ui.activity.DetailActivity;
+import org.ogasimli.manat.ui.adapter.CurrencyListAdapter;
+import org.ogasimli.manat.ui.dialog.CalculatorDialogFragment;
+import org.ogasimli.manat.ui.dialog.DatePickerDialogFragment;
+import org.ogasimli.manat.ui.dialog.SelectCurrencyDialogFragment;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.net.Uri;
@@ -45,6 +48,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.Loader;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -95,6 +99,8 @@ public class MainActivityFragment extends Fragment
     private ArrayList<Currency> mCurrencyList;
 
     private ProgressDialog mProgressDialog;
+
+    private BroadcastReceiver mBroadcastReceiver;
 
     private String mDateString;
 
@@ -191,6 +197,9 @@ public class MainActivityFragment extends Fragment
         //Load add banner
         loadAd(mAdView);
 
+        //Register broadcast receiver
+        registerReceiver();
+
         //Set date
         DateTime date = new DateTime();
         String dateText = Constants.DATE_FORMATTER_DMMMMYYYY.print(date);
@@ -286,6 +295,8 @@ public class MainActivityFragment extends Fragment
             mProgressDialog.dismiss();
         }
 
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mBroadcastReceiver);
+
         mUnbinder.unbind();
     }
 
@@ -371,6 +382,21 @@ public class MainActivityFragment extends Fragment
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Helper method to register LocalBroadcastManager
+     */
+    private void registerReceiver() {
+        mBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                loadData();
+            }
+        };
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Constants.ACTION_DB_DATA_UPDATED);
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mBroadcastReceiver, intentFilter);
     }
 
     /**
@@ -601,17 +627,9 @@ public class MainActivityFragment extends Fragment
                     mCurrencyList = Utilities.sortList(mCurrencyList);
                     Log.d(LOG_TAG, "Loaded from API");
                     //Delete old data and insert new
-                    new CurrencySaver(getActivity(), mDateString).execute(mCurrencyList);
+                    saveCurrencyList(mCurrencyList, mDateString);
                     Log.d(LOG_TAG, "Inserted into DB");
                     showResultView();
-
-                    //Update widget if today rates are updated
-                    DateTime dateTime = new DateTime();
-                    String dateString = Constants.DATE_FORMATTER_WITH_DASH.print(dateTime)
-                            + Constants.DATE_APPENDIX;
-                    if (dateString.equals(mDateString)) {
-                        updateWidgets();
-                    }
                 } else {
                     showErrorView();
                 }
@@ -626,6 +644,16 @@ public class MainActivityFragment extends Fragment
     }
 
     /**
+     * Helper method to start CurrencySaverIntentService
+     */
+    private void saveCurrencyList(ArrayList<Currency> currencyList, String dateString) {
+        Intent intent = new Intent(getActivity(), CurrencySaverIntentService.class);
+        intent.putParcelableArrayListExtra(Constants.CURRENCY_SVER_LIST_EXTRA_KEY, currencyList);
+        intent.putExtra(Constants.CURRENCY_SAVER_DATE_EXTRA_KEY, dateString);
+        getActivity().startService(intent);
+    }
+
+    /**
      * Helper method to get necessary data before loading
      */
     private void initializeData() {
@@ -633,6 +661,7 @@ public class MainActivityFragment extends Fragment
                 Constants.DATE_FORMATTER_DDMMMYYYY,
                 Constants.DATE_FORMATTER_WITH_DASH,
                 Constants.DATE_APPENDIX);
+        ManatApplication.globalSelectedDate = mDateString;
         mCodes = getResources().getStringArray(R.array.currency_codes);
     }
 
@@ -764,23 +793,9 @@ public class MainActivityFragment extends Fragment
     * Helper method to set ripple effect to view
     */
     private void setRipple(View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            // If we're running on Honeycomb or newer, then we can use the Theme's
-            // selectableItemBackground to ensure that the View has a pressed state
-            TypedValue tValue = new TypedValue();
-            getContext().getTheme().resolveAttribute(R.attr.selectableItemBackground, tValue, true);
-            view.setBackgroundResource(tValue.resourceId);
-        }
-    }
-
-    /*
-    * Helper method to update app widget
-    */
-    private void updateWidgets() {
-        Context context = getContext();
-        Intent dataUpdatedIntent = new Intent(Constants.ACTION_DATA_UPDATED)
-                .setPackage(context.getPackageName());
-        context.sendBroadcast(dataUpdatedIntent);
+        TypedValue tValue = new TypedValue();
+        getContext().getTheme().resolveAttribute(R.attr.selectableItemBackground, tValue, true);
+        view.setBackgroundResource(tValue.resourceId);
     }
 
     @OnClick(R.id.main_swap_fab)

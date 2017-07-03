@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
+        android:name="org.ogasimli.manat.ManatApplication"
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
@@ -42,6 +43,42 @@
         <provider
             android:name="org.ogasimli.manat.database.provigen.ManatContentProvider"
             android:authorities="org.ogasimli.manat" />
+
+        <!-- IntentService class to save data into DB -->
+        <service
+            android:exported="false"
+            android:name="org.ogasimli.manat.database.CurrencySaverIntentService"/>
+
+        <!-- A service that extends FirebaseMessagingService to handle messages -->
+        <service
+            android:exported="false"
+            android:name="org.ogasimli.manat.network.fcm.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <!-- JobService to update currencies based on the FCM message -->
+        <service android:name="org.ogasimli.manat.network.fcm.MyJobService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
+            </intent-filter>
+        </service>
+
+        <!-- Custom default icon meta-data for incoming notification messages -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notification_small" />
+
+        <!-- Custom color used with incoming notification messages -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorPrimary" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel"
+            android:value="@string/default_notification_channel_id"/>
 
         <!-- Google Play Services meta-data -->
         <meta-data

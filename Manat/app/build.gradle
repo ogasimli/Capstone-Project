@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion '26.0.0'
     dexOptions{
         maxProcessCount 2
@@ -10,9 +10,9 @@ android {
     defaultConfig {
         applicationId "org.ogasimli.manat"
         minSdkVersion 14
-        targetSdkVersion 25
-        versionCode 9
-        versionName "1.0.9"
+        targetSdkVersion 26
+        versionCode 10
+        versionName "2.0"
     }
     signingConfigs {
         release {
@@ -40,48 +40,48 @@ buildscript {
     repositories {
         mavenCentral()
     }
-    dependencies {
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-    }
 }
 
-apply plugin: 'com.neenbedankt.android-apt'
-
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testImplementation 'junit:junit:4.12'
+
     //Android Libraries
-    compile 'com.android.support:design:25.4.0'
-    compile 'com.android.support:support-v4:25.4.0'
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    compile 'com.android.support:recyclerview-v7:25.4.0'
-    compile 'com.android.support:cardview-v7:25.4.0'
-    compile 'com.android.support:gridlayout-v7:25.4.0'
+    implementation 'com.android.support:design:26.0.0-beta2'
+    implementation 'com.android.support:support-v4:26.0.0-beta2'
+    implementation 'com.android.support:appcompat-v7:26.0.0-beta2'
+    implementation 'com.android.support:recyclerview-v7:26.0.0-beta2'
+    implementation 'com.android.support:cardview-v7:26.0.0-beta2'
+    implementation 'com.android.support:gridlayout-v7:26.0.0-beta2'
     //Firebase
-    compile 'com.google.firebase:firebase-analytics:11.0.1'
-    compile 'com.google.firebase:firebase-invites:11.0.1'
-    compile 'com.google.firebase:firebase-ads:11.0.1'
-    compile 'com.google.firebase:firebase-crash:11.0.1'
-    compile 'com.google.firebase:firebase-messaging:11.0.1'
+    implementation 'com.google.firebase:firebase-analytics:11.0.2'
+    implementation 'com.google.firebase:firebase-invites:11.0.2'
+    implementation 'com.google.firebase:firebase-ads:11.0.2'
+    implementation 'com.google.firebase:firebase-crash:11.0.2'
+    implementation 'com.google.firebase:firebase-messaging:11.0.2'
+    implementation 'com.firebase:firebase-jobdispatcher:0.6.0'
     //ButterKnife
-    compile 'com.jakewharton:butterknife:8.5.1'
-    apt 'com.jakewharton:butterknife-compiler:8.5.1'
+    implementation 'com.jakewharton:butterknife:8.6.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     //MPAndroidChart
-    compile 'com.github.PhilJay:MPAndroidChart:v2.2.4'
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
     //Joda Time
-    compile 'joda-time:joda-time:2.9.3'
+    implementation 'joda-time:joda-time:2.9.3'
     //Retrofit
-    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    implementation 'com.squareup.retrofit:retrofit:1.9.0'
     //ProviGen
-    compile 'com.github.provigen:ProviGen-lib:2.0.1'
+    implementation 'com.github.provigen:ProviGen-lib:2.0.1'
     //EvalEx
-    compile 'com.udojava:EvalEx:1.2'
+    implementation 'com.udojava:EvalEx:1.2'
     //Backport transition animations library
-    compile 'com.andkulikov:transitionseverywhere:1.6.3'
+    implementation 'com.andkulikov:transitionseverywhere:1.6.3'
     //Calligraphy font library
-    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
+    implementation 'uk.co.chrisjenx:calligraphy:2.2.0'
     //Auto-fit TextView library
-    compile 'me.grantland:autofittextview:0.2.1'
+    implementation 'me.grantland:autofittextview:0.2.1'
 }
 
 apply plugin: 'com.google.gms.google-services'
