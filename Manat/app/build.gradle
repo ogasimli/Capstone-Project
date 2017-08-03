@@ -69,7 +69,7 @@ dependencies {
     //MPAndroidChart
     implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
     //Joda Time
-    implementation 'joda-time:joda-time:2.9.3'
+    implementation 'joda-time:joda-time:2.9.9'
     //Retrofit
     implementation 'com.squareup.retrofit:retrofit:1.9.0'
     //ProviGen
