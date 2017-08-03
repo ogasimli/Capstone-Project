@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.AppBarOverlay">
+                app:popupTheme="@style/AppTheme.PopupOverlay">
 
                 <ImageView
                     android:layout_width="wrap_content"
