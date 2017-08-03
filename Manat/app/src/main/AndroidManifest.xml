@@ -6,9 +6,9 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
-    <application
-        android:name="org.ogasimli.manat.ManatApplication"
+    <application android:name="org.ogasimli.manat.ManatApplication"
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
@@ -20,8 +20,7 @@
         tools:targetApi="n">
 
         <!-- Main Activity -->
-        <activity
-            android:name="org.ogasimli.manat.ui.activity.MainActivity"
+        <activity android:name="org.ogasimli.manat.ui.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -31,28 +30,27 @@
         </activity>
 
         <!-- Detail Activity -->
-        <activity
-            android:name="org.ogasimli.manat.ui.activity.DetailActivity"
+        <activity android:name="org.ogasimli.manat.ui.activity.DetailActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.ogasimli.manat.ui.activity.MainActivity"/>
         </activity>
 
         <!-- Database content provider -->
-        <provider
-            android:name="org.ogasimli.manat.database.provigen.ManatContentProvider"
-            android:authorities="org.ogasimli.manat" />
+        <provider android:name="org.ogasimli.manat.database.provigen.ManatContentProvider"
+            android:authorities="org.ogasimli.manat"/>
 
         <!-- IntentService class to save data into DB -->
-        <service
-            android:exported="false"
-            android:name="org.ogasimli.manat.database.CurrencySaverIntentService"/>
+        <service android:name="org.ogasimli.manat.database.CurrencySaverIntentService"
+            android:exported="false"/>
+
+        <!-- IntentService class to delete old data from DB -->
+        <service android:name="org.ogasimli.manat.database.CurrencyRemoverIntentService"
+            android:exported="false"/>
 
         <!-- A service that extends FirebaseMessagingService to handle messages -->
-        <service
-            android:exported="false"
-            android:name="org.ogasimli.manat.network.fcm.MyFirebaseMessagingService">
+        <service android:name="org.ogasimli.manat.network.fcm.MyFirebaseMessagingService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
@@ -67,43 +65,36 @@
         </service>
 
         <!-- Custom default icon meta-data for incoming notification messages -->
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_notification_small" />
+        <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notification_small"/>
 
         <!-- Custom color used with incoming notification messages -->
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorPrimary" />
+        <meta-data android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorPrimary"/>
 
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_channel"
+        <meta-data android:name="com.google.firebase.messaging.default_notification_channel"
             android:value="@string/default_notification_channel_id"/>
 
         <!-- Google Play Services meta-data -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
 
         <!-- Support for larger display formats -->
         <meta-data android:name="android.max_aspect"
             android:value="2.1"/>
 
         <!-- Widget -->
-        <receiver
-            android:name="org.ogasimli.manat.widget.WidgetProvider" >
+        <receiver android:name="org.ogasimli.manat.widget.WidgetProvider">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="org.ogasimli.manat.ACTION_DATA_UPDATED" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="org.ogasimli.manat.ACTION_DATA_UPDATED"/>
             </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_info" />
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info"/>
         </receiver>
-        <service
-            android:name="org.ogasimli.manat.widget.WidgetRemoteViewsService"
+        <service android:name="org.ogasimli.manat.widget.WidgetRemoteViewsService"
             android:permission="android.permission.BIND_REMOTEVIEWS"
-            android:exported="false" />
+            android:exported="false"/>
     </application>
 
 </manifest>

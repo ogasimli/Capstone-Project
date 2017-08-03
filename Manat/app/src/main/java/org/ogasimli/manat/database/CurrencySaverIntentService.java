@@ -1,7 +1,6 @@
 package org.ogasimli.manat.database;
 
 import org.joda.time.DateTime;
-import org.ogasimli.manat.ManatApplication;
 import org.ogasimli.manat.database.provigen.ManatContract;
 import org.ogasimli.manat.helper.Constants;
 import org.ogasimli.manat.model.Currency;
@@ -34,14 +33,14 @@ public class CurrencySaverIntentService extends IntentService {
     protected void onHandleIntent(@Nullable Intent intent) {
         if (intent != null) {
             String dateString = intent.getStringExtra(Constants.CURRENCY_SAVER_DATE_EXTRA_KEY);
-            //Get ContentResolver
+            // Get ContentResolver
             Uri contentUri = ManatContract.CONTENT_URI;
             ContentResolver contentResolver = getContentResolver();
-            //First delete old data
+            // First delete old data
             contentResolver.delete(contentUri, ManatContract.DATE + " = ? ",
                     new String[]{dateString});
 
-            //Insert new values
+            // Insert new values
             ArrayList<Currency> currencyList =
                     intent.getParcelableArrayListExtra(Constants.CURRENCY_SAVER_LIST_EXTRA_KEY);
             for (Currency currency : currencyList) {
@@ -54,22 +53,36 @@ public class CurrencySaverIntentService extends IntentService {
                 contentResolver.insert(contentUri, newValues);
             }
 
-            //Update UI if today rates are updated
+            // Update UI if today rates are updated
             boolean manualRefresh = intent
                     .getBooleanExtra(Constants.CURRENCY_SAVER_SWITCH_EXTRA_KEY, false);
-            if (!manualRefresh && dateString.equals(ManatApplication.globalSelectedDate)) {
+            if (!manualRefresh) {
+                Intent broadcastIntent = new Intent();
+                broadcastIntent.setAction(Constants.ACTION_DB_DATA_UPDATED);
+                broadcastIntent.putExtra(Constants.LOCAL_BROADCAST_DATE_EXTRA, dateString);
                 LocalBroadcastManager.getInstance(this)
-                        .sendBroadcast(new Intent(Constants.ACTION_DB_DATA_UPDATED));
+                        .sendBroadcast(broadcastIntent);
+                // Remove old data
+                removeOldData();
             }
 
             //Update widget if today rates are updated
             DateTime dateTime = new DateTime();
             String todayString = Constants.DATE_FORMATTER_WITH_DASH.print(dateTime)
-                    + Constants.DATE_APPENDIX;
+                    .concat(Constants.DATE_APPENDIX);
             if (dateString.equals(todayString)) {
                 updateWidgets();
+                removeOldData();
             }
         }
+    }
+
+    /**
+     * Helper method to remove data older than a month from DB
+     */
+    private void removeOldData() {
+        Intent intent = new Intent(this, CurrencyRemoverIntentService.class);
+        startService(intent);
     }
 
     /**

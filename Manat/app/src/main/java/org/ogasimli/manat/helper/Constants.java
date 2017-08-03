@@ -91,9 +91,12 @@ public class Constants {
     public static final String ACTION_DB_DATA_UPDATED = "org.ogasimli.manat.ACTION_DB_DATA_UPDATED";
 
     //Intent extra keys for CurrencySaverIntentService
-    public static String CURRENCY_SAVER_DATE_EXTRA_KEY = "DATE_EXTRA";
+    public static String CURRENCY_SAVER_DATE_EXTRA_KEY = "SAVE_DATE_EXTRA";
     public static String CURRENCY_SAVER_LIST_EXTRA_KEY = "CURRENCY_LIST_EXTRA";
     public static String CURRENCY_SAVER_SWITCH_EXTRA_KEY = "MANUAL_REFRESH";
+
+    //Intent extra keys for local BroadCastManager
+    public static String LOCAL_BROADCAST_DATE_EXTRA = "LOCAL_BROADCAST_DATE_EXTRA";
 
     //Topic name for FCM
     public static String FCM_TOPIC_NAME = "update";

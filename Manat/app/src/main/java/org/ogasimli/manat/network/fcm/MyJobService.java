@@ -53,7 +53,7 @@ public class MyJobService extends JobService {
                 Constants.DATE_FORMATTER_DDMMYYYY_WITH_DOT,
                 Constants.DATE_FORMATTER_WITH_DASH,
                 Constants.DATE_APPENDIX);
-        //Load data from API
+        // Load data from API
         RestAdapter adapter = RetrofitAdapter.getRestAdapter();
         ApiService service = adapter.create(ApiService.class);
         service.getCurrencyByDate(formattedDate, new Callback<ArrayList<Currency>>() {
@@ -61,10 +61,10 @@ public class MyJobService extends JobService {
             @Override
             public void success(ArrayList<Currency> currencyList, Response response) {
                 if (currencyList != null && currencyList.size() == 44) {
-                    //Sort list in desired order
+                    // Sort list in desired order
                     currencyList = Utilities.sortList(currencyList);
                     Log.d(LOG_TAG, "Loaded from API");
-                    //Delete old data and insert new
+                    // Delete old data and insert new
                     saveCurrencyList(currencyList, formattedDate);
                     Log.d(LOG_TAG, "Inserted into DB");
                     mIsSuccessful = true;

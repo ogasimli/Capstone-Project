@@ -13,7 +13,6 @@ import com.transitionseverywhere.ChangeBounds;
 import com.transitionseverywhere.TransitionManager;
 
 import org.joda.time.DateTime;
-import org.ogasimli.manat.ManatApplication;
 import org.ogasimli.manat.database.CurrencyLoader;
 import org.ogasimli.manat.database.CurrencySaverIntentService;
 import org.ogasimli.manat.helper.Constants;
@@ -190,21 +189,21 @@ public class MainActivityFragment extends Fragment
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         mUnbinder = ButterKnife.bind(this, rootView);
 
-        //Initialize Toolbar
+        // Initialize Toolbar
         initToolbar();
 
-        //Load add banner
+        // Load add banner
         loadAd(mAdView);
 
-        //Register broadcast receiver
+        // Register broadcast receiver
         registerReceiver();
 
-        //Set date
+        // Set date
         DateTime date = new DateTime();
         String dateText = Constants.DATE_FORMATTER_DMMMMYYYY.print(date);
         mMainDateTextView.setText(dateText);
 
-        //Format amount to have default locale decimal separator
+        // Format amount to have default locale decimal separator
         String foreignAmount = mMainForeignAmountTextView.getText().toString();
         String aznAmount = mMainAznAmountTextView.getText().toString();
         mIgnoreChange = true;
@@ -212,20 +211,20 @@ public class MainActivityFragment extends Fragment
         mIgnoreChange = true;
         mMainAznAmountTextView.setText(aznAmount.replace(",", Utilities.getDecimalSeparator()));
 
-        //Set TextWatchers
+        // Set TextWatchers
         mMainDateTextView.addTextChangedListener(mDateWatcher);
         mMainRateTextView.addTextChangedListener(mRateWatcher);
         mMainForeignAmountTextView.addTextChangedListener(mForeignAmountWatcher);
         mMainAznAmountTextView.addTextChangedListener(mAznAmountWatcher);
 
-        //Set selected currency
+        // Set selected currency
         mSelectedCode = Utilities.getSelectedCode(getActivity());
         mMainForeignCurrencyText.setText(mSelectedCode);
 
-        //Instantiate RecyclerView adapter
+        // Instantiate RecyclerView adapter
         mCurrencyListAdapter = new CurrencyListAdapter(getActivity());
 
-        //Instantiate RecyclerView
+        // Instantiate RecyclerView
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -256,6 +255,10 @@ public class MainActivityFragment extends Fragment
         if (mAdView != null) {
             mAdView.pause();
         }
+
+        // Unregister local BroadcastReceiver
+        unregisterReceiver();
+
         super.onPause();
     }
 
@@ -265,6 +268,9 @@ public class MainActivityFragment extends Fragment
         if (mAdView != null) {
             mAdView.resume();
         }
+
+        // Register local BroadcastReceiver
+        registerReceiver();
     }
 
     @Override
@@ -293,8 +299,6 @@ public class MainActivityFragment extends Fragment
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }
-
-        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mBroadcastReceiver);
 
         mUnbinder.unbind();
     }
@@ -373,7 +377,7 @@ public class MainActivityFragment extends Fragment
 
         switch (id) {
             case R.id.menu_refresh:
-                refreshData(true);
+                refreshData();
                 break;
             case R.id.menu_invite:
                 onInviteClicked();
@@ -390,12 +394,20 @@ public class MainActivityFragment extends Fragment
         mBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                loadData();
+                String date = intent.getStringExtra(Constants.LOCAL_BROADCAST_DATE_EXTRA);
+                if (mDateString.equals(date)) {
+                    loadData();
+                }
             }
         };
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Constants.ACTION_DB_DATA_UPDATED);
-        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mBroadcastReceiver, intentFilter);
+        LocalBroadcastManager.getInstance(getActivity())
+                .registerReceiver(mBroadcastReceiver, intentFilter);
+    }
+
+    private void unregisterReceiver() {
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mBroadcastReceiver);
     }
 
     /**
@@ -596,7 +608,7 @@ public class MainActivityFragment extends Fragment
     private void loadData() {
         initializeData();
         showProgressDialog(true);
-        //First try to check if DB has corresponding entries
+        // First try to check if DB has corresponding entries
         getActivity()
                 .getSupportLoaderManager()
                 .restartLoader(Constants.CURRENCY_LOADER_ID, null, this);
@@ -606,13 +618,11 @@ public class MainActivityFragment extends Fragment
     /**
      * Helper method to refresh rates
      */
-    private void refreshData(final boolean manualRefresh) {
-        //Show ProgressDialog if not visible
-        if (mProgressDialog == null || !mProgressDialog.isShowing()) {
-            showProgressDialog(true);
-        }
+    private void refreshData() {
+        // Show ProgressDialog if not visible
+        showProgressDialog(true);
 
-        //Load data from API
+        // Load data from API
         RestAdapter adapter = RetrofitAdapter.getRestAdapter();
         ApiService service = adapter.create(ApiService.class);
         service.getCurrencyByDate(mDateString, new Callback<ArrayList<Currency>>() {
@@ -622,11 +632,11 @@ public class MainActivityFragment extends Fragment
                 mCurrencyList = new ArrayList<>();
                 mCurrencyList = currencyList;
                 if (mCurrencyList != null && mCurrencyList.size() == 44) {
-                    //Sort list in desired order
+                    // Sort list in desired order
                     mCurrencyList = Utilities.sortList(mCurrencyList);
                     Log.d(LOG_TAG, "Loaded from API");
-                    //Delete old data and insert new
-                    saveCurrencyList(mCurrencyList, mDateString, manualRefresh);
+                    // Delete old data and insert new
+                    saveCurrencyList(mCurrencyList, mDateString, true);
                     Log.d(LOG_TAG, "Inserted into DB");
                     showResultView();
                 } else {
@@ -662,7 +672,6 @@ public class MainActivityFragment extends Fragment
                 Constants.DATE_FORMATTER_DDMMMYYYY,
                 Constants.DATE_FORMATTER_WITH_DASH,
                 Constants.DATE_APPENDIX);
-        ManatApplication.globalSelectedDate = mDateString;
         mCodes = getResources().getStringArray(R.array.currency_codes);
     }
 
@@ -671,7 +680,7 @@ public class MainActivityFragment extends Fragment
      */
     private void showResultView() {
 
-        //View and hide relevant LinearLayouts
+        // View and hide relevant LinearLayouts
         if (mResultView != null) {
             mResultView.setVisibility(View.VISIBLE);
         }
@@ -679,16 +688,14 @@ public class MainActivityFragment extends Fragment
             mErrorView.setVisibility(View.GONE);
         }
 
-        //Set adapter to RecyclerView
+        // Set adapter to RecyclerView
         mCurrencyListAdapter.setCurrencyList(mCurrencyList);
 
-        //Set main rate text
+        // Set main rate text
         mMainRateTextView.setText(Utilities.getRateByCode(mCurrencyList, mSelectedCode));
 
-        //Hide ProgressDialog
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            showProgressDialog(false);
-        }
+        // Hide ProgressDialog
+        showProgressDialog(false);
     }
 
     /**
@@ -696,7 +703,7 @@ public class MainActivityFragment extends Fragment
      */
     private void showErrorView() {
 
-        //View and hide relevant LinearLayouts
+        // View and hide relevant LinearLayouts
         if (mResultView != null) {
             mResultView.setVisibility(View.GONE);
         }
@@ -704,10 +711,8 @@ public class MainActivityFragment extends Fragment
             mErrorView.setVisibility(View.VISIBLE);
         }
 
-        //Hide ProgressDialog
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            showProgressDialog(false);
-        }
+        // Hide ProgressDialog
+        showProgressDialog(false);
     }
 
     /*
@@ -715,11 +720,15 @@ public class MainActivityFragment extends Fragment
     */
     private void showProgressDialog(boolean show) {
         if (show) {
-            mProgressDialog = ProgressDialog.show(getActivity(),
-                    getActivity().getString(R.string.progress_dialog_title),
-                    getActivity().getString(R.string.progress_dialog_content), true, false);
+            if (mProgressDialog == null || !mProgressDialog.isShowing()) {
+                mProgressDialog = ProgressDialog.show(getActivity(),
+                        getActivity().getString(R.string.progress_dialog_title),
+                        getActivity().getString(R.string.progress_dialog_content), true, false);
+            }
         } else {
-            mProgressDialog.dismiss();
+            if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                mProgressDialog.dismiss();
+            }
         }
     }
 
@@ -766,16 +775,16 @@ public class MainActivityFragment extends Fragment
             mRootView.removeView(mForeignLinerLayout);
             mRootView.removeView(mAznLinearLayout);
 
-            //swap layouts
+            // swap layouts
             mRootView.addView(mForeignLinerLayout, mRootView.getChildCount());
             mRootView.addView(mAznLinearLayout, 1);
 
-            //enable/disable ripple effects
+            // enable/disable ripple effects
             mMainForeignAmountTextView.setBackgroundResource(0);
             setRipple(mMainAznAmountTextView);
         }
 
-        //Disable scrolling of RecyclerView on orientation change and disable focusing
+        // Disable scrolling of RecyclerView on orientation change and disable focusing
         if (isLandscape()) {
             mRecyclerView.setFocusable(false);
             mRecyclerView.setNestedScrollingEnabled(false);
@@ -801,7 +810,7 @@ public class MainActivityFragment extends Fragment
 
     @OnClick(R.id.main_swap_fab)
     public void swapLayouts(FloatingActionButton swapFab) {
-        //Animate fab
+        // Animate fab
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             AnimatedVectorDrawable fabRotation = (AnimatedVectorDrawable) getActivity().
                     getDrawable(R.drawable.fab_anim_vector_drawable);
@@ -811,34 +820,34 @@ public class MainActivityFragment extends Fragment
             }
         }
 
-        //Swap layouts
+        // Swap layouts
         TransitionManager.beginDelayedTransition(mRootView, new ChangeBounds());
         mRootView.removeView(mForeignLinerLayout);
         mRootView.removeView(mAznLinearLayout);
 
         switch (mSwapOrder) {
             case 0:
-                //swap layouts
+                // Swap layouts
                 mRootView.addView(mForeignLinerLayout, mRootView.getChildCount());
                 mRootView.addView(mAznLinearLayout, 1);
 
-                //enable/disable ripple effects
+                // Enable/disable ripple effects
                 mMainForeignAmountTextView.setBackgroundResource(0);
                 setRipple(mMainAznAmountTextView);
 
-                //set swap order
+                // Set swap order
                 mSwapOrder++;
                 break;
             case 1:
-                //swap layouts
+                // Swap layouts
                 mRootView.addView(mForeignLinerLayout, 1);
                 mRootView.addView(mAznLinearLayout, mRootView.getChildCount());
 
-                //enable/disable ripple effects
+                // Enable/disable ripple effects
                 mMainAznAmountTextView.setBackgroundResource(0);
                 setRipple(mMainForeignAmountTextView);
 
-                //set swap order
+                // Set swap order
                 mSwapOrder--;
                 break;
         }
@@ -846,7 +855,7 @@ public class MainActivityFragment extends Fragment
 
     @OnClick(R.id.reload_text)
     public void reloadTextViewClick(Button button) {
-        refreshData(true);
+        refreshData();
     }
 
     @OnClick(R.id.main_date_text)
@@ -916,7 +925,7 @@ public class MainActivityFragment extends Fragment
 
         @Override
         public void onItemLongClick(int position, View v) {
-            //TODO: Implement long click on list item
+            // TODO: Implement long click on list item
         }
     };
 
@@ -938,12 +947,12 @@ public class MainActivityFragment extends Fragment
     @Override
     public void onLoadFinished(Loader<ArrayList<Currency>> loader, ArrayList<Currency> data) {
         mCurrencyList = data;
-        //If there is no corresponding entries in DB then make API call and write to DB
+        // If there is no corresponding entries in DB then make API call and write to DB
         if (mCurrencyList != null && mCurrencyList.size() == 44) {
             Log.d(LOG_TAG, "Loaded from DB");
             showResultView();
         } else {
-            refreshData(false);
+            refreshData();
         }
     }
 

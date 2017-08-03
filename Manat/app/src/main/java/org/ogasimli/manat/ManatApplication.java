@@ -13,8 +13,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class ManatApplication extends Application {
 
-    public static String globalSelectedDate;
-
     @Override
     public void onCreate() {
         super.onCreate();
