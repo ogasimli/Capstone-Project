@@ -66,7 +66,7 @@ public class ChartMaker {
         // set the marker to the chart
         mChart.setMarkerView(mv);
 
-        //XAxis settings
+        // XAxis settings
         XAxis x = mChart.getXAxis();
         x.setEnabled(true);
         x.setDrawAxisLine(true);
@@ -79,7 +79,7 @@ public class ChartMaker {
         x.setAvoidFirstLastClipping(true);
         x.setPosition(XAxis.XAxisPosition.BOTTOM);
 
-        //YAxis settings
+        // YAxis settings
         YAxis y = mChart.getAxisLeft();
         y.setEnabled(true);
         y.setDrawAxisLine(true);
@@ -129,7 +129,7 @@ public class ChartMaker {
         lineDataSet.setDrawFilled(true);
         lineDataSet.setDrawCircles(false);
         lineDataSet.setLineWidth(1.8f);
-        //set1.setCircleSize(4f);
+        // set1.setCircleSize(4f);
         lineDataSet.setCircleColor(Color.WHITE);
         lineDataSet.setHighlightEnabled(true);
         lineDataSet.setDrawHorizontalHighlightIndicator(false);
@@ -137,7 +137,7 @@ public class ChartMaker {
         lineDataSet.setHighLightColor(Color.WHITE);
         lineDataSet.setColor(Color.WHITE);
         lineDataSet.setFillColor(Color.WHITE);
-        //set1.setFillAlpha(255);
+        // set1.setFillAlpha(255);
 
         // create a data object with the datasets
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();

@@ -47,7 +47,7 @@ public class DetailActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        // noinspection SimplifiableIfStatement
         switch (id) {
             case android.R.id.home:
                 supportFinishAfterTransition();

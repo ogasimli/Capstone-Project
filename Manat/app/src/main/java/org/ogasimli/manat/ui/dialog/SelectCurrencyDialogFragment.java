@@ -87,7 +87,7 @@ public class SelectCurrencyDialogFragment extends DialogFragment {
             = new SelectCurrencyAdapter.ClickListener() {
         @Override
         public void onItemClick(int position, View v) {
-            //Write result to SharedPreferences
+            // Write result to SharedPreferences
             String code = mSelectCurrencyAdapter.selectCurrency(position);
             SharedPreferences sharedPref = getActivity().getSharedPreferences
                     (Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
@@ -95,7 +95,7 @@ public class SelectCurrencyDialogFragment extends DialogFragment {
             editor.putString(Constants.SELECTED_CODE_KEY, code);
             editor.apply();
 
-            //Go back to MainActivityFragment
+            // Go back to MainActivityFragment
             Intent intent = new Intent();
             intent.putExtra(Constants.CODE, code);
             getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);

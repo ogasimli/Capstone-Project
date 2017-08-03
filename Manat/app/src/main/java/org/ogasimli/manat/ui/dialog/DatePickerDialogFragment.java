@@ -48,20 +48,20 @@ public class DatePickerDialogFragment extends DialogFragment
         String dateString = getArguments().getString(Constants.DATE_PICKER_BUNDLE_KEY);
         DateTime date = DateTime.parse(dateString, Constants.DATE_FORMATTER_DDMMMYYYY);
         int year = date.getYear();
-        //Subtract 1 because JodaTime's month begins from 1, while Calendar's month from 0
+        // Subtract 1 because JodaTime's month begins from 1, while Calendar's month from 0
         int month = date.getMonthOfYear() - 1;
         int day = date.getDayOfMonth();
 
         DatePickerDialog dialog = new DatePickerDialog(getActivity(),
                 R.style.DatePickerDialogStyle, this, year, month, day);
 
-        //Set min date
+        // Set min date
         DateTime minDate =  DateTime.parse(Constants.MIN_DATE,
                 Constants.DATE_FORMATTER_DDMMYYYY);
         long minDateMillis = minDate.getMillis();
         dialog.getDatePicker().setMinDate(minDateMillis);
 
-        //Set max date
+        // Set max date
         DateTime maxDate = new DateTime(DateTimeZone.getDefault())
                 .withHourOfDay(23)
                 .withMinuteOfHour(59)

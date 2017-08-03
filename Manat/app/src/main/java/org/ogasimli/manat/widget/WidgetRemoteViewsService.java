@@ -38,21 +38,21 @@ public class WidgetRemoteViewsService extends RemoteViewsService {
 
             @Override
             public void onCreate() {
-                //Initialize currency list
+                // Initialize currency list
                 mCurrencyList = new ArrayList<>();
 
-                //Get current date
+                // Get current date
                 DateTime dateTime = new DateTime();
                 String dateString = Constants.DATE_FORMATTER_WITH_DASH.print(dateTime)
                         + Constants.DATE_APPENDIX;
 
-                //Initialize parameters of query
+                // Initialize parameters of query
                 Uri uri = ManatContract.CONTENT_URI;
                 String selection = ManatContract.DATE + " = ? ";
                 String[] args = new String[]{dateString};
                 cursor =  getContentResolver().query(uri, null, selection, args, "");
 
-                //Perform query and pass data to list
+                // Perform query and pass data to list
                 if(cursor != null && cursor.getCount() > 0) {
                     Log.d(LOG_TAG, "Rates found: " + cursor.getCount());
                     cursor.moveToFirst();
@@ -120,7 +120,7 @@ public class WidgetRemoteViewsService extends RemoteViewsService {
                 remoteViews.setTextViewText(R.id.widget_list_item_rate_textview, currencyValue);
                 remoteViews.setImageViewResource(R.id.widget_list_item_trend_imageview, trendImage);
 
-                //Set content descriptions to images
+                // Set content descriptions to images
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
                     remoteViews.setContentDescription(R.id.widget_list_item_country_flag,
                             currencyName);

@@ -63,15 +63,15 @@ public class CalculatorDialogFragment extends DialogFragment {
 
         mButtonKey = getArguments().getInt(Constants.CALCULATOR_BUNDLE_KEY);
 
-        //Set system decimal separator as text of delimiter button
+        // Set system decimal separator as text of delimiter button
         mCalcDelimiterTextView.setText(Utilities.getDecimalSeparator());
 
-        //Prevent mEditTextView from resizing
+        // Prevent mEditTextView from resizing
         mEditTextView.setMaxWidth(mEditTextView.getWidth());
         mEditTextView.setMaxHeight(mEditTextView.getHeight());
         mEditTextView.setMovementMethod(new ScrollingMovementMethod());
 
-        //Set mEditTextView text to zero
+        // Set mEditTextView text to zero
         double zero = 0;
         String zeroStr = String.format(Locale.getDefault(), "%.2f", zero);
         mEditTextView.setText(zeroStr);
@@ -83,7 +83,7 @@ public class CalculatorDialogFragment extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Remove TitleBar
+        // Remove TitleBar
         int style = DialogFragment.STYLE_NO_TITLE;
         int theme = R.style.CalculatorDialogStyle;
         setStyle(style, theme);
@@ -165,7 +165,7 @@ public class CalculatorDialogFragment extends DialogFragment {
         String editText = mEditTextView.getText().toString();
         try {
             editText = Utilities.evalMathString(editText);
-            //Go back to MainActivityFragment
+            // Go back to MainActivityFragment
             Intent intent = new Intent();
             intent.putExtra(Constants.AMOUNT, editText);
             intent.putExtra(Constants.BUTTON_KEY, mButtonKey);

@@ -180,10 +180,10 @@ public class DetailActivityFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
         mUnbinder = ButterKnife.bind(this, rootView);
 
-        //initToolbar();
+        // initToolbar();
         initToolbar();
 
-        //Set statistics label
+        // Set statistics label
         mStatisticsLabelTextView.setText(getString(R.string.detail_statistics_label,
                 getString(R.string.statistics_label_weekly)));
 
@@ -288,15 +288,15 @@ public class DetailActivityFragment extends Fragment {
      * Helper method to load rates
      */
     private void loadData() {
-        //Show ProgressDialog if not visible
+        // Show ProgressDialog if not visible
         if (mProgressDialog == null || !mProgressDialog.isShowing()) {
             showProgressDialog(true);
         }
 
-        //Build query string
+        // Build query string
         buildQueryString();
 
-        //Load data from API
+        // Load data from API
         RestAdapter adapter = RetrofitAdapter.getRestAdapter();
         ApiService service = adapter.create(ApiService.class);
         service.getCurrencyByPeriod(mFromDateString, mTillDateString, mCurrencyCode,
@@ -341,7 +341,7 @@ public class DetailActivityFragment extends Fragment {
 
         changeBtnState(mPressedBtnNum);
 
-        //Instantiate and create LineChart
+        // Instantiate and create LineChart
         ChartMaker chartMaker = new ChartMaker(getActivity(), mChart, mSecondaryCurrencyList);
         chartMaker.createChart();
 
