@@ -99,8 +99,6 @@ public class CalculatorDialogFragment extends DialogFragment {
 
     @Override
     public void show(FragmentManager manager, String tag) {
-        DialogFragment.mDismissed = false;
-        mShownByMe = true;
         try {
             FragmentTransaction ft = manager.beginTransaction();
             ft.add(this, tag);
