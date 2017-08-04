@@ -22,6 +22,7 @@
     <string name="menu_refresh_text">Yenilə</string>
     <string name="menu_share_text">Paylaş</string>
     <string name="menu_invite_text">Dostlarını dəvət et</string>
+    <string name="menu_notification_text">Bildirişlər</string>
 
     <!-- Statistical info labels -->
     <string name="detail_statistics_label">"%s" Statistika</string>
@@ -64,9 +65,11 @@
 
     <!-- Error messages -->
     <string name="express_exception_message">Zəhmət olmasa, daxil edilmiş məlumatın düzgünlüyünü
-        bir daha yoxlayın!</string>
+        bir daha yoxlayın.</string>
     <string name="arithmetical_exception_message">Yanlış məlumat daxil edilib! Hesablama xətası
-        baş verdi!</string>
+        baş verdi.</string>
+    <string name="number_format_exception_message">Yanlış məlumat daxil edilib! Məlummatın
+        formatı düzgün deyildir.</string>
     <string name="main_no_result_message">Məzənnələrin yüklənməsi zamanı xəta baş verdi.
         Bir daha cəhd edin&#8230;</string>
     <string name="widget_no_result_message">Məzənnələrlə bağlı məlumat mövcud deyil.
@@ -83,6 +86,11 @@
     <string name="send_failed">Dəvətnamənin göndərilməsində xəta baş verdi</string>
     <string name="sent_invitations_fmt" formatted="false">%d dəvətnamə göndərildi</string>
     <string name="google_play_services_error">Google Play Xidmətində Xəta</string>
+
+    <!-- FCM notification strings resources -->
+    <string name="fcm_notification_title">Yenilənmiş valyuta məzənnələri</string>
+    <string name="fcm_notification_body" formatted="false">%s tarixinə olan valyuta
+        məzənnələri yenilənmişdir</string>
 
     <!-- Currency names -->
     <string-array name="currency_names">

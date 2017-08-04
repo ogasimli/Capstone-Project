@@ -22,6 +22,7 @@
     <string name="menu_refresh_text">Обнови</string>
     <string name="menu_share_text">Поделись</string>
     <string name="menu_invite_text">Пригласи друзей</string>
+    <string name="menu_notification_text">Уведомления</string>
 
     <!-- Statistical info labels -->
     <string name="detail_statistics_label">"%s" Статистика</string>
@@ -81,6 +82,10 @@
     <string name="send_failed">Ошибка при отправке приглашения</string>
     <string name="sent_invitations_fmt" formatted="false">%d приглашений отправлено</string>
     <string name="google_play_services_error">Ошибка в службе Google Play</string>
+
+    <!-- FCM notification strings resources -->
+    <string name="fcm_notification_title">Обновленные курсы валют</string>
+    <string name="fcm_notification_body" formatted="false">Новые курсы на %s</string>
 
     <!-- Currency names -->
     <string-array name="currency_names">
