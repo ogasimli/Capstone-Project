@@ -80,7 +80,7 @@ public class SelectCurrencyAdapter extends RecyclerView.Adapter<SelectCurrencyAd
         @BindView(R.id.select_list_item_currency_textview)
         TextView mCurrency;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);

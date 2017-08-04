@@ -1,7 +1,7 @@
 package org.ogasimli.manat.ui.dialog;
 
-import org.ogasimli.manat.ui.adapter.SelectCurrencyAdapter;
 import org.ogasimli.manat.helper.Constants;
+import org.ogasimli.manat.ui.adapter.SelectCurrencyAdapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,6 +13,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,8 @@ import manat.ogasimli.org.manat.R;
  * Created by Orkhan Gasimli on 12.04.2016.
  */
 public class SelectCurrencyDialogFragment extends DialogFragment {
+
+    private static final String LOG_TAG = SelectCurrencyDialogFragment.class.getSimpleName();
 
     @BindView(R.id.select_currency_recyclerview)
     RecyclerView mRecyclerView;
@@ -89,11 +92,16 @@ public class SelectCurrencyDialogFragment extends DialogFragment {
         public void onItemClick(int position, View v) {
             // Write result to SharedPreferences
             String code = mSelectCurrencyAdapter.selectCurrency(position);
-            SharedPreferences sharedPref = getActivity().getSharedPreferences
-                    (Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString(Constants.SELECTED_CODE_KEY, code);
-            editor.apply();
+            Context context = getContext();
+            if (context != null) {
+                SharedPreferences sharedPref = getContext().getSharedPreferences
+                        (Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString(Constants.SELECTED_CODE_KEY, code);
+                editor.apply();
+            } else {
+                Log.e(LOG_TAG, "Context is null");
+            }
 
             // Go back to MainActivityFragment
             Intent intent = new Intent();
