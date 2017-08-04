@@ -9,11 +9,19 @@
         android:title="@string/menu_refresh_text"
         android:icon="@drawable/ic_reload"
         android:orderInCategory="100"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/menu_invite"
         android:title="@string/menu_invite_text"
         android:icon="@drawable/ic_invite"
         android:orderInCategory="200"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_notification"
+        android:title="@string/menu_notification_text"
+        android:icon="@drawable/ic_notifications_on_menu"
+        android:checkable="true"
+        android:checked="true"
+        android:orderInCategory="300"
         app:showAsAction="ifRoom"/>
 </menu>

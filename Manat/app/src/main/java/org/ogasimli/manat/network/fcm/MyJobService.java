@@ -37,7 +37,8 @@ public class MyJobService extends JobService {
     public boolean onStartJob(JobParameters jobParameters) {
         Log.d(LOG_TAG, "Performing long running task in scheduled job");
         Bundle bundle = jobParameters.getExtras();
-        return bundle != null && refreshData(jobParameters.getExtras().getString("date"));
+        return bundle != null && refreshData(jobParameters.getExtras()
+                .getString(Constants.FCM_MESSAGE_EXTRA_KEY));
     }
 
     @Override

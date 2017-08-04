@@ -32,6 +32,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.net.Uri;
@@ -372,6 +373,16 @@ public class MainActivityFragment extends Fragment
     }
 
     @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(
+                Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        boolean showNotification = sharedPref.getBoolean(Constants.NOTIFICATION_SHOW_KEY, true);
+        MenuItem notificationItem = menu.getItem(2);
+        toggleNotificationMenuItem(notificationItem, showNotification);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
@@ -382,9 +393,43 @@ public class MainActivityFragment extends Fragment
             case R.id.menu_invite:
                 onInviteClicked();
                 break;
+            case R.id.menu_notification:
+                boolean checked = item.isChecked();
+                saveIntoSharedPrefs(!checked);
+                getActivity().invalidateOptionsMenu();
+                String message;
+                if (checked) {
+                    message = "Notifications disabled";
+                } else {
+                    message = "Notifications enabled";
+                }
+                showMessage(message);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Helper method to put update notifications
+     */
+    private void saveIntoSharedPrefs(boolean checked) {
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(
+                Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(Constants.NOTIFICATION_SHOW_KEY, checked).apply();
+    }
+
+    /**
+     * Helper method to enable/disable update notifications
+     */
+    private void toggleNotificationMenuItem(MenuItem item, boolean checked) {
+        item.setChecked(checked);
+        if (checked) {
+            item.setIcon(R.drawable.ic_notifications_on_menu);
+        } else {
+            item.setIcon(R.drawable.ic_notifications_off_menu);
+        }
     }
 
     /**

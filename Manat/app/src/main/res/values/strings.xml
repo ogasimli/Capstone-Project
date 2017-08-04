@@ -23,6 +23,7 @@
     <string name="menu_refresh_text">Refresh</string>
     <string name="menu_share_text">Share</string>
     <string name="menu_invite_text">Invite Friends</string>
+    <string name="menu_notification_text">Notifications</string>
 
     <!-- Statistical info labels -->
     <string name="detail_statistics_label">"%s" Statistics</string>
@@ -95,12 +96,10 @@
     <string name="sent_invitations_fmt" formatted="false">Sent %d invitations</string>
     <string name="google_play_services_error">Google Play Services Error</string>
 
-    <!--
-    This is the name that users will see when interacting with this channel.
-    It should describe the category of notifications that will be sent through this channel
- -->
+    <!-- FCM notification strings resources -->
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-    <string name="default_notification_channel_name" translatable="true">News</string>
+    <string name="fcm_notification_title">Updated exchange rates</string>
+    <string name="fcm_notification_body" formatted="false">New rates available for %s</string>
 
     <!-- Currency names -->
     <string-array name="currency_names">
