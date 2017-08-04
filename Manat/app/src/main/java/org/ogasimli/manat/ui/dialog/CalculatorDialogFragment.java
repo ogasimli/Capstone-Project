@@ -152,6 +152,10 @@ public class CalculatorDialogFragment extends DialogFragment {
             Log.d(LOG_TAG, arithmeticException.toString());
             Toast.makeText(getActivity(), R.string.arithmetical_exception_message, Toast
                     .LENGTH_LONG).show();
+        } catch (NumberFormatException formatException) {
+            Log.d(LOG_TAG, formatException.toString());
+            Toast.makeText(getActivity(), R.string.arithmetical_exception_message, Toast
+                    .LENGTH_LONG).show();
         }
     }
 
