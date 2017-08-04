@@ -301,6 +301,12 @@ public class MainActivityFragment extends Fragment
             mProgressDialog.dismiss();
         }
 
+        // Remove TextWatchers to avoid bugs while destroying the activity
+        mMainDateTextView.removeTextChangedListener(mDateWatcher);
+        mMainRateTextView.removeTextChangedListener(mRateWatcher);
+        mMainAznAmountTextView.removeTextChangedListener(mAznAmountWatcher);
+        mMainForeignAmountTextView.removeTextChangedListener(mForeignAmountWatcher);
+
         mUnbinder.unbind();
     }
 
