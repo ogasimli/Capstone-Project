@@ -3,6 +3,7 @@ package org.ogasimli.manat.ui.dialog;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDateTime;
 import org.ogasimli.manat.helper.Constants;
 import org.ogasimli.manat.helper.Utilities;
 
@@ -51,7 +52,7 @@ public class DatePickerDialogFragment extends DialogFragment
         mUnbinder = ButterKnife.bind(this, getActivity());
 
         String dateString = getArguments().getString(Constants.DATE_PICKER_BUNDLE_KEY);
-        DateTime date = DateTime.parse(dateString, Constants.DATE_FORMATTER_DDMMMYYYY);
+        LocalDateTime date = Constants.DATE_FORMATTER_DDMMMYYYY.parseLocalDateTime(dateString);
         int year = date.getYear();
         // Subtract 1 because JodaTime's month begins from 1, while Calendar's month from 0
         int month = date.getMonthOfYear() - 1;

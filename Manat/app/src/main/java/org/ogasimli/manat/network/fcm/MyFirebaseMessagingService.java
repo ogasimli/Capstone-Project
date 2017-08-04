@@ -7,7 +7,7 @@ import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 import org.ogasimli.manat.helper.Constants;
 import org.ogasimli.manat.ui.activity.MainActivity;
 
@@ -89,7 +89,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
-        DateTime date = DateTime.parse(messageBody, Constants.DATE_FORMATTER_DDMMYYYY_WITH_DOT);
+        LocalDateTime date = Constants.DATE_FORMATTER_DDMMYYYY_WITH_DOT
+                .parseLocalDateTime(messageBody);
         String formattedDate = Constants.DATE_FORMATTER_DMMMMYYYY.print(date);
         messageBody = getString((R.string.fcm_notification_body),formattedDate);
         String channelId = getString(R.string.default_notification_channel_id);
