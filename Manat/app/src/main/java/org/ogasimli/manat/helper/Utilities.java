@@ -4,6 +4,7 @@ import com.udojava.evalex.Expression;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
+import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.ogasimli.manat.model.Currency;
 
@@ -170,7 +171,7 @@ public class Utilities {
     */
     public static String modifyDateString(String dateString, DateTimeFormatter beforeFormatter,
                                           DateTimeFormatter afterFormatter, String appendix) {
-        DateTime date = DateTime.parse(dateString, beforeFormatter);
+        LocalDateTime date = beforeFormatter.parseLocalDateTime(dateString);
         return afterFormatter.print(date) + appendix;
     }
 
