@@ -11,6 +11,9 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
@@ -26,6 +29,8 @@ import manat.ogasimli.org.manat.R;
  */
 public class DatePickerDialogFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
+
+    private static final String LOG_TAG = DatePickerDialogFragment.class.getSimpleName();
 
     @BindView(R.id.main_date_text)
     TextView mMainDateTextView;
@@ -84,5 +89,17 @@ public class DatePickerDialogFragment extends DialogFragment
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
+    }
+
+
+    @Override
+    public void show(FragmentManager manager, String tag) {
+        try {
+            FragmentTransaction ft = manager.beginTransaction();
+            ft.add(this, tag);
+            ft.commitAllowingStateLoss();
+        } catch (IllegalStateException e) {
+            Log.e(LOG_TAG, e.toString());
+        }
     }
 }

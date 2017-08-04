@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -93,6 +95,19 @@ public class CalculatorDialogFragment extends DialogFragment {
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
+    }
+
+    @Override
+    public void show(FragmentManager manager, String tag) {
+        DialogFragment.mDismissed = false;
+        mShownByMe = true;
+        try {
+            FragmentTransaction ft = manager.beginTransaction();
+            ft.add(this, tag);
+            ft.commitAllowingStateLoss();
+        } catch (IllegalStateException e) {
+            Log.e(LOG_TAG, e.toString());
+        }
     }
 
     @OnClick({R.id.calc_one_textview, R.id.calc_two_textview, R.id.calc_three_textview,

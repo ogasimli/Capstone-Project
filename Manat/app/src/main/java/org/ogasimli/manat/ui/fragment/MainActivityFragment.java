@@ -276,7 +276,6 @@ public class MainActivityFragment extends Fragment
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
 
         int state = Constants.VIEW_STATE_RESULTS;
         if (mErrorView.getVisibility() == View.VISIBLE) {
@@ -288,6 +287,7 @@ public class MainActivityFragment extends Fragment
         outState.putBoolean(Constants.IGNORE_CHANGE_KEY, mIgnoreChange);
         outState.putInt(Constants.SWAP_ORDER_KEY, mSwapOrder);
         outState.putParcelableArrayList(Constants.LIST_STATE_KEY, mCurrencyList);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
