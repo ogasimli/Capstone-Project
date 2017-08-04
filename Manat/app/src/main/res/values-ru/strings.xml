@@ -63,9 +63,11 @@
     <string name="calc_0_text">0</string>
 
     <!-- Error messages -->
-    <string name="express_exception_message">Неправильный ввод! Введите правильные значения!</string>
+    <string name="express_exception_message">Неправильный ввод! Введите правильные значения.</string>
     <string name="arithmetical_exception_message">Неправильный ввод! Произошла арифметическая
-        ошибка!</string>
+        ошибка.</string>
+    <string name="number_format_exception_message">Неправильный ввод! Формат введенных данных
+        неверный.</string>
     <string name="main_no_result_message">К сожалению, что-то пошло не так во время извлечения
         данных. Пожалуйста, попробуйте еще раз&#8230;</string>
     <string name="widget_no_result_message">Похоже, что нет данных для отображения. Попробуйте
